@@ -7,6 +7,7 @@ import { IconButton, InputAdornment, TextField } from '@mui/material'
 import useCustom from './hooks'
 
 function CustomField({
+  className,
   disabled,
   error,
   inputProps,
@@ -32,6 +33,7 @@ function CustomField({
   const conditionalPassword = type === 'password' && state.showPassword ? 'text' : 'password'
   return (
     <TextField
+      className={className}
       fullWidth={isFullWidth}
       disabled={disabled}
       error={isError}
@@ -81,6 +83,7 @@ CustomField.defaultProps = {
 }
 
 CustomField.propTypes = {
+  className: PropTypes.string,
   disabled: PropTypes.bool,
   error: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   inputProps: PropTypes.string,

@@ -20,6 +20,7 @@ export const fontSize = {
   50: '3.125rem',
   64: '4rem',
   72: '4.5rem',
+  96: '6rem',
 }
 export const colors = {
   ...importedColors,

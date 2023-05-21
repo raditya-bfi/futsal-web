@@ -1,9 +1,7 @@
 import { Typography } from '@mui/material'
 import { Field, Formik, Form } from 'formik'
 
-import { KorlantasLogo, LoginHero, MainLogo } from '~/assets/png'
 import Button from '~/components/Button'
-import CustomCheckBox from '~/components/CustomCheckbox'
 import CustomField from '~/components/CustomField'
 import Snackbar from '~/components/Snackbar'
 
@@ -17,8 +15,13 @@ function Login() {
   return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
-        <img className={classes.backgroundLogo} src={KorlantasLogo} alt='korlantas-logo-login' />
+        <Typography fontWeight={700} className={classes.title}>
+          FUTSAL GEMBIRA
+        </Typography>
         <div className={classes.loginBox}>
+          <Typography fontWeight={700} className={classes.subtitle}>
+            Masuk Admin
+          </Typography>
           <Formik
             innerRef={refs?.formikRef}
             initialValues={{
@@ -43,55 +46,51 @@ function Login() {
                   open={state?.alert?.open}
                   severity={state?.alert?.severity}
                 />
-                <Typography fontWeight={700} className={classes.title}>
-                  DASHBOARD EXECUTIVE
-                </Typography>
-                <img className={classes.mainLogo} src={MainLogo} alt='main-logo-login' />
                 <div className={classes.input}>
+                  <Typography fontWeight={700} className={classes.inputLabel}>
+                    Email
+                  </Typography>
                   <Field
+                    className={classes.textInput}
                     isFullWidth
                     name='username'
                     type='text'
-                    label='Nama Pengguna atau Akun'
-                    placeholder='Nama Pengguna atau Akun'
                     as={CustomField}
                     error={errors.username}
                     touch={touched.username}
                   />
+                  <Typography fontWeight={700} className={classes.inputLabel}>
+                    Password
+                  </Typography>
                   <Field
+                    className={classes.textInput}
                     isFullWidth
                     name='password'
                     type='password'
-                    label='Sandi'
-                    placeholder='Sandi'
                     as={CustomField}
                     error={errors.password}
                     touch={touched.password}
                   />
-                </div>
-                <div className={classes.remember}>
-                  <Field name='rememberMe' type='checkbox' label='Ingat Saya' as={CustomCheckBox} />
                 </div>
                 <div className={classes.buttonWrapper}>
                   <Button
                     disabled={isSubmitting}
                     handleOnClick={handleSubmit}
                     isFullWidth
-                    label='Masuk / Login'
+                    label='Masuk'
                     loading={isSubmitting}
                     type='button'
                   />
                 </div>
-                <div className={classes.forgotWrapper}>
-                  <a className={classes.forgotLabel} href='#' target='_blank' rel='noreferrer'>
-                    Lupa Sandi ?
-                  </a>
-                </div>
               </Form>
             )}
           </Formik>
-          <img className={classes.hero} src={LoginHero} alt='hero-login' />
         </div>
+      </div>
+      <div className={classes.footer}>
+        <Typography fontWeight={700} className={classes.inputLabel}>
+          “Semangat adalah modal utama dalam meraih kesuksesan”
+        </Typography>
       </div>
     </div>
   )

@@ -1,11 +1,11 @@
 import { apiUrl } from '~/config/index'
 import { toFormData } from '~/helpers/general'
 
-import Wrap from './axiosWrapper'
+import Axios from './axiosWrapper'
 
 export const doLogin = (payload = {}) => {
   const data = toFormData(payload)
-  return Wrap({
+  return Axios({
     MAIN_URL: apiUrl,
     url: `/v1/auth/login`,
     method: 'POST',
@@ -14,7 +14,7 @@ export const doLogin = (payload = {}) => {
 }
 
 export const getLoggedUserData = () =>
-  Wrap({
+  Axios({
     MAIN_URL: apiUrl,
     url: `/v1/user/logged-user`,
     method: 'GET',

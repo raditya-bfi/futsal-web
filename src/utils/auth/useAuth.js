@@ -1,9 +1,6 @@
 import { useContext, useCallback } from 'react'
 
-import { get } from 'lodash-es'
-
 import { AuthContext } from '~/context/AuthProvider'
-import { getLoggedUserData } from '~/helpers/request'
 
 const useAuth = () => {
   const {
@@ -17,16 +14,17 @@ const useAuth = () => {
   } = useContext(AuthContext)
 
   const handleLogin = useCallback(
+    // eslint-disable-next-line unused-imports/no-unused-vars, no-unused-vars
     async (token) => {
-      await setAuthTokens(token)
+      // await setAuthTokens(token)
       await setIsLoggedIn(true)
 
-      const response = await getLoggedUserData()
-      const responseData = response?.data
-      if (responseData?.statusCode === 200 && responseData?.isSuccess === true) {
-        const loggedUserData = get(responseData, 'data', {})
-        await setUserData(loggedUserData)
-      }
+      // const response = await getLoggedUserData()
+      // const responseData = response?.data
+      // if (responseData?.statusCode === 200 && responseData?.isSuccess === true) {
+      //   const loggedUserData = get(responseData, 'data', {})
+      //   await setUserData(loggedUserData)
+      // }
     },
     [setAuthTokens, setIsLoggedIn, setUserData],
   )
