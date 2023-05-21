@@ -5,85 +5,110 @@ import { colors, fontSize } from '~/styles/theme'
 
 const style = makeStyles((theme) => ({
   container: {
+    display: 'flex',
+    flexDirection: 'column',
     height: '100vh',
     width: '100%',
     overflow: 'hidden',
     backgroundImage: `url(${LoginBackground})`,
+    backgroundSize: 'cover',
+  },
+  title: {
+    fontSize: fontSize[96],
+    fontWeight: theme.typography.fontWeightBold,
+    color: colors.White,
+    marginBottom: theme.spacing(6),
   },
   wrapper: {
+    flexBasis: '90%',
     display: 'flex',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     height: '100%',
     width: '100%',
   },
-  backgroundLogo: {
-    zIndex: '250',
-    width: '23%',
-    height: '100%',
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    padding: '4vw 0vw',
+  footer: {
+    flexBasis: '10%',
+    marginLeft: theme.spacing(10),
+    marginBottom: theme.spacing(6),
+    maxWidth: '480px',
+  },
+  footerLabel: {
+    fontSize: fontSize[24],
+    lineHeight: '29px',
   },
   loginBox: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    zIndex: '500',
-    height: '60%',
-    width: '55vw',
-  },
-  loginForm: {
-    flexBasis: '70%',
-    background: colors.White,
-    borderTopLeftRadius: '20px',
-    borderBottomLeftRadius: '20px',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: '4.2vw 0vw',
   },
-  hero: {
-    flexBasis: '30%',
-    borderTopRightRadius: '20px',
-    borderBottomRightRadius: '20px',
+  loginForm: {
+    flexBasis: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '27.5vw',
   },
-  title: {
-    fontSize: fontSize[16],
+  subtitle: {
+    fontSize: fontSize[34],
     fontWeight: theme.typography.fontWeightBold,
-    color: colors.Smalt,
+    color: colors.White,
+    marginBottom: theme.spacing(6),
   },
   mainLogo: {
     height: '6.7vw',
     width: '13.2vw',
   },
+  inputLabel: {
+    fontSize: fontSize[24],
+    fontWeight: theme.typography.fontWeightBold,
+    color: colors.White,
+  },
   input: {
-    width: '55%',
+    width: '100%',
     '& > div:not(:last-child)': {
       marginBottom: theme.spacing(4),
     },
+    marginBottom: '1rem',
   },
-  remember: {
-    width: '55%',
-    display: 'flex',
-    justifyContent: 'flex-start',
-    marginBottom: theme.spacing(4),
+  textInput: {
+    '& .MuiOutlinedInput-root': {
+      '& .MuiInputBase-input': {
+        color: colors.White,
+      },
+      '& fieldset': {
+        borderRadius: '20px',
+        borderColor: colors.White,
+      },
+      '&:hover fieldset': {
+        borderRadius: '20px',
+        borderColor: colors.White,
+      },
+      '&.Mui-focused fieldset': {
+        borderRadius: '20px',
+        borderColor: colors.White,
+      },
+      '& .MuiInputAdornment-root': {
+        '& .MuiIconButton-root': {
+          color: colors.White,
+        },
+      },
+    },
+    '& .MuiFormHelperText-root': {
+      color: colors.White,
+    },
+    '& .MuiFormHelperText-root.Mui-error': {
+      color: colors.TorchRed,
+    },
   },
   buttonWrapper: {
     display: 'flex',
     alignItems: 'center',
-    width: '55%',
-    marginBottom: theme.spacing(4),
-  },
-  forgotWrapper: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  forgotLabel: {
-    fontSize: fontSize[12],
-    color: colors.RiverStyx,
-    textDecoration: 'none',
+    width: '100%',
+    marginTop: '3rem',
   },
 }))
 

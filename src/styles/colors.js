@@ -107,4 +107,5 @@ export const colors = {
   Pumpkin: '#FF7D1D',
   Trout: '#495057',
   DiamondCut: '#E9E9Ef',
+  MineShaft: '#363636',
 }

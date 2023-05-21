@@ -1,4 +1,5 @@
 import { makeStyles } from '@mui/styles'
+
 import { fontSize } from '~/styles/theme'
 
 import { BUTTON_STYLE_MAPPING } from './helper'
@@ -16,7 +17,7 @@ const style = makeStyles((theme) => ({
       disabled
         ? BUTTON_STYLE_MAPPING[variant].textColorDisabled
         : BUTTON_STYLE_MAPPING[variant].textColor,
-    fontSize: fontSize[14],
+    fontSize: fontSize[20],
     fontWeight: theme.typography.fontWeightMedium,
     padding: '12px 16px',
     borderRadius: '8px',
