@@ -47,9 +47,7 @@ function Login() {
                   severity={state?.alert?.severity}
                 />
                 <div className={classes.input}>
-                  <Typography fontWeight={700} className={classes.inputLabel}>
-                    Email
-                  </Typography>
+                  <Typography className={classes.inputLabel}>Email</Typography>
                   <Field
                     className={classes.textInput}
                     isFullWidth
@@ -59,9 +57,7 @@ function Login() {
                     error={errors.username}
                     touch={touched.username}
                   />
-                  <Typography fontWeight={700} className={classes.inputLabel}>
-                    Password
-                  </Typography>
+                  <Typography className={classes.inputLabel}>Password</Typography>
                   <Field
                     className={classes.textInput}
                     isFullWidth
@@ -88,7 +84,7 @@ function Login() {
         </div>
       </div>
       <div className={classes.footer}>
-        <Typography fontWeight={700} className={classes.inputLabel}>
+        <Typography className={classes.inputLabel}>
           “Semangat adalah modal utama dalam meraih kesuksesan”
         </Typography>
       </div>

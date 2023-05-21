@@ -64,7 +64,6 @@ const style = makeStyles((theme) => ({
   },
   inputLabel: {
     fontSize: fontSize[24],
-    fontWeight: theme.typography.fontWeightBold,
     color: colors.White,
   },
   input: {
