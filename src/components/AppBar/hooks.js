@@ -1,52 +1,28 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
+import { MENU_TAB_KEY, MENU_TAB_VALUE } from '~/constants/general'
 import useAuth from '~/utils/auth/useAuth'
 
 const useCustom = () => {
-  const [locale, setLocale] = useState({
-    date: new Date().toLocaleDateString('id', {
-      weekday: 'long',
-      month: 'long',
-      year: 'numeric',
-      day: 'numeric',
-    }),
-    time: new Date().toLocaleTimeString('id', {
-      hour: 'numeric',
-      minute: 'numeric',
-      second: 'numeric',
-      hourCycle: 'h12',
-    }),
-  })
+  const { handler, state } = useAuth()
+
   const [anchorEl, setAnchorEl] = useState(null)
-  const { handler } = useAuth()
+  const [showPopUp, setShowPopUp] = useState(false)
   const [notification, setNotification] = useState([])
+  const [currentTab, setCurrentTab] = useState(MENU_TAB_VALUE[MENU_TAB_KEY.DASBOR])
 
-  useEffect(() => {
-    const itv = setInterval(() => {
-      setLocale({
-        date: new Date().toLocaleDateString('id', {
-          weekday: 'long',
-          month: 'long',
-          year: 'numeric',
-          day: 'numeric',
-        }),
-        time: new Date().toLocaleTimeString('id', {
-          hour: 'numeric',
-          minute: 'numeric',
-          second: 'numeric',
-          hourCycle: 'h12',
-        }),
-      })
-      return clearInterval(itv)
-    }, 1000)
-  }, [locale])
+  const handleChangeTab = (event, newValue) => {
+    setCurrentTab(newValue)
+  }
 
-  const handleMenu = (event) => {
+  const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
+    setShowPopUp(true)
   }
 
   const handleClose = () => {
     setAnchorEl(null)
+    setShowPopUp(false)
   }
 
   const handleLogout = async () => {
@@ -56,14 +32,17 @@ const useCustom = () => {
 
   return {
     handler: {
-      handleMenu,
+      handleChangeTab,
+      handleClick,
       handleClose,
       handleLogout,
     },
     state: {
-      locale,
       anchorEl,
+      currentTab,
       notification,
+      showPopUp,
+      userData: state.userData,
     },
   }
 }

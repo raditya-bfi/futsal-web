@@ -27,6 +27,7 @@ export const colors = {
 }
 
 export const DEFAULT_FONT_FAMILY = 'Inter'
+export const APPBAR_HEIGHT = 90
 
 const theme = createTheme({
   components: {

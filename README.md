@@ -41,9 +41,3 @@ Fix lint
 ```
 yarn lint:fix
 ```
-
-## Used By
-
-This project is used by the following companies:
-
-- PT Transnovasi Bangun Persada

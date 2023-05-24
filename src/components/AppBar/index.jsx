@@ -1,81 +1,214 @@
-import { NotificationsOutlined } from '@mui/icons-material'
 import LogoutIcon from '@mui/icons-material/Logout'
-import { AppBar, Box, Container, Stack, Toolbar, Typography } from '@mui/material'
+import {
+  AppBar,
+  Avatar,
+  Box,
+  Fade,
+  ListItemIcon,
+  ListItemText,
+  MenuItem,
+  Popover,
+  Tabs,
+  Tab,
+  Toolbar,
+  Tooltip,
+  Typography,
+} from '@mui/material'
+import { capitalize } from 'lodash-es'
 
-import Logo from '~/assets/png/logo-k3i.png'
-import ButtonMenu from '~/components/ButtonDropdown'
+import { AvatarLogo } from '~/assets/png'
+import { MENU_TAB_KEY, MENU_TAB_MAPPING, MENU_TAB_VALUE } from '~/constants/general'
 
 import useCustom from './hooks'
 import useStyles from './style'
 
 function CustomAppBar() {
   const classes = useStyles()
-  const { state } = useCustom()
-
-  const profileMenu = [
-    {
-      label: 'Logout',
-      icon: <LogoutIcon className={classes.menuIcon} />,
-      action: async () => {
-        // TODO handling logout
-      },
-    },
-  ]
-
-  const notification = () => {
-    if (!state.notification?.length) {
-      return [
-        {
-          label: 'notifikasi kosong',
-          disabled: true,
-        },
-      ]
-    }
-    return state.notification
-  }
+  const { handler, state } = useCustom()
 
   return (
     <Box>
       <AppBar className={classes.appBarRoot}>
-        <Toolbar>
-          <Container maxWidth='xl'>
-            <Stack direction='row' justifyContent='space-between' width='100%'>
-              <Box>
-                <Typography className={classes.textDark} fontSize={12}>
-                  Welcome to Dashboard Operasi
-                </Typography>
-                <Typography className={classes.titleRed}>
-                  PUSAT KENDALI KOORDINASI KOMUNIKASI & INFORMASI &nbsp;-
-                </Typography>
-                <Typography className={classes.titleBlue}>
-                  &nbsp; K3I KORLANTAS POLRI - OPERASI KTT FEBRUARY
-                </Typography>
+        <Toolbar className={classes.toolbar}>
+          <div className={classes.container}>
+            <Box className={classes.mainHeader}>
+              <Box className={classes.appTitleWrapper}>
+                <Typography className={classes.appTitle}>FUTSAL GEMBIRA</Typography>
               </Box>
-              <Stack direction='row' spacing={4} alignItems='center'>
-                <Box display='inline-block' textAlign='right'>
-                  <Typography className={classes.dateBar}>{state.locale.date}</Typography>
-                  <Typography className={classes.timeBar}>{state.locale.time}</Typography>
+              <Box className={classes.headerMenu}>
+                <Box className={classes.menuTabs}>
+                  <Tabs
+                    className={classes.tabsContainer}
+                    value={state.currentTab}
+                    onChange={handler.handleChangeTab}
+                  >
+                    <Tab
+                      label={
+                        <div
+                          className={
+                            state?.currentTab === MENU_TAB_VALUE[MENU_TAB_KEY.DASBOR]
+                              ? classes.activeTab
+                              : classes.tab
+                          }
+                        >
+                          <Tooltip
+                            title={
+                              state?.currentTab !== MENU_TAB_VALUE[MENU_TAB_KEY.DASBOR]
+                                ? MENU_TAB_MAPPING[MENU_TAB_KEY.DASBOR].name
+                                : ''
+                            }
+                          >
+                            <img
+                              className={classes.tabIcon}
+                              src={MENU_TAB_MAPPING[MENU_TAB_KEY.DASBOR].icon}
+                              alt={`${MENU_TAB_MAPPING[
+                                MENU_TAB_KEY.DASBOR
+                              ].name.toLowerCase()}-menu-tab`}
+                            />
+                          </Tooltip>
+                          {state?.currentTab === MENU_TAB_VALUE[MENU_TAB_KEY.DASBOR] && (
+                            <Typography className={classes.tabLabel} fontWeight={500}>
+                              {MENU_TAB_MAPPING[MENU_TAB_KEY.DASBOR].name}
+                            </Typography>
+                          )}
+                        </div>
+                      }
+                      value={MENU_TAB_VALUE[MENU_TAB_KEY.DASBOR]}
+                    />
+                    <Tab
+                      label={
+                        <div
+                          className={
+                            state?.currentTab === MENU_TAB_VALUE[MENU_TAB_KEY.PENYEWAAN]
+                              ? classes.activeTab
+                              : classes.tab
+                          }
+                        >
+                          <Tooltip
+                            title={
+                              state?.currentTab !== MENU_TAB_VALUE[MENU_TAB_KEY.PENYEWAAN]
+                                ? MENU_TAB_MAPPING[MENU_TAB_KEY.PENYEWAAN].name
+                                : ''
+                            }
+                          >
+                            <img
+                              className={classes.tabIcon}
+                              src={MENU_TAB_MAPPING[MENU_TAB_KEY.PENYEWAAN].icon}
+                              alt={`${MENU_TAB_MAPPING[
+                                MENU_TAB_KEY.PENYEWAAN
+                              ].name.toLowerCase()}-menu-tab`}
+                            />
+                          </Tooltip>
+                          {state?.currentTab === MENU_TAB_VALUE[MENU_TAB_KEY.PENYEWAAN] && (
+                            <Typography className={classes.tabLabel} fontWeight={500}>
+                              {MENU_TAB_MAPPING[MENU_TAB_KEY.PENYEWAAN].name}
+                            </Typography>
+                          )}
+                        </div>
+                      }
+                      value={MENU_TAB_VALUE[MENU_TAB_KEY.PENYEWAAN]}
+                    />
+                    <Tab
+                      label={
+                        <div
+                          className={
+                            state?.currentTab === MENU_TAB_VALUE[MENU_TAB_KEY.LAPANGAN]
+                              ? classes.activeTab
+                              : classes.tab
+                          }
+                        >
+                          <Tooltip
+                            title={
+                              state?.currentTab !== MENU_TAB_VALUE[MENU_TAB_KEY.LAPANGAN]
+                                ? MENU_TAB_MAPPING[MENU_TAB_KEY.LAPANGAN].name
+                                : ''
+                            }
+                          >
+                            <img
+                              className={classes.tabIcon}
+                              src={MENU_TAB_MAPPING[MENU_TAB_KEY.LAPANGAN].icon}
+                              alt={`${MENU_TAB_MAPPING[
+                                MENU_TAB_KEY.LAPANGAN
+                              ].name.toLowerCase()}-menu-tab`}
+                            />
+                          </Tooltip>
+
+                          {state?.currentTab === MENU_TAB_VALUE[MENU_TAB_KEY.LAPANGAN] && (
+                            <Typography className={classes.tabLabel} fontWeight={500}>
+                              {MENU_TAB_MAPPING[MENU_TAB_KEY.LAPANGAN].name}
+                            </Typography>
+                          )}
+                        </div>
+                      }
+                      value={MENU_TAB_VALUE[MENU_TAB_KEY.LAPANGAN]}
+                    />
+                    <Tab
+                      label={
+                        <div
+                          className={
+                            state?.currentTab === MENU_TAB_VALUE[MENU_TAB_KEY.OPERATOR]
+                              ? classes.activeTab
+                              : classes.tab
+                          }
+                        >
+                          <Tooltip
+                            title={
+                              state?.currentTab !== MENU_TAB_VALUE[MENU_TAB_KEY.OPERATOR]
+                                ? MENU_TAB_MAPPING[MENU_TAB_KEY.OPERATOR].name
+                                : ''
+                            }
+                          >
+                            <img
+                              className={classes.tabIcon}
+                              src={MENU_TAB_MAPPING[MENU_TAB_KEY.OPERATOR].icon}
+                              alt={`${MENU_TAB_MAPPING[
+                                MENU_TAB_KEY.OPERATOR
+                              ].name.toLowerCase()}-menu-tab`}
+                            />
+                          </Tooltip>
+                          {state?.currentTab === MENU_TAB_VALUE[MENU_TAB_KEY.OPERATOR] && (
+                            <Typography className={classes.tabLabel} fontWeight={500}>
+                              {MENU_TAB_MAPPING[MENU_TAB_KEY.OPERATOR].name}
+                            </Typography>
+                          )}
+                        </div>
+                      }
+                      value={MENU_TAB_VALUE[MENU_TAB_KEY.OPERATOR]}
+                    />
+                  </Tabs>
                 </Box>
-                <div>
-                  <ButtonMenu
-                    buttonProps={{
-                      icon: <NotificationsOutlined />,
-                    }}
-                    menus={notification()}
-                    menuHeader={<Typography className={classes.menuHeader}>Notifikasi</Typography>}
-                  />
+                <div className={classes.avatarWrapper}>
+                  <Avatar className={classes.avatar} onClick={handler.handleClick} src={AvatarLogo}>
+                    {state?.userData?.email}
+                  </Avatar>
                 </div>
-                <ButtonMenu
-                  buttonProps={{
-                    startIcon: <img src={Logo} alt='logo-k3i' height={36} width={36} />,
-                    label: 'Operation',
-                    labelClasses: `${classes.textDark} ${classes.s1}`,
+                <Popover
+                  className={classes.menu}
+                  anchorEl={state.anchorEl}
+                  open={state.showPopUp}
+                  onClose={() => handler.handleClose()}
+                  TransitionComponent={Fade}
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center',
                   }}
-                  menus={profileMenu}
-                />
-              </Stack>
-            </Stack>
-          </Container>
+                >
+                  <Box className={classes.userInfo}>
+                    <Typography className={classes.roleName} fontWeight={600}>
+                      {capitalize(state?.userData?.type)}
+                    </Typography>
+                    <Typography className={classes.email}>{state?.userData?.email}</Typography>
+                  </Box>
+                  <MenuItem onClick={() => handler.handleLogout()}>
+                    <ListItemIcon>
+                      <LogoutIcon className={classes.menuIcon} />
+                    </ListItemIcon>
+                    <ListItemText className={classes.menuLabel}>Keluar</ListItemText>
+                  </MenuItem>
+                </Popover>
+              </Box>
+            </Box>
+          </div>
         </Toolbar>
       </AppBar>
     </Box>
