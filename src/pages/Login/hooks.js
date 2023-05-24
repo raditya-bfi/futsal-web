@@ -1,5 +1,6 @@
 import { useCallback, useRef, useState } from 'react'
 
+import { doLogin } from '~/helpers/request'
 import useAuth from '~/utils/auth/useAuth'
 
 const useCustom = () => {
@@ -23,26 +24,24 @@ const useCustom = () => {
       open: false,
     }))
   }
-  // eslint-disable-next-line unused-imports/no-unused-vars, no-unused-vars
   const handleSubmit = useCallback(async (values) => {
-    handler.handleLogin()
-    // const response = await doLogin({
-    //   username: values.username,
-    //   password: values.password,
-    // })
+    const response = await doLogin({
+      email: values.username,
+      password: values.password,
+    })
 
-    // if (response?.data?.statusCode === 200 && response?.data?.isSuccess === true) {
-    //   const responseData = response?.data
-    //   const accessToken = responseData?.data?.accessToken
-    //   handler.handleLogin(accessToken)
-    // } else {
-    //   setAlert((prev) => ({
-    //     ...prev,
-    //     open: true,
-    //     title: 'Login Failed',
-    //     message: response?.data?.responseMessage,
-    //   }))
-    // }
+    if (response?.data?.status === true) {
+      const responseData = response?.data
+      const accessToken = responseData?.data?.access_token
+      handler.handleLogin(accessToken)
+    } else {
+      setAlert((prev) => ({
+        ...prev,
+        open: true,
+        title: 'Login Failed',
+        message: response?.data?.message,
+      }))
+    }
   }, [])
 
   return {

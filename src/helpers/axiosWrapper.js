@@ -12,7 +12,7 @@ const request = async (options) => {
     requestHeaders = options.customHeaders || {
       'Content-type': 'application/json',
       Accept: 'application/json',
-      Authorization: authTokens,
+      Authorization: `Bearer ${authTokens}`,
     }
   }
 

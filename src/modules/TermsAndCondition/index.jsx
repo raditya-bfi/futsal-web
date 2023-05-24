@@ -52,9 +52,6 @@ function TermsAndConditions() {
             </div>
           ))}
         </div>
-        <div className={classes.copyright}>
-          Copyright © 2023 PT Transnovasi Bangun Persada and/or its affaliates. All rights reserved.
-        </div>
       </div>
     </div>
   )

@@ -108,4 +108,7 @@ export const colors = {
   Trout: '#495057',
   DiamondCut: '#E9E9Ef',
   MineShaft: '#363636',
+  TricornBlack: '#2F2F2F',
+  AgedMoustacheGrey: '#7E7E7E',
+  Argent: '#888888',
 }
