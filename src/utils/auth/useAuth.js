@@ -1,7 +1,8 @@
 import { useContext, useCallback } from 'react'
 
+import jwtDecode from 'jwt-decode'
+
 import { AuthContext } from '~/context/AuthProvider'
-import { getLoggedUserData } from '~/helpers/request'
 
 const useAuth = () => {
   const {
@@ -15,27 +16,45 @@ const useAuth = () => {
     // removeUserInfoData,
   } = useContext(AuthContext)
 
-  const handleLogin = useCallback(
-    async (token) => {
-      await setAuthTokens(token)
-      const response = await getLoggedUserData()
-      const responseData = response?.data
-      if (responseData?.status === true) {
-        await setUserData(responseData?.data)
-      }
-      // Redirect to protected layout
-      await setIsLoggedIn(true)
-    },
-    [setAuthTokens, setIsLoggedIn, setUserData],
-  )
-
   const handleLogout = useCallback(async () => {
     removeTokens()
     // removeUserInfoData()
   }, [removeTokens])
 
+  const decodeToken = useCallback(
+    (token) => {
+      try {
+        const result = jwtDecode(token)
+        return result
+      } catch (err) {
+        handleLogout()
+        return null
+      }
+    },
+    [handleLogout],
+  )
+
+  const getUserInformationData = useCallback(
+    (token) => {
+      const userInfoData = decodeToken(token)
+      return userInfoData
+    },
+    [decodeToken],
+  )
+
+  const handleLogin = useCallback(
+    async (token) => {
+      await setAuthTokens(token)
+      const userInfoData = await getUserInformationData(token)
+      await setUserData(userInfoData)
+      await setIsLoggedIn(true)
+    },
+    [getUserInformationData, setAuthTokens, setIsLoggedIn, setUserData],
+  )
+
   return {
     handler: {
+      decodeToken,
       handleLogin,
       handleLogout,
       removeTokens,

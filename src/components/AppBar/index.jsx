@@ -197,7 +197,9 @@ function CustomAppBar() {
                     <Typography className={classes.roleName} fontWeight={600}>
                       {capitalize(state?.userData?.type)}
                     </Typography>
-                    <Typography className={classes.email}>{state?.userData?.email}</Typography>
+                    <Typography
+                      className={classes.email}
+                    >{`@${state?.userData?.type}-${state?.userData?.user_id}`}</Typography>
                   </Box>
                   <MenuItem onClick={() => handler.handleLogout()}>
                     <ListItemIcon>
