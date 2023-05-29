@@ -30,10 +30,10 @@ const useCustom = () => {
       password: values.password,
     })
 
-    if (response?.data?.status === true) {
-      const responseData = response?.data
+    const responseData = response?.data
+    if (responseData?.status === 200) {
       const accessToken = responseData?.data?.access_token
-      handler.handleLogin(accessToken)
+      await handler.handleLogin(accessToken)
     } else {
       setAlert((prev) => ({
         ...prev,
