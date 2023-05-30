@@ -38,7 +38,10 @@ function CustomAppBar() {
               <Box className={classes.headerMenu}>
                 <Box className={classes.menuTabs}>
                   <Tabs
-                    className={classes.tabsContainer}
+                    classes={{
+                      indicator: classes.tabsIndicator,
+                      root: classes.tabsContainer,
+                    }}
                     value={state.currentTab}
                     onChange={handler.handleChangeTab}
                   >
@@ -179,7 +182,7 @@ function CustomAppBar() {
                 </Box>
                 <div className={classes.avatarWrapper}>
                   <Avatar className={classes.avatar} onClick={handler.handleClick} src={AvatarLogo}>
-                    {state?.userData?.email}
+                    {state?.userData?.name}
                   </Avatar>
                 </div>
                 <Popover
@@ -195,7 +198,7 @@ function CustomAppBar() {
                 >
                   <Box className={classes.userInfo}>
                     <Typography className={classes.roleName} fontWeight={600}>
-                      {capitalize(state?.userData?.type)}
+                      {capitalize(state?.userData?.name)}
                     </Typography>
                     <Typography
                       className={classes.email}

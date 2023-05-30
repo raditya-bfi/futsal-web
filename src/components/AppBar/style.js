@@ -2,7 +2,7 @@ import { makeStyles } from '@mui/styles'
 
 import { APPBAR_HEIGHT, colors, fontSize } from '~/styles/theme'
 
-const style = makeStyles((theme) => ({
+const style = makeStyles(() => ({
   appBarRoot: {
     backgroundColor: colors.TricornBlack,
     position: 'fixed',
@@ -47,6 +47,9 @@ const style = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'row',
     marginRight: '33px',
+  },
+  tabsIndicator: {
+    height: '0px', // ? : remove tab indicator
   },
   tabsContainer: {
     '& > div > div': {
