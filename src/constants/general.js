@@ -32,3 +32,26 @@ export const MENU_TAB_VALUE = {
   [MENU_TAB_KEY.LAPANGAN]: '3',
   [MENU_TAB_KEY.OPERATOR]: '4',
 }
+
+export const DASHBOARD_MENU_TAB_KEY = {
+  PENDAPATAN: 'PENDAPATAN',
+  JAM_PENYEWAAN: 'JAM_PENYEWAAN',
+}
+
+export const DASHBOARD_TAB_MAPPING = {
+  [DASHBOARD_MENU_TAB_KEY.PENDAPATAN]: {
+    prefix: 'Rp ',
+    name: 'Jumlah Pendapatan - ',
+    suffix: '',
+  },
+  [DASHBOARD_MENU_TAB_KEY.JAM_PENYEWAAN]: {
+    prefix: '',
+    name: 'Jumlah Jam Penyewaan - ',
+    suffix: ' Jam',
+  },
+}
+
+export const DASHBOARD_MENU_TAB_VALUE = {
+  [DASHBOARD_MENU_TAB_KEY.PENDAPATAN]: '1',
+  [DASHBOARD_MENU_TAB_KEY.JAM_PENYEWAAN]: '2',
+}

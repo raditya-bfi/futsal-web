@@ -1,8 +1,18 @@
 import loadable from '@loadable/component'
 
+const DashboardPage = loadable(() => import('~/pages/Dashboard'))
 const LandingPage = loadable(() => import('~/pages/Home'))
 
 export default [
+  {
+    id: 'dashboard',
+    title: 'Halaman Dasbor',
+    path: '/dashboard',
+    defaultPath: '/dashboard',
+    component: <DashboardPage />,
+    exact: false,
+    withHeader: true,
+  },
   {
     id: 'landing',
     title: 'Landing Page',
