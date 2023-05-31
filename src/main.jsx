@@ -14,6 +14,7 @@ import './font.css'
 import { HelmetProvider } from 'react-helmet-async'
 
 import { AuthProvider } from '~/context/AuthProvider'
+import { LoadingProvider } from '~/context/LoadingProvider'
 import theme from '~/styles/theme'
 
 import App from './App'
@@ -22,14 +23,16 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <HelmetProvider>
-          <StyledEngineProvider injectFirst>
-            <MuiThemeProvider theme={theme}>
-              <CssBaseline />
-              <App />
-            </MuiThemeProvider>
-          </StyledEngineProvider>
-        </HelmetProvider>
+        <LoadingProvider>
+          <HelmetProvider>
+            <StyledEngineProvider injectFirst>
+              <MuiThemeProvider theme={theme}>
+                <CssBaseline />
+                <App />
+              </MuiThemeProvider>
+            </StyledEngineProvider>
+          </HelmetProvider>
+        </LoadingProvider>
       </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>,

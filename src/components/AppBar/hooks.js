@@ -1,10 +1,12 @@
 import { useState } from 'react'
 
-import { MENU_TAB_KEY, MENU_TAB_VALUE } from '~/constants/general'
+import { MENU_TAB_KEY, MENU_TAB_VALUE, MENU_TAB_VALUE_ROUTE_MAPPING } from '~/constants/general'
 import useAuth from '~/utils/auth/useAuth'
+import { useNavigateParams } from '~/utils/routing'
 
 const useCustom = () => {
   const { handler, state } = useAuth()
+  const navigate = useNavigateParams()
 
   const [anchorEl, setAnchorEl] = useState(null)
   const [showPopUp, setShowPopUp] = useState(false)
@@ -13,6 +15,7 @@ const useCustom = () => {
 
   const handleChangeTab = (event, newValue) => {
     setCurrentTab(newValue)
+    navigate(MENU_TAB_VALUE_ROUTE_MAPPING[newValue])
   }
 
   const handleClick = (event) => {
