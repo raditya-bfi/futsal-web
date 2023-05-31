@@ -9,3 +9,11 @@ export const doLogin = (payload = {}) =>
     method: 'POST',
     data: payload,
   })
+
+export const getListOfOperator = (params = {}) =>
+  Axios({
+    MAIN_URL: apiUrl,
+    url: `/user/operators`,
+    method: 'GET',
+    params,
+  })

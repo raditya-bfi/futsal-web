@@ -14,7 +14,6 @@ export const colors = {
   EarlyDawn: '#FFFBE6',
   SeashellPeach: '#FFF1E8',
   Conifer: '#7FE84A',
-  Malachite: '#08c06c',
   SugarCane: '#F6FFED',
   TropicalRainForest: '#00684f',
   PaleBlue: '#cef7ff',
@@ -118,4 +117,7 @@ export const colors = {
   Indochine: '#B06A00',
   PigmentIndigo: '#570081',
   Pueblo: '#873116',
+  Tundora: '#414141',
+  Vermilion: '#FF3D00',
+  Malachite: '#00FF47',
 }

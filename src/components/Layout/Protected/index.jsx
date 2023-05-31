@@ -5,11 +5,14 @@ import { Box } from '@mui/material'
 
 import CustomAppBar from '~/components/AppBar'
 import Loading from '~/components/Loading'
+import Overlay from '~/components/Overlay'
 import routes from '~/routes'
+import useLoading from '~/utils/loading/useLoading'
 
 import useStyles from './style'
 
 function ProtectedLayout() {
+  const { isLoading } = useLoading()
   const classes = useStyles()
   return (
     <Suspense fallback={<Loading height='100%' loading />}>
@@ -23,6 +26,7 @@ function ProtectedLayout() {
           <Route path='*' element={<Navigate to='/404' />} />
         </Routes>
       </Box>
+      <Overlay show={isLoading} />
     </Suspense>
   )
 }

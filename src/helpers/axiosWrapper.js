@@ -11,8 +11,8 @@ const request = async (options) => {
   if (!options.customHeaders && authTokens) {
     requestHeaders = options.customHeaders || {
       'Content-type': 'application/json',
-      Accept: 'application/json',
-      Authorization: `Bearer ${authTokens}`,
+      Accept: '*/*',
+      Token: authTokens,
     }
   }
 
