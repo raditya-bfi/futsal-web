@@ -24,6 +24,11 @@ function HorizontalBarChart({ chartData, decimalPlaces }) {
         formatter(value) {
           return `${thousandSeparator(value, decimalPlaces, true)}%`
         },
+        display(context) {
+          const index = context.dataIndex
+          const value = context.dataset.data[index]
+          return value > 0 // display labels with a value greater than 0
+        },
       },
       legend: {
         position: 'bottom',
@@ -39,6 +44,12 @@ function HorizontalBarChart({ chartData, decimalPlaces }) {
       },
       tooltip: {
         enabled: false,
+      },
+    },
+    layout: {
+      padding: {
+        left: 25,
+        right: 25,
       },
     },
     scales: {

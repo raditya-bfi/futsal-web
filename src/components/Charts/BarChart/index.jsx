@@ -66,6 +66,13 @@ function BarChart({ chartData, decimalPlaces, metric }) {
         },
       },
     },
+    layout: {
+      padding: {
+        top: 25,
+        // left: 25,
+        // right: 25,
+      },
+    },
   }
   return <Bar data={chartData} options={chartOptions} />
 }

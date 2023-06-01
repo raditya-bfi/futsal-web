@@ -60,3 +60,39 @@ export const DASHBOARD_MENU_TAB_VALUE = {
   [DASHBOARD_MENU_TAB_KEY.PENDAPATAN]: '1',
   [DASHBOARD_MENU_TAB_KEY.JAM_PENYEWAAN]: '2',
 }
+
+export const DASHBOARD_RENT_TIME_KEY = {
+  '7_TO_8': '07:00-08:00',
+  '8_TO_9': '08:00-09:00',
+  '9_TO_10': '09:00-10:00',
+  '10_TO_11': '10:00-11:00',
+  '11_TO_12': '11:00-12:00',
+  '12_TO_13': '12:00-13:00',
+  '13_TO_14': '13:00-14:00',
+  '14_TO_15': '14:00-15:00',
+  '15_TO_16': '15:00-16:00',
+  '16_TO_17': '16:00-17:00',
+  '17_TO_18': '17:00-18:00',
+  '18_TO_19': '18:00-19:00',
+  '19_TO_20': '19:00-20:00',
+  '20_TO_21': '20:00-21:00',
+  '21_TO_22': '21:00-22:00',
+}
+
+export const DASHBOARD_RENT_TIME_MAPPING = {
+  [DASHBOARD_RENT_TIME_KEY['7_TO_8']]: 'Lainnya',
+  [DASHBOARD_RENT_TIME_KEY['8_TO_9']]: 'Lainnya',
+  [DASHBOARD_RENT_TIME_KEY['9_TO_10']]: 'Lainnya',
+  [DASHBOARD_RENT_TIME_KEY['10_TO_11']]: 'Lainnya',
+  [DASHBOARD_RENT_TIME_KEY['11_TO_12']]: 'Lainnya',
+  [DASHBOARD_RENT_TIME_KEY['12_TO_13']]: 'Lainnya',
+  [DASHBOARD_RENT_TIME_KEY['13_TO_14']]: 'Lainnya',
+  [DASHBOARD_RENT_TIME_KEY['14_TO_15']]: 'Pukul 14:00 hingga 15:00',
+  [DASHBOARD_RENT_TIME_KEY['15_TO_16']]: 'Pukul 15:00 hingga 16:00',
+  [DASHBOARD_RENT_TIME_KEY['16_TO_17']]: 'Pukul 16:00 hingga 17:00',
+  [DASHBOARD_RENT_TIME_KEY['17_TO_18']]: 'Pukul 17:00 hingga 18:00',
+  [DASHBOARD_RENT_TIME_KEY['18_TO_19']]: 'Lainnya',
+  [DASHBOARD_RENT_TIME_KEY['19_TO_20']]: 'Lainnya',
+  [DASHBOARD_RENT_TIME_KEY['20_TO_21']]: 'Pukul 20:00 hingga 21:00',
+  [DASHBOARD_RENT_TIME_KEY['21_TO_22']]: 'Pukul 21:00 hingga 22:00',
+}

@@ -18,18 +18,16 @@ export const getListOfOperator = (params = {}) =>
     params,
   })
 
-export const getLaporanPendapatan = () => {
+export const getLaporanPendapatan = () =>
   Axios({
     MAIN_URL: apiUrl,
     url: `/dashboard/income`,
     method: 'GET',
   })
-}
 
-export const getLaporanWaktuSewa = () => {
+export const getLaporanWaktuSewa = () =>
   Axios({
     MAIN_URL: apiUrl,
     url: `/dashboard/rent-time`,
     method: 'GET',
   })
-}

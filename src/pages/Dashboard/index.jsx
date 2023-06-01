@@ -56,9 +56,9 @@ function DashboardPage() {
                     }
                   >
                     <Typography className={classes.tabLabel}>
-                      {`${
-                        DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.PENDAPATAN].name
-                      }Januari 2023`}
+                      {`${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.PENDAPATAN].name}${
+                        state?.currentDate?.date
+                      }`}
                     </Typography>
                     <Typography className={classes.tabLabelDesc}>
                       {`${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.PENDAPATAN].prefix}
@@ -81,9 +81,9 @@ function DashboardPage() {
                     `}
                   >
                     <Typography className={classes.tabLabel}>
-                      {`${
-                        DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.JAM_PENYEWAAN].name
-                      }Januari 2023`}
+                      {`${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.JAM_PENYEWAAN].name}${
+                        state?.currentDate?.date
+                      }`}
                     </Typography>
                     <Typography className={classes.tabLabelDesc}>
                       {`${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.JAM_PENYEWAAN].prefix}
