@@ -17,3 +17,17 @@ export const getListOfOperator = (params = {}) =>
     method: 'GET',
     params,
   })
+
+export const getLaporanPendapatan = () =>
+  Axios({
+    MAIN_URL: apiUrl,
+    url: `/dashboard/income`,
+    method: 'GET',
+  })
+
+export const getLaporanWaktuSewa = () =>
+  Axios({
+    MAIN_URL: apiUrl,
+    url: `/dashboard/rent-time`,
+    method: 'GET',
+  })

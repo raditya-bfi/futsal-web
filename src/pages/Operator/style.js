@@ -30,12 +30,53 @@ const style = makeStyles((theme) => ({
   },
   pageContent: {
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'row',
     height: 'max-content',
     width: '100%',
+  },
+  mainContent: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: 'max-content',
+    width: '95%',
     borderRadius: '10px',
     border: `3px solid ${colors.White}`,
     padding: '65px 60px',
+  },
+  navigation: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+    height: 'max-content',
+    width: '5%',
+
+    '& > div:not(:last-child)': {
+      marginBottom: '15px',
+    },
+  },
+  addButton: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '54.02px',
+    height: '55px',
+    backgroundColor: colors.ForestGreen,
+    border: `1px solid ${colors.White}`,
+    borderRadius: '5px',
+    color: colors.White,
+    cursor: 'pointer',
+  },
+  deleteButton: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '54.02px',
+    height: '55px',
+    backgroundColor: colors.Matisse,
+    border: `1px solid ${colors.White}`,
+    borderRadius: '5px',
+    color: colors.White,
+    cursor: 'pointer',
   },
   contentInfo: {
     marginBottom: '52px',
@@ -81,6 +122,12 @@ const style = makeStyles((theme) => ({
     width: '265px',
     height: '338.1px',
     backgroundColor: colors.TricornBlack,
+    borderTopLeftRadius: '5px',
+    borderTopRightRadius: '5px',
+  },
+  userThumbnail: {
+    width: '100%',
+    height: '100%',
     borderTopLeftRadius: '5px',
     borderTopRightRadius: '5px',
   },
@@ -157,7 +204,7 @@ const style = makeStyles((theme) => ({
     lineHeight: '19.36px',
     marginTop: '33px',
 
-    '& > div': {
+    '& > span': {
       display: 'flex',
       alignItems: 'center',
       fontSize: fontSize[16],

@@ -7,6 +7,15 @@ const useCustom = () => {
   const { setIsLoading } = useLoading()
 
   const [operatorsData, setOperatorsData] = useState([])
+  const [openAddModal, setOpenAddModal] = useState(false)
+
+  const handleOpenAddModal = () => {
+    setOpenAddModal(true)
+  }
+
+  const handleCloseAddModal = () => {
+    setOpenAddModal(false)
+  }
 
   const fetchOperatorsData = async () => {
     await setIsLoading(true)
@@ -16,7 +25,7 @@ const useCustom = () => {
     const response = await getListOfOperator({
       type: 'active',
     })
-    if (response.status === 200) {
+    if (response && response.status === 200) {
       setOperatorsData(response?.data?.data || [])
     }
     await setIsLoading(false)
@@ -30,8 +39,13 @@ const useCustom = () => {
     data: {
       operatorsData,
     },
-    handler: {},
-    state: {},
+    handler: {
+      handleCloseAddModal,
+      handleOpenAddModal,
+    },
+    state: {
+      openAddModal,
+    },
   }
 }
 
