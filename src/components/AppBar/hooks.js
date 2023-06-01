@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { MENU_TAB_KEY, MENU_TAB_VALUE, MENU_TAB_VALUE_ROUTE_MAPPING } from '~/constants/general'
 import useAuth from '~/utils/auth/useAuth'
@@ -15,7 +15,6 @@ const useCustom = () => {
 
   const handleChangeTab = (event, newValue) => {
     setCurrentTab(newValue)
-    navigate(MENU_TAB_VALUE_ROUTE_MAPPING[newValue])
   }
 
   const handleClick = (event) => {
@@ -32,6 +31,10 @@ const useCustom = () => {
     await handler.handleLogout()
     window.location.reload()
   }
+
+  useEffect(() => {
+    navigate(MENU_TAB_VALUE_ROUTE_MAPPING[currentTab])
+  }, [currentTab])
 
   return {
     handler: {
