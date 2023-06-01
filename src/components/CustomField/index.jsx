@@ -22,6 +22,7 @@ function CustomField({
   touch,
   type,
   value,
+  variant,
 }) {
   let isError = false
   if (error && touch) {
@@ -44,6 +45,7 @@ function CustomField({
       required={required}
       label={label}
       type={type === 'password' ? conditionalPassword : type}
+      variant={variant}
       value={value}
       InputProps={{
         endAdornment:
@@ -80,6 +82,7 @@ CustomField.defaultProps = {
   required: false,
   touch: false,
   type: 'text',
+  variant: 'outlined',
 }
 
 CustomField.propTypes = {
@@ -98,6 +101,7 @@ CustomField.propTypes = {
   touch: PropTypes.bool,
   type: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  variant: PropTypes.string,
 }
 
 export default CustomField

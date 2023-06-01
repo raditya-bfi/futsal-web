@@ -87,8 +87,11 @@ export const getVerticalChartData = (
 
 export const getHorizontalChartData = (
   dashboardType = DASHBOARD_MENU_TAB_VALUE[DASHBOARD_MENU_TAB_KEY.PENDAPATAN],
+  laporanPendapatanData = [],
+  laporanWaktuSewaData = [],
 ) => {
   if (dashboardType === DASHBOARD_MENU_TAB_VALUE[DASHBOARD_MENU_TAB_KEY.PENDAPATAN]) {
+    console.log(laporanPendapatanData)
     return {
       data: {
         labels: ['Januari 2023'],
@@ -117,6 +120,8 @@ export const getHorizontalChartData = (
       decimalPlaces: 1,
     }
   }
+
+  console.log(laporanWaktuSewaData)
 
   return {
     data: {
