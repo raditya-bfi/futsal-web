@@ -4,7 +4,7 @@ import { DASHBOARD_MENU_TAB_KEY, DASHBOARD_MENU_TAB_VALUE } from '~/constants/ge
 import { getLaporanPendapatan, getLaporanWaktuSewa } from '~/helpers/request'
 import useLoading from '~/utils/loading/useLoading'
 
-import { getHorizontalChartData, getVerticalChartData } from './helper'
+import { getHorizontalChartData, getSummary, getVerticalChartData } from './helper'
 
 const useCustom = () => {
   const { setIsLoading } = useLoading()
@@ -31,6 +31,11 @@ const useCustom = () => {
   const handleChangeTab = (event, newValue) => {
     setCurrentTab(newValue)
   }
+
+  const summary = useMemo(
+    () => getSummary(laporanPendapatanData, laporanWaktuSewaData),
+    [laporanPendapatanData, laporanWaktuSewaData],
+  )
 
   const horizontalChartData = useMemo(
     () =>
@@ -66,6 +71,7 @@ const useCustom = () => {
   return {
     data: {
       horizontalChartData,
+      summary,
       verticalChartData,
     },
     handler: {

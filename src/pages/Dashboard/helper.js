@@ -9,6 +9,35 @@ import {
 import { colors } from '~/styles/theme'
 import { thousandSeparator } from '~/utils/number'
 
+export const getSummary = (laporanPendapatanData = [], laporanWaktuSewaData = []) => {
+  const res = {
+    pendapatan: 0,
+    jam: 0,
+  }
+
+  // ? : Pendapatan
+  if (laporanPendapatanData && laporanPendapatanData?.length > 0) {
+    laporanPendapatanData.forEach((data) => {
+      Object.keys(data).forEach((key) => {
+        res.pendapatan = data[key]?.total_all || 0
+      })
+    })
+  }
+
+  // ? : Jam
+  if (laporanWaktuSewaData && laporanWaktuSewaData?.length > 0) {
+    laporanWaktuSewaData.forEach((data) => {
+      Object.keys(data).forEach((key) => {
+        if (key === 'total_time_rent') {
+          res.jam = data[key]
+        }
+      })
+    })
+  }
+
+  return res
+}
+
 export const getVerticalChartData = (
   currentDate,
   dashboardType = DASHBOARD_MENU_TAB_VALUE[DASHBOARD_MENU_TAB_KEY.PENDAPATAN],

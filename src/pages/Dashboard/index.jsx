@@ -10,6 +10,7 @@ import {
   DASHBOARD_MENU_TAB_VALUE,
   DASHBOARD_TAB_MAPPING,
 } from '~/constants/general'
+import { thousandSeparator } from '~/utils/number'
 
 import useCustom from './hooks'
 import useStyles from './style'
@@ -62,7 +63,7 @@ function DashboardPage() {
                     </Typography>
                     <Typography className={classes.tabLabelDesc}>
                       {`${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.PENDAPATAN].prefix}
-                      38.639.517
+                      ${thousandSeparator(data?.summary?.pendapatan, 0, false)}
                       ${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.PENDAPATAN].suffix}`}
                     </Typography>
                   </div>
@@ -87,7 +88,7 @@ function DashboardPage() {
                     </Typography>
                     <Typography className={classes.tabLabelDesc}>
                       {`${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.JAM_PENYEWAAN].prefix}
-                      485
+                      ${thousandSeparator(data?.summary?.jam, 0, false)}
                       ${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.JAM_PENYEWAAN].suffix}`}
                     </Typography>
                   </div>
