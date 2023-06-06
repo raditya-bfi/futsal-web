@@ -1,9 +1,8 @@
-import { AddRounded, FemaleRounded, MaleRounded } from '@mui/icons-material'
-import { Box, Typography } from '@mui/material'
+import { FemaleRounded, MaleRounded } from '@mui/icons-material'
+import { Box } from '@mui/material'
 import { Formik, Form, Field } from 'formik'
 
 import {
-  UserIcon,
   MenuOperator,
   FieldPhoneIcon,
   FieldEmailIcon,
@@ -13,13 +12,15 @@ import {
 import Button from '~/components/Button'
 import CustomField from '~/components/CustomField'
 import CustomModal from '~/components/CustomModal'
+import OperatorKTP from '~/components/OperatorKTP'
+import OperatorPhoto from '~/components/OperatorPhoto'
 
 import useCustom from './hooks'
 import { AddOperatorSchema } from './schema'
 import useStyles from './style'
 
-function AddOperatorModal({ onClose, open }) {
-  const { handler, ref, state } = useCustom()
+function AddOperatorModal({ alert, setAlert, setIsNeedRefetch, onClose, open, setOpenModal }) {
+  const { handler, ref, state } = useCustom({ alert, setAlert, setIsNeedRefetch, setOpenModal })
   const classes = useStyles()
 
   return (
@@ -44,12 +45,17 @@ function AddOperatorModal({ onClose, open }) {
           initialValues={state?.initialValue}
           validationSchema={AddOperatorSchema}
           onSubmit={(values, { setSubmitting, resetForm }) => {
-            setSubmitting(true)
-            handler.handleAdd(values)
-            setTimeout(() => {
-              resetForm()
+            const validation = handler?.validateUpload()
+            if (validation === true) {
+              setSubmitting(true)
+              handler.handleAdd(values)
+              setTimeout(() => {
+                resetForm()
+                setSubmitting(false)
+              }, 1000)
+            } else {
               setSubmitting(false)
-            }, 1000)
+            }
           }}
           validateOnChange
           validateOnBlur={false}
@@ -59,18 +65,7 @@ function AddOperatorModal({ onClose, open }) {
             <Form>
               <Box className={classes.addModal}>
                 <Box className={classes.userPhoto}>
-                  <Box className={classes.userPhotoUpload}>
-                    <div>
-                      <img
-                        className={classes.userIconUpload}
-                        src={UserIcon}
-                        alt='add-operator-user-icon'
-                      />
-                    </div>
-                    <Typography className={classes.uploadLabel}>
-                      Klik untuk menambah gambar
-                    </Typography>
-                  </Box>
+                  <OperatorPhoto setFiles={handler?.setPhotoFiles} files={state?.photoFiles} />
                 </Box>
                 <Box className={classes.userInfoWrapper}>
                   <Box className={classes.userInfo}>
@@ -181,12 +176,7 @@ function AddOperatorModal({ onClose, open }) {
                       <Box className={classes.input}>
                         <img src={FieldPasswordIcon} alt='add-user-password-field-icon' />
                         <Box className={classes.ktpBox}>
-                          <div>
-                            <AddRounded />
-                          </div>
-                          <Typography className={classes.uploadKtpLabel}>
-                            Masukkan Foto KTP
-                          </Typography>
+                          <OperatorKTP files={state?.ktpFiles} setFiles={handler?.setKtpFiles} />
                         </Box>
                       </Box>
                     </Box>

@@ -39,7 +39,7 @@ const useCustom = () => {
         ...prev,
         open: true,
         title: 'Login Failed',
-        message: response?.data?.message,
+        message: response?.data?.message || response?.statusText,
       }))
     }
   }, [])

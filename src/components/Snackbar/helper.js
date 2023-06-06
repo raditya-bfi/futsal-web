@@ -9,23 +9,23 @@ export const ALERT_SEVERITY_KEY = {
 
 export const ALERT_STYLE_MAPPING = {
   [ALERT_SEVERITY_KEY.ERROR]: {
-    borderColor: colors.AlizarinCrimson,
-    backgroundColor: colors.FairPink,
+    borderColor: colors.White,
+    backgroundColor: colors.TricornBlack,
     textColor: colors.AlizarinCrimson,
   },
   [ALERT_SEVERITY_KEY.INFO]: {
-    borderColor: colors.Gold,
-    backgroundColor: colors.Corn,
-    textColor: colors.White,
+    borderColor: colors.White,
+    backgroundColor: colors.TricornBlack,
+    textColor: colors.Corn,
   },
   [ALERT_SEVERITY_KEY.SUCCESS]: {
-    borderColor: colors.MountainMeadow,
-    backgroundColor: colors.Conifer,
-    textColor: colors.White,
+    borderColor: colors.White,
+    backgroundColor: colors.TricornBlack,
+    textColor: colors.Malachite,
   },
   [ALERT_SEVERITY_KEY.WARNING]: {
-    borderColor: colors.TreePoppy,
-    backgroundColor: colors.OutrageousOrange,
-    textColor: colors.White,
+    borderColor: colors.White,
+    backgroundColor: colors.TricornBlack,
+    textColor: colors.OutrageousOrange,
   },
 }

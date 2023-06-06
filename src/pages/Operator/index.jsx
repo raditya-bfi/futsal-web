@@ -10,9 +10,11 @@ import {
   MaleRounded,
 } from '@mui/icons-material'
 import { Box, Tooltip, Typography } from '@mui/material'
+import { truncate } from 'lodash-es'
 import { Helmet } from 'react-helmet-async'
 
 import { UserIcon } from '~/assets/svg'
+import Snackbar from '~/components/Snackbar'
 import AddOperatorModal from '~/modules/Operator/AddOperatorModal'
 
 import useCustom from './hooks'
@@ -27,6 +29,12 @@ function OperatorPage() {
       <Helmet title='Operator'>
         <meta name='description' content='Operator | Futsal Gembira' />
       </Helmet>
+      <Snackbar
+        handleClose={handler.handleCloseSnackbar}
+        message={state?.alert?.message}
+        open={state?.alert?.open}
+        severity={state?.alert?.severity}
+      />
       <Box className={classes.container}>
         <Box className={classes.pageTitle}>
           <Typography className={classes.title}>Daftar Operator</Typography>
@@ -58,14 +66,19 @@ function OperatorPage() {
                       </Box>
                       <Box className={classes.cardInfo}>
                         <Box className={classes.operatorInfo}>
-                          <Typography className={classes.operatorName}>
-                            {operator?.name}
-                            {operator?.gender === 'LK' ? (
-                              <MaleRounded className={classes.maleIcon} />
-                            ) : (
-                              <FemaleRounded className={classes.femaleIcon} />
-                            )}
-                          </Typography>
+                          <Tooltip title={operator?.name} placement='top'>
+                            <Typography className={classes.operatorName}>
+                              {truncate(operator?.name, {
+                                length: 15,
+                                omission: '...',
+                              })}
+                              {operator?.gender === 'LK' ? (
+                                <MaleRounded className={classes.maleIcon} />
+                              ) : (
+                                <FemaleRounded className={classes.femaleIcon} />
+                              )}
+                            </Typography>
+                          </Tooltip>
                         </Box>
                         <Typography className={classes.operatorId}>
                           {`@${operator?.username}-${operator?.user_id}`}
@@ -74,10 +87,15 @@ function OperatorPage() {
                           <LocalPhoneRounded />
                           {operator?.no_hp}
                         </Typography>
-                        <Typography className={classes.operatorEmail}>
-                          <EmailRounded />
-                          {operator?.email}
-                        </Typography>
+                        <Tooltip title={operator?.email} placement='top'>
+                          <Typography className={classes.operatorEmail}>
+                            <EmailRounded />
+                            {truncate(operator?.email, {
+                              length: 22,
+                              omission: '...',
+                            })}
+                          </Typography>
+                        </Tooltip>
                         <Typography
                           className={`${classes.operatorStatus} ${
                             operator?.isaktif ? classes.active : classes.unactive
@@ -111,7 +129,14 @@ function OperatorPage() {
           </Box>
         </Box>
       </Box>
-      <AddOperatorModal onClose={handler?.handleCloseAddModal} open={state?.openAddModal} />
+      <AddOperatorModal
+        alert={state?.alert}
+        setAlert={handler?.setAlert}
+        setIsNeedRefetch={handler?.setIsNeedRefetch}
+        onClose={handler?.handleCloseAddModal}
+        open={state?.openAddModal}
+        setOpenModal={handler?.setOpenAddModal}
+      />
     </>
   )
 }

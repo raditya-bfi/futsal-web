@@ -38,7 +38,7 @@ const style = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     height: 'max-content',
-    width: '95%',
+    width: '92%',
     borderRadius: '10px',
     border: `3px solid ${colors.White}`,
     padding: '65px 60px',
@@ -48,7 +48,7 @@ const style = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'flex-end',
     height: 'max-content',
-    width: '5%',
+    width: '8%',
 
     '& > div:not(:last-child)': {
       marginBottom: '15px',
