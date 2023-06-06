@@ -8,6 +8,7 @@ import {
   FieldEmailIcon,
   FieldAddressIcon,
   FieldPasswordIcon,
+  FieldKtpIcon,
 } from '~/assets/svg'
 import Button from '~/components/Button'
 import CustomField from '~/components/CustomField'
@@ -174,7 +175,7 @@ function AddOperatorModal({ alert, setAlert, setIsNeedRefetch, onClose, open, se
                         />
                       </Box>
                       <Box className={classes.input}>
-                        <img src={FieldPasswordIcon} alt='add-user-password-field-icon' />
+                        <img src={FieldKtpIcon} alt='add-user-ktp-field-icon' />
                         <Box className={classes.ktpBox}>
                           <OperatorKTP files={state?.ktpFiles} setFiles={handler?.setKtpFiles} />
                         </Box>
