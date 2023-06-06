@@ -23,7 +23,6 @@ import useStyles from './style'
 function OperatorPage() {
   const { data, handler, state } = useCustom()
   const classes = useStyles()
-
   return (
     <>
       <Helmet title='Operator'>

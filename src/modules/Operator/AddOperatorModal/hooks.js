@@ -61,7 +61,7 @@ const useCustom = ({ setAlert, setIsNeedRefetch, setOpenModal }) => {
         thumbnail: photoFiles && photoFiles.length > 0 ? photoFiles[0] : null,
         ktp: ktpFiles && ktpFiles.length > 0 ? ktpFiles[0] : null,
       })
-      if (response && response?.status === 200) {
+      if (response && response?.status === 201) {
         setAlert((prev) => ({
           ...prev,
           open: true,

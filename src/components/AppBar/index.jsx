@@ -16,8 +16,8 @@ import {
 } from '@mui/material'
 import { capitalize } from 'lodash-es'
 
-import { AvatarLogo } from '~/assets/png'
 import { MENU_TAB_KEY, MENU_TAB_MAPPING, MENU_TAB_VALUE } from '~/constants/general'
+import { stringAvatar } from '~/utils/string'
 
 import useCustom from './hooks'
 import useStyles from './style'
@@ -181,8 +181,12 @@ function CustomAppBar() {
                   </Tabs>
                 </Box>
                 <div className={classes.avatarWrapper}>
-                  <Avatar className={classes.avatar} onClick={handler.handleClick} src={AvatarLogo}>
-                    {state?.userData?.name}
+                  <Avatar
+                    className={classes.avatar}
+                    onClick={handler.handleClick}
+                    src={state?.userData?.thumbnail && state?.userData?.thumbnail}
+                  >
+                    {stringAvatar(state?.userData?.name)}
                   </Avatar>
                 </div>
                 <Popover
