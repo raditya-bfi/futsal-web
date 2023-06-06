@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
 
 import { getListOfOperator } from '~/helpers/request'
@@ -8,6 +9,20 @@ const useCustom = () => {
 
   const [operatorsData, setOperatorsData] = useState([])
   const [openAddModal, setOpenAddModal] = useState(false)
+  const [isNeedRefetch, setIsNeedRefetch] = useState(false)
+  const [alert, setAlert] = useState({
+    open: false,
+    severity: 'error',
+    title: '',
+    message: '',
+  })
+
+  const handleCloseSnackbar = () => {
+    setAlert((prev) => ({
+      ...prev,
+      open: false,
+    }))
+  }
 
   const handleOpenAddModal = () => {
     setOpenAddModal(true)
@@ -28,8 +43,17 @@ const useCustom = () => {
     if (response && response.status === 200) {
       setOperatorsData(response?.data?.data || [])
     }
+    if (isNeedRefetch) {
+      setIsNeedRefetch(false)
+    }
     await setIsLoading(false)
   }
+
+  useEffect(() => {
+    if (isNeedRefetch) {
+      fetchOperatorsData()
+    }
+  }, [isNeedRefetch, setIsNeedRefetch])
 
   useEffect(() => {
     fetchOperatorsData()
@@ -41,9 +65,14 @@ const useCustom = () => {
     },
     handler: {
       handleCloseAddModal,
+      handleCloseSnackbar,
       handleOpenAddModal,
+      setAlert,
+      setIsNeedRefetch,
+      setOpenAddModal,
     },
     state: {
+      alert,
       openAddModal,
     },
   }

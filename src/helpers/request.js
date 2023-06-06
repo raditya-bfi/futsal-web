@@ -1,6 +1,7 @@
 import { apiUrl } from '~/config/index'
 
 import Axios from './axiosWrapper'
+import { toFormData } from './general'
 
 export const doLogin = (payload = {}) =>
   Axios({
@@ -31,3 +32,14 @@ export const getLaporanWaktuSewa = () =>
     url: `/dashboard/rent-time`,
     method: 'GET',
   })
+
+export const handleAddOperator = (payload = {}) => {
+  const data = toFormData(payload)
+  return Axios({
+    MAIN_URL: apiUrl,
+    url: `/user/operators`,
+    method: 'POST',
+    data,
+    isFormData: true,
+  })
+}

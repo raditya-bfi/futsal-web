@@ -16,6 +16,14 @@ const request = async (options) => {
     }
   }
 
+  if (options.isFormData && options.isFormData === true) {
+    requestHeaders = {
+      'Content-type': 'multipart/form-data',
+      Accept: '*/*',
+      Token: authTokens,
+    }
+  }
+
   const client = axios.create({
     baseURL: options.MAIN_URL || apiUrl,
     headers: requestHeaders,

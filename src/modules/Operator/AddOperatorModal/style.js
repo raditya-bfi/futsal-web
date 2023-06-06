@@ -133,21 +133,6 @@ const style = makeStyles(() => ({
     width: '100%',
     backgroundImage: `url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='5' ry='5' stroke='%23DADEE4FF' stroke-width='1' stroke-dasharray='20' stroke-dashoffset='0' stroke-linecap='round'/%3e%3c/svg%3e")`,
     borderRadius: '5px',
-
-    '& > div': {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      height: '100%',
-      width: '100%',
-
-      '& > svg': {
-        height: '57px',
-        width: '57px',
-        color: colors.AgedMoustacheGrey,
-        opacity: '0.1',
-      },
-    },
   },
   uploadKtpLabel: {
     fontSize: fontSize[24],
