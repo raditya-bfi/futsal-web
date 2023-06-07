@@ -9,7 +9,10 @@ const useCustom = () => {
 
   const [operatorsData, setOperatorsData] = useState([])
   const [openAddModal, setOpenAddModal] = useState(false)
+  const [openDetailModal, setOpenDetailModal] = useState(false)
+  const [selectedUserId, setSelectedUserId] = useState(null)
   const [isNeedRefetch, setIsNeedRefetch] = useState(false)
+
   const [alert, setAlert] = useState({
     open: false,
     severity: 'error',
@@ -22,6 +25,15 @@ const useCustom = () => {
       ...prev,
       open: false,
     }))
+  }
+
+  const handleOpenDetailModal = (userId) => {
+    setOpenDetailModal(true)
+    setSelectedUserId(userId)
+  }
+
+  const handleCloseDetailModal = () => {
+    setOpenDetailModal(false)
   }
 
   const handleOpenAddModal = () => {
@@ -65,15 +77,20 @@ const useCustom = () => {
     },
     handler: {
       handleCloseAddModal,
+      handleCloseDetailModal,
       handleCloseSnackbar,
       handleOpenAddModal,
+      handleOpenDetailModal,
       setAlert,
       setIsNeedRefetch,
       setOpenAddModal,
+      setOpenDetailModal,
     },
     state: {
       alert,
       openAddModal,
+      openDetailModal,
+      selectedUserId,
     },
   }
 }

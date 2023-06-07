@@ -43,3 +43,18 @@ export const handleAddOperator = (payload = {}) => {
     isFormData: true,
   })
 }
+
+export const getDetailOperator = (userId) =>
+  Axios({
+    MAIN_URL: apiUrl,
+    url: `/user/operators/${userId}`,
+    method: 'GET',
+  })
+
+export const patchStatusOperator = (userId, payload = {}) =>
+  Axios({
+    MAIN_URL: apiUrl,
+    url: `/user/operators/${userId}`,
+    method: 'PATCH',
+    data: payload,
+  })
