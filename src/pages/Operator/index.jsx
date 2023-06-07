@@ -16,6 +16,7 @@ import { Helmet } from 'react-helmet-async'
 import { UserIcon } from '~/assets/svg'
 import Snackbar from '~/components/Snackbar'
 import AddOperatorModal from '~/modules/Operator/AddOperatorModal'
+import DetailOperatorModal from '~/modules/Operator/DetailOperatorModal'
 
 import useCustom from './hooks'
 import useStyles from './style'
@@ -55,6 +56,7 @@ function OperatorPage() {
                     <Box
                       className={classes.card}
                       key={`operator-card-${operator?.user_id}-${operator?.username}`}
+                      onClick={() => handler?.handleOpenDetailModal(operator?.user_id)}
                     >
                       <Box className={classes.cardPhoto}>
                         <img
@@ -135,6 +137,15 @@ function OperatorPage() {
         onClose={handler?.handleCloseAddModal}
         open={state?.openAddModal}
         setOpenModal={handler?.setOpenAddModal}
+      />
+      <DetailOperatorModal
+        alert={state?.alert}
+        setAlert={handler?.setAlert}
+        setIsNeedRefetch={handler?.setIsNeedRefetch}
+        onClose={handler?.handleCloseDetailModal}
+        open={state?.openDetailModal}
+        setOpenModal={handler?.setOpenDetailModal}
+        userId={state?.selectedUserId}
       />
     </>
   )

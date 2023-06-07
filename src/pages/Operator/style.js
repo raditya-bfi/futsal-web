@@ -114,6 +114,7 @@ const style = makeStyles((theme) => ({
     borderRadius: '5px',
     backgroundColor: colors.Tundora,
     boxShadow: '0px 4px 7px rgba(0, 0, 0, 0.2)',
+    cursor: 'pointer',
   },
   cardPhoto: {
     display: 'flex',
@@ -221,7 +222,7 @@ const style = makeStyles((theme) => ({
     color: colors.Malachite,
   },
   unactive: {
-    color: colors.AlizarinCrimson,
+    color: colors.AgedMoustacheGrey,
   },
   arrow: {
     width: '18px',
