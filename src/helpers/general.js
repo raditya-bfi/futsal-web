@@ -7,3 +7,13 @@ export const toFormData = (object) => {
   })
   return formData
 }
+
+export const getCurrentRoute = (routes, pathname) => {
+  let res = {}
+
+  if (routes && routes.length > 0) {
+    res = routes.find((route) => route.path === pathname)
+    return res
+  }
+  return res
+}

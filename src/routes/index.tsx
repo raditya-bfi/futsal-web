@@ -30,6 +30,6 @@ export default [
     defaultPath: '/operator/archived',
     component: <ArchivedPage />,
     exact: true,
-    withHeader: true,
+    withHeader: false,
   },
 ]
