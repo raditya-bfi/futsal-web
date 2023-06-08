@@ -1,5 +1,5 @@
 import { Circle, FemaleRounded, MaleRounded } from '@mui/icons-material'
-import { Box, Typography } from '@mui/material'
+import { Box, Tooltip, Typography } from '@mui/material'
 import { truncate } from 'lodash-es'
 
 import {
@@ -64,12 +64,14 @@ function DetailOperatorModal({
             <Box className={classes.userInfo}>
               <Box className={classes.userMainInfo}>
                 <Box className={classes.userData}>
-                  <Typography className={classes.name}>
-                    {truncate(state?.operatorData?.name, {
-                      length: 10,
-                      omission: '...',
-                    })}
-                  </Typography>
+                  <Tooltip title={state?.operatorData?.name} placement='top'>
+                    <Typography className={classes.name}>
+                      {truncate(state?.operatorData?.name, {
+                        length: 10,
+                        omission: '...',
+                      })}
+                    </Typography>
+                  </Tooltip>
                   <Box className={classes.genderWrapper}>
                     {state?.operatorData?.gender === 'LK' ? (
                       <MaleRounded className={classes.maleIcon} />

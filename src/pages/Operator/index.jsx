@@ -123,7 +123,10 @@ function OperatorPage() {
               </Box>
             </Tooltip>
             <Tooltip title='Lihat Arsip Operator Nonaktif' placement='left'>
-              <Box className={classes.deleteButton}>
+              <Box
+                className={classes.deleteButton}
+                onClick={() => handler.handleRedirectToArchived()}
+              >
                 <Inventory2Outlined />
               </Box>
             </Tooltip>

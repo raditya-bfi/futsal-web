@@ -1,5 +1,5 @@
 import { memo, Suspense } from 'react'
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 
 import { Box } from '@mui/material'
 
@@ -14,6 +14,7 @@ import useStyles from './style'
 function ProtectedLayout() {
   const { isLoading } = useLoading()
   const classes = useStyles()
+  const location = useLocation()
   return (
     <Suspense fallback={<Loading height='100%' loading />}>
       <CustomAppBar />

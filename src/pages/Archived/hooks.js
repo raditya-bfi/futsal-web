@@ -1,19 +1,25 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { getListOfOperator } from '~/helpers/request'
 import useLoading from '~/utils/loading/useLoading'
 import { useNavigateParams } from '~/utils/routing'
+
+import { getOperatorTableData, getPagination } from './helper'
 
 const useCustom = () => {
   const { setIsLoading } = useLoading()
   const navigate = useNavigateParams()
 
   const [operatorsData, setOperatorsData] = useState([])
-  const [openAddModal, setOpenAddModal] = useState(false)
+  const [isNeedRefetch, setIsNeedRefetch] = useState(false)
   const [openDetailModal, setOpenDetailModal] = useState(false)
   const [selectedUserId, setSelectedUserId] = useState(null)
-  const [isNeedRefetch, setIsNeedRefetch] = useState(false)
+  const [pagination, setPagination] = useState({
+    rowPerPage: 10,
+    currentPage: 1,
+    totalData: 0,
+    totalPage: 0,
+  })
 
   const [alert, setAlert] = useState({
     open: false,
@@ -22,8 +28,8 @@ const useCustom = () => {
     message: '',
   })
 
-  const handleRedirectToArchived = () => {
-    navigate('/operator/archived')
+  const handleBackButton = () => {
+    navigate('/operator')
   }
 
   const handleCloseSnackbar = () => {
@@ -42,13 +48,17 @@ const useCustom = () => {
     setOpenDetailModal(false)
   }
 
-  const handleOpenAddModal = () => {
-    setOpenAddModal(true)
-  }
+  const handleChangePage = useCallback((event, newPage) => {
+    setPagination((prev) => ({
+      ...prev,
+      currentPage: newPage,
+    }))
+  }, [])
 
-  const handleCloseAddModal = () => {
-    setOpenAddModal(false)
-  }
+  const operatorTableData = useMemo(
+    () => getOperatorTableData(operatorsData, pagination),
+    [operatorsData, pagination],
+  )
 
   const fetchOperatorsData = async () => {
     await setIsLoading(true)
@@ -56,10 +66,12 @@ const useCustom = () => {
     setOperatorsData([])
     // ? Operators
     const response = await getListOfOperator({
-      type: 'active',
+      type: 'not-active',
     })
     if (response && response.status === 200) {
-      setOperatorsData(response?.data?.data || [])
+      const data = response?.data?.data || []
+      setOperatorsData(data)
+      setPagination(getPagination(data))
     }
     if (isNeedRefetch) {
       setIsNeedRefetch(false)
@@ -79,24 +91,22 @@ const useCustom = () => {
 
   return {
     data: {
-      operatorsData,
+      operatorTableData,
     },
     handler: {
-      handleCloseAddModal,
+      handleBackButton,
+      handleChangePage,
       handleCloseDetailModal,
       handleCloseSnackbar,
-      handleOpenAddModal,
       handleOpenDetailModal,
-      handleRedirectToArchived,
       setAlert,
       setIsNeedRefetch,
-      setOpenAddModal,
       setOpenDetailModal,
     },
     state: {
       alert,
-      openAddModal,
       openDetailModal,
+      pagination,
       selectedUserId,
     },
   }

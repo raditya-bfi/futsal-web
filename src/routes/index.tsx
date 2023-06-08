@@ -2,7 +2,7 @@ import loadable from '@loadable/component'
 
 const DashboardPage = loadable(() => import('~/pages/Dashboard'))
 const OperatorPage = loadable(() => import('~/pages/Operator'))
-const LandingPage = loadable(() => import('~/pages/Home'))
+const ArchivedPage = loadable(() => import('~/pages/Archived'))
 
 export default [
   {
@@ -11,7 +11,7 @@ export default [
     path: '/dashboard',
     defaultPath: '/dashboard',
     component: <DashboardPage />,
-    exact: false,
+    exact: true,
     withHeader: true,
   },
   {
@@ -20,16 +20,16 @@ export default [
     path: '/operator',
     defaultPath: '/operator',
     component: <OperatorPage />,
-    exact: false,
+    exact: true,
     withHeader: true,
   },
   {
-    id: 'landing',
-    title: 'Landing Page',
-    path: '/landing',
-    defaultPath: '/landing',
-    component: <LandingPage />,
-    exact: false,
+    id: 'operator-archived',
+    title: 'Operator Archived Page',
+    path: '/operator/archived',
+    defaultPath: '/operator/archived',
+    component: <ArchivedPage />,
+    exact: true,
     withHeader: true,
   },
 ]
