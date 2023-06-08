@@ -26,7 +26,7 @@ export const getOperatorTableData = (operatorData = [], pagination = {}) => {
     for (let counter = startIndex; counter <= endIndex; counter += 1) {
       res.push({
         key: counter,
-        id: 10,
+        id: operatorData[counter]?.user_id,
         user_id: operatorData[counter]?.user_id,
         name: operatorData[counter]?.name,
         username: operatorData[counter]?.username,
