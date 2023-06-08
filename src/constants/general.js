@@ -38,6 +38,13 @@ export const MENU_TAB_VALUE_ROUTE_MAPPING = {
   [MENU_TAB_VALUE[MENU_TAB_KEY.OPERATOR]]: '/operator',
 }
 
+export const MENU_TAB_ROUTE_VALUE_MAPPING = {
+  dashboard: '1',
+  penyewaan: '2',
+  lapangan: '3',
+  operator: '4',
+}
+
 export const DASHBOARD_MENU_TAB_KEY = {
   PENDAPATAN: 'PENDAPATAN',
   JAM_PENYEWAAN: 'JAM_PENYEWAAN',

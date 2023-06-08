@@ -1,12 +1,19 @@
 import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 
-import { MENU_TAB_KEY, MENU_TAB_VALUE, MENU_TAB_VALUE_ROUTE_MAPPING } from '~/constants/general'
+import {
+  MENU_TAB_KEY,
+  MENU_TAB_VALUE,
+  MENU_TAB_VALUE_ROUTE_MAPPING,
+  MENU_TAB_ROUTE_VALUE_MAPPING,
+} from '~/constants/general'
 import useAuth from '~/utils/auth/useAuth'
 import { useNavigateParams } from '~/utils/routing'
 
 const useCustom = () => {
   const { handler, state } = useAuth()
   const navigate = useNavigateParams()
+  const location = useLocation()
 
   const [anchorEl, setAnchorEl] = useState(null)
   const [showPopUp, setShowPopUp] = useState(false)
@@ -15,6 +22,7 @@ const useCustom = () => {
 
   const handleChangeTab = (event, newValue) => {
     setCurrentTab(newValue)
+    navigate(MENU_TAB_VALUE_ROUTE_MAPPING[newValue])
   }
 
   const handleClick = (event) => {
@@ -33,8 +41,11 @@ const useCustom = () => {
   }
 
   useEffect(() => {
-    navigate(MENU_TAB_VALUE_ROUTE_MAPPING[currentTab])
-  }, [currentTab])
+    if (location?.pathname) {
+      const currentPath = location?.pathname.substring(1).split('/')[0]
+      setCurrentTab(MENU_TAB_ROUTE_VALUE_MAPPING[currentPath])
+    }
+  }, [location?.pathname])
 
   return {
     handler: {

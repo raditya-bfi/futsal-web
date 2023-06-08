@@ -1,10 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { North, South, Search } from '@mui/icons-material'
 import {
-  Box,
-  InputAdornment,
   Table,
   TableBody,
   TableContainer,
@@ -12,45 +9,27 @@ import {
   TableCell,
   TableRow,
   TablePagination,
-  TableSortLabel,
   Pagination,
   PaginationItem,
 } from '@mui/material'
-
-import CustomField from '~/components/CustomField'
-import { colors } from '~/styles/theme'
 
 import useStyle from './style'
 
 function GridTable({
   rows,
   columns,
-  searchVal,
   page,
   rowsPerPage,
   totalData,
-  totalPages,
+  totalPage,
   handleChangePage,
   handleChangeRowsPerPage,
-  handleSearch,
-  handleSort,
+  handleClickRow,
 }) {
   const classes = useStyle()
 
   return (
-    <div>
-      <Box className={classes.searchContainer}>
-        <CustomField
-          placeholder='Search'
-          onChange={handleSearch}
-          value={searchVal}
-          inputProps={
-            <InputAdornment position='end'>
-              <Search />
-            </InputAdornment>
-          }
-        />
-      </Box>
+    <div className={classes.table}>
       <TableContainer sx={{ marginBottom: 10 }} component='div'>
         <Table stickyHeader sx={{ minWidth: '5%', overflowX: 'auto' }}>
           <TableHead>
@@ -65,41 +44,6 @@ function GridTable({
                     <span style={{ textAlign: 'center', whiteSpace: 'nowrap' }}>
                       {title.headerName}
                     </span>
-                    {title.sortIcon && (
-                      <TableSortLabel
-                        // eslint-disable-next-line react/no-unstable-nested-components
-                        IconComponent={() => (
-                          <div className={classes.tableCellHeadIcon}>
-                            <North
-                              onClick={() => {
-                                handleSort(title.field, 'asc')
-                              }}
-                              sx={{
-                                color: colors.OsloGray,
-                                marginBottom: '3px',
-                                ':hover': {
-                                  color: () => colors.Trout,
-                                },
-                                width: 14,
-                              }}
-                              active={classes.iconDesc}
-                            />
-                            <South
-                              onClick={() => {
-                                handleSort(title.field, 'desc')
-                              }}
-                              sx={{
-                                color: colors.OsloGray,
-                                ':hover': {
-                                  color: () => colors.Trout,
-                                },
-                                width: 14,
-                              }}
-                            />
-                          </div>
-                        )}
-                      />
-                    )}
                   </div>
                 </TableCell>
               ))}
@@ -108,15 +52,21 @@ function GridTable({
           <TableBody>
             {rows.length ? (
               rows?.map((row, index) => (
-                <TableRow style={{ height: 'auto !important' }} key={`table-content-row-${row.id}`}>
+                <TableRow
+                  className={classes.tableRow}
+                  style={{ height: 'auto !important' }}
+                  key={`table-content-row-${row.key}`}
+                  onClick={() => handleClickRow(row.id)}
+                >
                   {columns.map((item) => (
                     <TableCell
-                      key={`table-column-${row.id}-${item.field}`}
+                      key={`table-column-${row.key}-${item.field}`}
                       sx={{
                         textAlign: 'left',
                         width: item.width,
                         whiteSpace: 'break-spaces',
                       }}
+                      className={classes.tableCellBody}
                     >
                       {item.field === 'no' ? index + 1 : item.renderCell(row)}
                     </TableCell>
@@ -129,6 +79,7 @@ function GridTable({
                   colSpan={5}
                   sx={{
                     textAlign: 'center',
+                    color: 'white',
                   }}
                 >
                   No data available in table
@@ -149,7 +100,7 @@ function GridTable({
             >
               <TablePagination
                 className={classes.tablePagination}
-                rowsPerPageOptions={[10, 25, 50, 100]}
+                rowsPerPageOptions={[10]}
                 component='div'
                 count={totalData}
                 rowsPerPage={rowsPerPage}
@@ -165,14 +116,14 @@ function GridTable({
             </div>
             <Pagination
               className={classes.paginationButton}
-              count={totalPages}
+              count={totalPage}
               page={page}
               onChange={handleChangePage}
               renderItem={(item) => (
                 <PaginationItem
                   components={{
-                    next: () => 'Next',
-                    previous: () => 'Previous',
+                    next: () => '>>',
+                    previous: () => '<<',
                   }}
                   // eslint-disable-next-line react/jsx-props-no-spreading
                   {...item}
@@ -192,29 +143,25 @@ function GridTable({
 GridTable.defaultProps = {
   rows: {},
   columns: {},
-  searchVal: '',
   page: 1,
   rowsPerPage: 10,
   totalData: 0,
-  totalPages: 0,
-  handleSearch: () => {},
+  totalPage: 0,
   handleChangePage: () => {},
   handleChangeRowsPerPage: () => {},
-  handleSort: () => {},
+  handleClickRow: () => {},
 }
 
 GridTable.propTypes = {
   rows: PropTypes.shape({}),
   columns: PropTypes.shape({}),
-  searchVal: PropTypes.string,
   page: PropTypes.number,
   rowsPerPage: PropTypes.number,
   totalData: PropTypes.number,
-  totalPages: PropTypes.number,
-  handleSearch: PropTypes.func,
+  totalPage: PropTypes.number,
   handleChangePage: PropTypes.func,
   handleChangeRowsPerPage: PropTypes.func,
-  handleSort: PropTypes.func,
+  handleClickRow: PropTypes.func,
 }
 
 export default GridTable
