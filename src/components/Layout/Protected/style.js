@@ -10,6 +10,11 @@ const style = makeStyles(() => ({
     backgroundColor: colors.MineShaft,
     padding: '95px 74px',
   },
+  pageContainerWithoutHeader: {
+    height: 'max-content',
+    width: '100%',
+    backgroundColor: colors.MineShaft,
+  },
 }))
 
 export default style

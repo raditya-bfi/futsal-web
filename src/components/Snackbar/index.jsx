@@ -21,6 +21,7 @@ function Snackbar({
         vertical: verticalPosition,
         horizontal: horizontalPosition,
       }}
+      autoHideDuration={300000}
       open={open}
       onClose={handleClose}
       sx={{ top: '45px' }}

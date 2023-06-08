@@ -13,8 +13,14 @@ const style = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     height: '10%',
+    minHeight: '90px',
     width: '100%',
     marginBottom: theme.spacing(3),
+    backgroundColor: colors.TricornBlack,
+    padding: '0px 49px',
+    transition: 'box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+    boxShadow:
+      'rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px',
   },
   titleWrapper: {
     display: 'flex',
@@ -40,7 +46,7 @@ const style = makeStyles((theme) => ({
     flexDirection: 'column',
     height: 'max-content',
     width: '100%',
-    padding: '65px 0px',
+    padding: '52px 49px 113px 49px',
   },
   contentInfo: {
     marginBottom: '52px',

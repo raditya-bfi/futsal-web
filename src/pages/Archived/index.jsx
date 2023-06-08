@@ -46,7 +46,7 @@ export const getArchivedColumns = () => [
 
 function ArchivedPage() {
   const { data, handler, state } = useCustom()
-  const classes = useStyles({})
+  const classes = useStyles()
 
   return (
     <>

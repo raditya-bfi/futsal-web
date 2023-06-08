@@ -17,6 +17,7 @@ const useCustom = () => {
 
   const [anchorEl, setAnchorEl] = useState(null)
   const [showPopUp, setShowPopUp] = useState(false)
+  // eslint-disable-next-line unused-imports/no-unused-vars, no-unused-vars
   const [notification, setNotification] = useState([])
   const [currentTab, setCurrentTab] = useState(MENU_TAB_VALUE[MENU_TAB_KEY.DASBOR])
 

@@ -141,8 +141,8 @@ function GridTable({
 }
 
 GridTable.defaultProps = {
-  rows: {},
-  columns: {},
+  rows: [{}],
+  columns: [{}],
   page: 1,
   rowsPerPage: 10,
   totalData: 0,
@@ -153,8 +153,8 @@ GridTable.defaultProps = {
 }
 
 GridTable.propTypes = {
-  rows: PropTypes.shape({}),
-  columns: PropTypes.shape({}),
+  rows: PropTypes.arrayOf(PropTypes.shape({})),
+  columns: PropTypes.arrayOf(PropTypes.shape({})),
   page: PropTypes.number,
   rowsPerPage: PropTypes.number,
   totalData: PropTypes.number,

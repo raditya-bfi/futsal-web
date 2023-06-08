@@ -20,7 +20,10 @@ const useCustom = ({ setAlert, setIsNeedRefetch, setOpenModal, userId }) => {
           open: true,
           title: '',
           severity: 'success',
-          message: 'Berhasil menyunting Operator',
+          message:
+            status !== true
+              ? 'Berhasil mengaktifkan Operator - Pindah ke Daftar Operator'
+              : 'Berhasil menonaktifkan Operator - Pindah ke arsip',
         }))
       } else {
         setAlert((prev) => ({
@@ -28,7 +31,10 @@ const useCustom = ({ setAlert, setIsNeedRefetch, setOpenModal, userId }) => {
           open: true,
           title: '',
           severity: 'error',
-          message: response?.data?.message || response?.statusText || 'Gagal menyunting Operator',
+          message:
+            response?.data?.message || response?.statusText || status !== true
+              ? 'Gagal mengaktifkan Operator - Pindah ke Daftar Operator'
+              : 'Gagal menonaktifkan Operator - Pindah ke arsip',
         }))
       }
       await setIsLoading(false)
