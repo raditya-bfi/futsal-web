@@ -3,6 +3,8 @@ import loadable from '@loadable/component'
 const DashboardPage = loadable(() => import('~/pages/Dashboard'))
 const OperatorPage = loadable(() => import('~/pages/Operator'))
 const ArchivedPage = loadable(() => import('~/pages/Archived'))
+const NotFoundPage = loadable(() => import('~/pages/NotFound'))
+const ForbiddenPage = loadable(() => import('~/pages/Forbidden'))
 
 export default [
   {
@@ -31,5 +33,23 @@ export default [
     component: <ArchivedPage />,
     exact: true,
     withHeader: false,
+  },
+  {
+    id: 'not-found',
+    title: 'Not Found Page',
+    path: '/404',
+    defaultPath: '/404',
+    component: <NotFoundPage />,
+    exact: true,
+    withHeader: true,
+  },
+  {
+    id: 'forbidden',
+    title: 'Forbidden Page',
+    path: '/403',
+    defaultPath: '/434',
+    component: <ForbiddenPage />,
+    exact: true,
+    withHeader: true,
   },
 ]
