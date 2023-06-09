@@ -58,3 +58,14 @@ export const patchStatusOperator = (userId, payload = {}) =>
     method: 'PATCH',
     data: payload,
   })
+
+export const handleEditOperator = (userId, payload = {}) => {
+  const data = toFormData(payload)
+  return Axios({
+    MAIN_URL: apiUrl,
+    url: `/user/operators/${userId}`,
+    method: 'PUT',
+    data,
+    isFormData: true,
+  })
+}

@@ -23,8 +23,16 @@ function DetailOperatorModal({
   open,
   setOpenModal,
   userId,
+  handleSuntingOperator,
 }) {
-  const { handler, state } = useCustom({ alert, setAlert, setIsNeedRefetch, setOpenModal, userId })
+  const { handler, state } = useCustom({
+    alert,
+    setAlert,
+    setIsNeedRefetch,
+    open,
+    setOpenModal,
+    userId,
+  })
   const classes = useStyles()
 
   return (
@@ -132,7 +140,11 @@ function DetailOperatorModal({
               </Box>
             </Box>
             <Box className={classes.optionWrapper}>
-              <Typography className={classes.updateLabel} variant='div'>
+              <Typography
+                className={classes.updateLabel}
+                onClick={() => handleSuntingOperator(state?.operatorData?.user_id)}
+                variant='div'
+              >
                 Sunting
               </Typography>
               <Typography

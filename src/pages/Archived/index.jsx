@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet-async'
 import GridTable from '~/components/GridTable'
 import Snackbar from '~/components/Snackbar'
 import DetailOperatorModal from '~/modules/Operator/DetailOperatorModal'
+import EditOperatorModal from '~/modules/Operator/EditOperatorModal'
 
 import useCustom from './hooks'
 import useStyles from './style'
@@ -97,6 +98,18 @@ function ArchivedPage() {
         onClose={handler?.handleCloseDetailModal}
         open={state?.openDetailModal}
         setOpenModal={handler?.setOpenDetailModal}
+        userId={state?.selectedUserId}
+        handleSuntingOperator={handler?.handleSuntingOperator}
+      />
+      <EditOperatorModal
+        alert={state?.alert}
+        setAlert={handler?.setAlert}
+        editPhotoMode
+        editKtpMode
+        setIsNeedRefetch={handler?.setIsNeedRefetch}
+        onClose={handler?.handleCloseEditModal}
+        open={state?.openEditModal}
+        setOpenModal={handler?.setOpenEditModal}
         userId={state?.selectedUserId}
       />
     </>

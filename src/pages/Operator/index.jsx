@@ -17,6 +17,7 @@ import { UserIcon } from '~/assets/svg'
 import Snackbar from '~/components/Snackbar'
 import AddOperatorModal from '~/modules/Operator/AddOperatorModal'
 import DetailOperatorModal from '~/modules/Operator/DetailOperatorModal'
+import EditOperatorModal from '~/modules/Operator/EditOperatorModal'
 
 import useCustom from './hooks'
 import useStyles from './style'
@@ -148,6 +149,18 @@ function OperatorPage() {
         onClose={handler?.handleCloseDetailModal}
         open={state?.openDetailModal}
         setOpenModal={handler?.setOpenDetailModal}
+        userId={state?.selectedUserId}
+        handleSuntingOperator={handler?.handleSuntingOperator}
+      />
+      <EditOperatorModal
+        alert={state?.alert}
+        setAlert={handler?.setAlert}
+        editPhotoMode
+        editKtpMode
+        setIsNeedRefetch={handler?.setIsNeedRefetch}
+        onClose={handler?.handleCloseEditModal}
+        open={state?.openEditModal}
+        setOpenModal={handler?.setOpenEditModal}
         userId={state?.selectedUserId}
       />
     </>
