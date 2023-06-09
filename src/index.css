@@ -16,7 +16,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Inter';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #363636;
+  background-color: #363636 !important;
 }
 
 body.fontLoaded {
