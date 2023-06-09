@@ -52,7 +52,7 @@ function OperatorPage() {
             <Box className={classes.content}>
               <Box className={classes.operatorList}>
                 {data?.operatorsData &&
-                  data?.operatorsData.length > 1 &&
+                  data?.operatorsData.length > 0 &&
                   data?.operatorsData.map((operator) => (
                     <Box
                       className={classes.card}
