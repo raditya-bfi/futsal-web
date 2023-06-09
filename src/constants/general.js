@@ -35,6 +35,8 @@ export const MENU_TAB_VALUE = {
 
 export const MENU_TAB_VALUE_ROUTE_MAPPING = {
   [MENU_TAB_VALUE[MENU_TAB_KEY.DASBOR]]: '/dashboard',
+  [MENU_TAB_VALUE[MENU_TAB_KEY.PENYEWAAN]]: '/penyewaan',
+  [MENU_TAB_VALUE[MENU_TAB_KEY.LAPANGAN]]: '/lapangan',
   [MENU_TAB_VALUE[MENU_TAB_KEY.OPERATOR]]: '/operator',
 }
 
@@ -102,4 +104,39 @@ export const DASHBOARD_RENT_TIME_MAPPING = {
   [DASHBOARD_RENT_TIME_KEY['19_TO_20']]: 'Lainnya',
   [DASHBOARD_RENT_TIME_KEY['20_TO_21']]: 'Pukul 20:00 hingga 21:00',
   [DASHBOARD_RENT_TIME_KEY['21_TO_22']]: 'Pukul 21:00 hingga 22:00',
+}
+
+export const ROLE_KEY = {
+  ADMIN: 'admin',
+  OPERATOR: 'operator',
+}
+
+export const MENU_KEY = {
+  DASHBOARD: '/dashboard',
+  PENYEWAAN: '/penyewaan',
+  LAPANGAN: '/lapangan',
+  OPERATOR: '/operator',
+  ARSIP_OPERATOR: '/operator/archived',
+  FORBIDDEN: '/403',
+  NOTFOUND: '/404',
+}
+
+export const ADMIN_MENUS = [
+  MENU_KEY.DASHBOARD,
+  MENU_KEY.OPERATOR,
+  MENU_KEY.ARSIP_OPERATOR,
+  MENU_KEY.FORBIDDEN,
+  MENU_KEY.NOTFOUND,
+]
+
+export const OPERATOR_MENUS = [
+  MENU_KEY.PENYEWAAN,
+  MENU_KEY.LAPANGAN,
+  MENU_KEY.FORBIDDEN,
+  MENU_KEY.NOTFOUND,
+]
+
+export const ROLE_MENU_MAPPING = {
+  [ROLE_KEY.ADMIN]: ADMIN_MENUS,
+  [ROLE_KEY.OPERATOR]: OPERATOR_MENUS,
 }
