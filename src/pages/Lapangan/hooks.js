@@ -12,6 +12,8 @@ const useCustom = () => {
   const navigate = useNavigateParams()
 
   const [fieldsData, setFieldsData] = useState([])
+  const [openDetailModal, setOpenDetailModal] = useState(false)
+  const [selectedFieldId, setSelectedFieldId] = useState(null)
   const [isNeedRefetch, setIsNeedRefetch] = useState(false)
 
   const [alert, setAlert] = useState({
@@ -26,6 +28,15 @@ const useCustom = () => {
       ...prev,
       open: false,
     }))
+  }
+
+  const handleOpenDetailModal = (userId) => {
+    setOpenDetailModal(true)
+    setSelectedFieldId(userId)
+  }
+
+  const handleCloseDetailModal = () => {
+    setOpenDetailModal(false)
   }
 
   const fieldSliderData = useMemo(() => getSliderData(fieldsData), [fieldsData])
@@ -60,12 +71,17 @@ const useCustom = () => {
       fieldSliderData,
     },
     handler: {
+      handleCloseDetailModal,
       handleCloseSnackbar,
+      handleOpenDetailModal,
       setAlert,
       setIsNeedRefetch,
+      setOpenDetailModal,
     },
     state: {
       alert,
+      openDetailModal,
+      selectedFieldId,
     },
   }
 }
