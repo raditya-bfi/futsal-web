@@ -1,3 +1,5 @@
+import ForbiddenIllustration from './403-page-forbidden.svg'
+import NotFoundIllustration from './404-page-not-found.svg'
 import FieldAddressIcon from './address-field-icon.svg'
 import FieldEmailIcon from './email-field-icon.svg'
 import FieldKtpIcon from './ktp-field-icon.svg'
@@ -15,9 +17,11 @@ export {
   FieldKtpIcon,
   FieldPasswordIcon,
   FieldPhoneIcon,
+  ForbiddenIllustration,
   MenuDashboard,
   MenuPenyewaan,
   MenuLapangan,
   MenuOperator,
+  NotFoundIllustration,
   UserIcon,
 }
