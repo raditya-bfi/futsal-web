@@ -14,7 +14,7 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material'
-import { capitalize } from 'lodash-es'
+import { capitalize, toLower } from 'lodash-es'
 
 import { MENU_TAB_KEY, MENU_TAB_MAPPING, MENU_TAB_VALUE } from '~/constants/general'
 import { stringAvatar } from '~/utils/string'
@@ -45,39 +45,41 @@ function CustomAppBar() {
                     value={state.currentTab}
                     onChange={handler.handleChangeTab}
                   >
-                    <Tab
-                      label={
-                        <div
-                          className={
-                            state?.currentTab === MENU_TAB_VALUE[MENU_TAB_KEY.DASBOR]
-                              ? classes.activeTab
-                              : classes.tab
-                          }
-                        >
-                          <Tooltip
-                            title={
-                              state?.currentTab !== MENU_TAB_VALUE[MENU_TAB_KEY.DASBOR]
-                                ? MENU_TAB_MAPPING[MENU_TAB_KEY.DASBOR].name
-                                : ''
+                    {toLower(state?.userData.type) === 'admin' && (
+                      <Tab
+                        label={
+                          <div
+                            className={
+                              state?.currentTab === MENU_TAB_VALUE[MENU_TAB_KEY.DASBOR]
+                                ? classes.activeTab
+                                : classes.tab
                             }
                           >
-                            <img
-                              className={classes.tabIcon}
-                              src={MENU_TAB_MAPPING[MENU_TAB_KEY.DASBOR].icon}
-                              alt={`${MENU_TAB_MAPPING[
-                                MENU_TAB_KEY.DASBOR
-                              ].name.toLowerCase()}-menu-tab`}
-                            />
-                          </Tooltip>
-                          {state?.currentTab === MENU_TAB_VALUE[MENU_TAB_KEY.DASBOR] && (
-                            <Typography className={classes.tabLabel} fontWeight={500}>
-                              {MENU_TAB_MAPPING[MENU_TAB_KEY.DASBOR].name}
-                            </Typography>
-                          )}
-                        </div>
-                      }
-                      value={MENU_TAB_VALUE[MENU_TAB_KEY.DASBOR]}
-                    />
+                            <Tooltip
+                              title={
+                                state?.currentTab !== MENU_TAB_VALUE[MENU_TAB_KEY.DASBOR]
+                                  ? MENU_TAB_MAPPING[MENU_TAB_KEY.DASBOR].name
+                                  : ''
+                              }
+                            >
+                              <img
+                                className={classes.tabIcon}
+                                src={MENU_TAB_MAPPING[MENU_TAB_KEY.DASBOR].icon}
+                                alt={`${MENU_TAB_MAPPING[
+                                  MENU_TAB_KEY.DASBOR
+                                ].name.toLowerCase()}-menu-tab`}
+                              />
+                            </Tooltip>
+                            {state?.currentTab === MENU_TAB_VALUE[MENU_TAB_KEY.DASBOR] && (
+                              <Typography className={classes.tabLabel} fontWeight={500}>
+                                {MENU_TAB_MAPPING[MENU_TAB_KEY.DASBOR].name}
+                              </Typography>
+                            )}
+                          </div>
+                        }
+                        value={MENU_TAB_VALUE[MENU_TAB_KEY.DASBOR]}
+                      />
+                    )}
                     <Tab
                       label={
                         <div
@@ -145,39 +147,41 @@ function CustomAppBar() {
                       }
                       value={MENU_TAB_VALUE[MENU_TAB_KEY.LAPANGAN]}
                     />
-                    <Tab
-                      label={
-                        <div
-                          className={
-                            state?.currentTab === MENU_TAB_VALUE[MENU_TAB_KEY.OPERATOR]
-                              ? classes.activeTab
-                              : classes.tab
-                          }
-                        >
-                          <Tooltip
-                            title={
-                              state?.currentTab !== MENU_TAB_VALUE[MENU_TAB_KEY.OPERATOR]
-                                ? MENU_TAB_MAPPING[MENU_TAB_KEY.OPERATOR].name
-                                : ''
+                    {toLower(state?.userData.type) === 'admin' && (
+                      <Tab
+                        label={
+                          <div
+                            className={
+                              state?.currentTab === MENU_TAB_VALUE[MENU_TAB_KEY.OPERATOR]
+                                ? classes.activeTab
+                                : classes.tab
                             }
                           >
-                            <img
-                              className={classes.tabIcon}
-                              src={MENU_TAB_MAPPING[MENU_TAB_KEY.OPERATOR].icon}
-                              alt={`${MENU_TAB_MAPPING[
-                                MENU_TAB_KEY.OPERATOR
-                              ].name.toLowerCase()}-menu-tab`}
-                            />
-                          </Tooltip>
-                          {state?.currentTab === MENU_TAB_VALUE[MENU_TAB_KEY.OPERATOR] && (
-                            <Typography className={classes.tabLabel} fontWeight={500}>
-                              {MENU_TAB_MAPPING[MENU_TAB_KEY.OPERATOR].name}
-                            </Typography>
-                          )}
-                        </div>
-                      }
-                      value={MENU_TAB_VALUE[MENU_TAB_KEY.OPERATOR]}
-                    />
+                            <Tooltip
+                              title={
+                                state?.currentTab !== MENU_TAB_VALUE[MENU_TAB_KEY.OPERATOR]
+                                  ? MENU_TAB_MAPPING[MENU_TAB_KEY.OPERATOR].name
+                                  : ''
+                              }
+                            >
+                              <img
+                                className={classes.tabIcon}
+                                src={MENU_TAB_MAPPING[MENU_TAB_KEY.OPERATOR].icon}
+                                alt={`${MENU_TAB_MAPPING[
+                                  MENU_TAB_KEY.OPERATOR
+                                ].name.toLowerCase()}-menu-tab`}
+                              />
+                            </Tooltip>
+                            {state?.currentTab === MENU_TAB_VALUE[MENU_TAB_KEY.OPERATOR] && (
+                              <Typography className={classes.tabLabel} fontWeight={500}>
+                                {MENU_TAB_MAPPING[MENU_TAB_KEY.OPERATOR].name}
+                              </Typography>
+                            )}
+                          </div>
+                        }
+                        value={MENU_TAB_VALUE[MENU_TAB_KEY.OPERATOR]}
+                      />
+                    )}
                   </Tabs>
                 </Box>
                 <div className={classes.avatarWrapper}>

@@ -1,3 +1,7 @@
+import { findIndex, toLower } from 'lodash-es'
+
+import { ROLE_MENU_MAPPING } from '~/constants/general'
+
 export const toFormData = (object) => {
   const formData = new FormData()
   Object.keys(object).forEach((key) => {
@@ -16,4 +20,11 @@ export const getCurrentRoute = (routes, pathname) => {
     return res
   }
   return res
+}
+
+export const getPageAuthorization = (currentRoute, userData) => {
+  const accessableMenu = ROLE_MENU_MAPPING[toLower(userData?.type)]
+  const isAccessible = findIndex(accessableMenu, (menu) => menu === currentRoute?.path)
+
+  return isAccessible >= 0
 }

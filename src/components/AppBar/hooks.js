@@ -44,7 +44,9 @@ const useCustom = () => {
   useEffect(() => {
     if (location?.pathname) {
       const currentPath = location?.pathname.substring(1).split('/')[0]
-      setCurrentTab(MENU_TAB_ROUTE_VALUE_MAPPING[currentPath])
+      if (MENU_TAB_ROUTE_VALUE_MAPPING[currentPath]) {
+        setCurrentTab(MENU_TAB_ROUTE_VALUE_MAPPING[currentPath])
+      }
     }
   }, [location?.pathname])
 
