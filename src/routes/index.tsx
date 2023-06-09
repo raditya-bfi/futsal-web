@@ -1,6 +1,7 @@
 import loadable from '@loadable/component'
 
 const DashboardPage = loadable(() => import('~/pages/Dashboard'))
+const LapanganPage = loadable(() => import('~/pages/Lapangan'))
 const OperatorPage = loadable(() => import('~/pages/Operator'))
 const ArchivedPage = loadable(() => import('~/pages/Archived'))
 const NotFoundPage = loadable(() => import('~/pages/NotFound'))
@@ -30,7 +31,7 @@ export default [
     title: 'Halaman Lapangan',
     path: '/lapangan',
     defaultPath: '/lapangan',
-    component: <>Lapangan</>,
+    component: <LapanganPage />,
     exact: true,
     withHeader: true,
   },

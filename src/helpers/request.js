@@ -69,3 +69,10 @@ export const handleEditOperator = (userId, payload = {}) => {
     isFormData: true,
   })
 }
+
+export const getListOfFields = () =>
+  Axios({
+    MAIN_URL: apiUrl,
+    url: `/fields`,
+    method: 'GET',
+  })
