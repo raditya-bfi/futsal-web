@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react'
 
 import { useDropzone } from 'react-dropzone'
 
-const useCustom = ({ editMode, files, maxFiles, setEditMode, setFiles }) => {
+const useCustom = ({ editMode, files, maxFiles, setFiles }) => {
   const previewImageRef = useRef(null)
   const [filePreview, setFilePreview] = useState([])
   const [previewImageSize, setPreviewImageSize] = useState({ height: '0px', width: '0px' })
@@ -11,7 +11,13 @@ const useCustom = ({ editMode, files, maxFiles, setEditMode, setFiles }) => {
       'image/*': [],
     },
     onDrop: (acceptedFiles) => {
-      setFiles(acceptedFiles)
+      setFiles(
+        acceptedFiles.map((file) =>
+          Object.assign(file, {
+            changed: true,
+          }),
+        ),
+      )
       setFilePreview(
         acceptedFiles.map((file) =>
           Object.assign(file, {
@@ -19,9 +25,6 @@ const useCustom = ({ editMode, files, maxFiles, setEditMode, setFiles }) => {
           }),
         ),
       )
-      if (editMode) {
-        setEditMode(false)
-      }
     },
     maxFiles,
     multiple: maxFiles > 1,
@@ -45,7 +48,9 @@ const useCustom = ({ editMode, files, maxFiles, setEditMode, setFiles }) => {
 
   useEffect(() => {
     if (editMode) {
-      setFilePreview(files)
+      if (files && files.length > 0 && files[0].changed === false) {
+        setFilePreview(files)
+      }
     }
   }, [editMode, files])
 

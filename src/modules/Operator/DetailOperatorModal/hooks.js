@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { getDetailOperator, patchStatusOperator } from '~/helpers/request'
 import useLoading from '~/utils/loading/useLoading'
 
-const useCustom = ({ setAlert, setIsNeedRefetch, setOpenModal, userId }) => {
+const useCustom = ({ setAlert, setIsNeedRefetch, open, setOpenModal, userId }) => {
   const { setIsLoading } = useLoading()
 
   const [operatorData, setOperatorData] = useState({})
@@ -60,7 +60,7 @@ const useCustom = ({ setAlert, setIsNeedRefetch, setOpenModal, userId }) => {
     if (userId) {
       fetchOperatorData()
     }
-  }, [userId])
+  }, [open, userId])
 
   return {
     handler: {

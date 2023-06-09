@@ -9,8 +9,8 @@ import { UserIcon } from '~/assets/svg'
 import useCustom from './hooks'
 import useStyle from './style'
 
-function OperatorPhoto({ editMode, files, maxFiles, setEditMode, setFiles }) {
-  const { dropZone, refs, state } = useCustom({ editMode, files, maxFiles, setEditMode, setFiles })
+function OperatorPhoto({ editMode, files, maxFiles, setFiles }) {
+  const { dropZone, refs, state } = useCustom({ editMode, files, maxFiles, setFiles })
   const classes = useStyle()
 
   // ? : Multiple Files
@@ -71,7 +71,6 @@ function OperatorPhoto({ editMode, files, maxFiles, setEditMode, setFiles }) {
 
 OperatorPhoto.defaultProps = {
   editMode: false,
-  setEditMode: () => {},
   files: [],
   maxFiles: 1,
 }
@@ -81,7 +80,6 @@ OperatorPhoto.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   files: PropTypes.array,
   maxFiles: PropTypes.number,
-  setEditMode: PropTypes.func,
   setFiles: PropTypes.func.isRequired,
 }
 

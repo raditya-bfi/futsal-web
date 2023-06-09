@@ -12,6 +12,7 @@ const useCustom = () => {
   const [operatorsData, setOperatorsData] = useState([])
   const [openAddModal, setOpenAddModal] = useState(false)
   const [openDetailModal, setOpenDetailModal] = useState(false)
+  const [openEditModal, setOpenEditModal] = useState(false)
   const [selectedUserId, setSelectedUserId] = useState(null)
   const [isNeedRefetch, setIsNeedRefetch] = useState(false)
 
@@ -50,6 +51,20 @@ const useCustom = () => {
     setOpenAddModal(false)
   }
 
+  const handleOpenEditModal = () => {
+    setOpenEditModal(true)
+  }
+
+  const handleCloseEditModal = () => {
+    setOpenEditModal(false)
+  }
+
+  const handleSuntingOperator = (userId) => {
+    setSelectedUserId(userId)
+    setOpenDetailModal(false)
+    setOpenEditModal(true)
+  }
+
   const fetchOperatorsData = async () => {
     await setIsLoading(true)
     // ? Init Operators
@@ -84,19 +99,24 @@ const useCustom = () => {
     handler: {
       handleCloseAddModal,
       handleCloseDetailModal,
+      handleCloseEditModal,
       handleCloseSnackbar,
       handleOpenAddModal,
       handleOpenDetailModal,
+      handleOpenEditModal,
       handleRedirectToArchived,
+      handleSuntingOperator,
       setAlert,
       setIsNeedRefetch,
       setOpenAddModal,
       setOpenDetailModal,
+      setOpenEditModal,
     },
     state: {
       alert,
       openAddModal,
       openDetailModal,
+      openEditModal,
       selectedUserId,
     },
   }

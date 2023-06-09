@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { getListOfOperator } from '~/helpers/request'
@@ -13,6 +14,7 @@ const useCustom = () => {
   const [operatorsData, setOperatorsData] = useState([])
   const [isNeedRefetch, setIsNeedRefetch] = useState(false)
   const [openDetailModal, setOpenDetailModal] = useState(false)
+  const [openEditModal, setOpenEditModal] = useState(false)
   const [selectedUserId, setSelectedUserId] = useState(null)
   const [pagination, setPagination] = useState({
     rowPerPage: 10,
@@ -46,6 +48,20 @@ const useCustom = () => {
 
   const handleCloseDetailModal = () => {
     setOpenDetailModal(false)
+  }
+
+  const handleOpenEditModal = () => {
+    setOpenEditModal(true)
+  }
+
+  const handleCloseEditModal = () => {
+    setOpenEditModal(false)
+  }
+
+  const handleSuntingOperator = (userId) => {
+    setSelectedUserId(userId)
+    setOpenDetailModal(false)
+    setOpenEditModal(true)
   }
 
   const handleChangePage = useCallback((event, newPage) => {
@@ -97,15 +113,20 @@ const useCustom = () => {
       handleBackButton,
       handleChangePage,
       handleCloseDetailModal,
+      handleCloseEditModal,
       handleCloseSnackbar,
       handleOpenDetailModal,
+      handleOpenEditModal,
+      handleSuntingOperator,
       setAlert,
       setIsNeedRefetch,
       setOpenDetailModal,
+      setOpenEditModal,
     },
     state: {
       alert,
       openDetailModal,
+      openEditModal,
       pagination,
       selectedUserId,
     },
