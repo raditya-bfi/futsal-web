@@ -89,6 +89,7 @@ const style = makeStyles((theme) => ({
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
+    cursor: 'pointer',
   },
   fieldInfo: {
     width: '100%',

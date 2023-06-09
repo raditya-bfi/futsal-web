@@ -76,3 +76,10 @@ export const getListOfFields = () =>
     url: `/fields`,
     method: 'GET',
   })
+
+export const getDetailField = (fieldId) =>
+  Axios({
+    MAIN_URL: apiUrl,
+    url: `/fields/${fieldId}`,
+    method: 'GET',
+  })

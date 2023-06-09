@@ -50,9 +50,9 @@ function OperatorPhoto({ editMode, files, maxFiles, setFiles }) {
               onLoad={() => {
                 URL.revokeObjectURL(state.filePreview[0].preview)
               }}
-              style={{
-                ...state.previewImageSize,
-              }}
+              // style={{
+              //   ...state.previewImageSize,
+              // }}
             />
           </div>
         ) : (

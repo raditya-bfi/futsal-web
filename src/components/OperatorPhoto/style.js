@@ -102,7 +102,7 @@ const style = makeStyles((theme) => ({
     width: '100%',
     height: '100%',
     overflow: 'hidden',
-    maxHeight: '570px',
+    maxHeight: '100%',
     maxWidth: '450px',
   },
   previewOverlay: {

@@ -3,6 +3,7 @@ import { Box, Typography } from '@mui/material'
 import { Helmet } from 'react-helmet-async'
 
 import Snackbar from '~/components/Snackbar'
+import DetailLapanganModal from '~/modules/Lapangan/DetailLapanganModal'
 import { thousandSeparator } from '~/utils/number'
 
 import useCustom from './hooks'
@@ -53,6 +54,7 @@ function LapanganPage() {
                         className={classes.fieldCard}
                         key={`field-card-odd-${field?.field_id}`}
                         sx={{ backgroundImage: `url(${field?.image})` }}
+                        onClick={() => handler?.handleOpenDetailModal(field?.field_id)}
                       >
                         <Box className={classes.fieldInfo}>
                           <Box className={classes.fieldNameWrapper}>
@@ -93,6 +95,7 @@ function LapanganPage() {
                         className={classes.fieldCard}
                         key={`field-card-even-${field?.field_id}`}
                         sx={{ backgroundImage: `url(${field?.image})` }}
+                        onClick={() => handler?.handleOpenDetailModal(field?.field_id)}
                       >
                         <Box className={classes.fieldInfo}>
                           <Box className={classes.fieldNameWrapper}>
@@ -122,6 +125,15 @@ function LapanganPage() {
           </Box>
         </Box>
       </Box>
+      <DetailLapanganModal
+        alert={state?.alert}
+        fieldId={state?.selectedFieldId}
+        onClose={handler?.handleCloseDetailModal}
+        open={state?.openDetailModal}
+        setAlert={handler?.setAlert}
+        setIsNeedRefetch={handler?.setIsNeedRefetch}
+        setOpenModal={handler?.setOpenDetailModal}
+      />
     </>
   )
 }
