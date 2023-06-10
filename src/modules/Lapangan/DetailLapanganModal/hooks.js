@@ -27,7 +27,6 @@ const useCustom = ({ open, fieldId }) => {
   }, [open, fieldId])
 
   return {
-    handler: {},
     state: {
       fieldData,
     },
