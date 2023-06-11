@@ -1,12 +1,22 @@
 import { useEffect, useState } from 'react'
 
 import { getDetailField } from '~/helpers/request'
+import useAuth from '~/utils/auth/useAuth'
 import useLoading from '~/utils/loading/useLoading'
+import { useNavigateParams } from '~/utils/routing'
 
 const useCustom = ({ open, fieldId }) => {
+  const { state } = useAuth()
   const { setIsLoading } = useLoading()
+  const navigate = useNavigateParams()
 
   const [fieldData, setFieldData] = useState({})
+
+  const handleEditNavigation = (paramId) => {
+    navigate('/lapangan/edit', {
+      id: paramId,
+    })
+  }
 
   const fetchFieldData = async () => {
     await setIsLoading(true)
@@ -27,8 +37,12 @@ const useCustom = ({ open, fieldId }) => {
   }, [open, fieldId])
 
   return {
+    handler: {
+      handleEditNavigation,
+    },
     state: {
       fieldData,
+      userData: state?.userData,
     },
   }
 }

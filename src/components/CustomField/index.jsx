@@ -12,6 +12,7 @@ function CustomField({
   error,
   inputProps,
   isFullWidth,
+  isMultiline,
   isPersistLabel,
   isReadOnly,
   label,
@@ -19,6 +20,7 @@ function CustomField({
   onChange,
   placeholder,
   required,
+  rows,
   touch,
   type,
   value,
@@ -38,6 +40,8 @@ function CustomField({
       fullWidth={isFullWidth}
       disabled={disabled}
       error={isError}
+      multiline={isMultiline}
+      rows={rows}
       helperText={error}
       name={name}
       onChange={onChange}
@@ -74,12 +78,14 @@ CustomField.defaultProps = {
   error: '',
   inputProps: null,
   isFullWidth: false,
+  isMultiline: false,
   isPersistLabel: false,
   isReadOnly: false,
   label: '',
   onChange: () => {},
   placeholder: '',
   required: false,
+  rows: 3,
   touch: false,
   type: 'text',
   variant: 'outlined',
@@ -91,6 +97,7 @@ CustomField.propTypes = {
   error: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   inputProps: PropTypes.string,
   isFullWidth: PropTypes.bool,
+  isMultiline: PropTypes.bool,
   isPersistLabel: PropTypes.bool,
   isReadOnly: PropTypes.bool,
   label: PropTypes.string,
@@ -98,6 +105,7 @@ CustomField.propTypes = {
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
   required: PropTypes.bool,
+  rows: PropTypes.number,
   touch: PropTypes.bool,
   type: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,

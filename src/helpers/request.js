@@ -83,3 +83,29 @@ export const getDetailField = (fieldId) =>
     url: `/fields/${fieldId}`,
     method: 'GET',
   })
+
+export const handleEditField = (fieldId, payload = {}) =>
+  Axios({
+    MAIN_URL: apiUrl,
+    url: `/fields/${fieldId}`,
+    method: 'PUT',
+    data: payload,
+  })
+
+export const handleDeleteFieldPhoto = (fieldId, galleryId) =>
+  Axios({
+    MAIN_URL: apiUrl,
+    url: `fields/${fieldId}/gallery/${galleryId}`,
+    method: 'DELETE',
+  })
+
+export const handleAddFieldPhoto = (fieldId, galleryId, payload = {}) => {
+  const data = toFormData(payload)
+  return Axios({
+    MAIN_URL: apiUrl,
+    url: `fields/${fieldId}/gallery/${galleryId}`,
+    method: 'PATCH',
+    data,
+    isFormData: true,
+  })
+}
