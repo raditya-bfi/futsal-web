@@ -25,8 +25,9 @@ export const getFieldGalleries = (savedPhotos = []) => {
   ]
 
   if (savedPhotos && savedPhotos.length > 0) {
-    savedPhotos.forEach((photo) => {
-      set(res, `[${photo.gallery_id - 1}].image`, photo.image)
+    savedPhotos.forEach((photo, index) => {
+      set(res, `[${index}].gallery_id`, photo.gallery_id)
+      set(res, `[${index}].image`, photo.image)
     })
   }
 

@@ -56,9 +56,9 @@ const useCustom = () => {
   }
 
   const handleAddPhoto = useCallback(
-    async (photoId, payload) => {
+    async (payload) => {
       await setIsLoading(true)
-      const response = await handleAddFieldPhoto(queryParams?.id, photoId, payload)
+      const response = await handleAddFieldPhoto(queryParams?.id, payload)
       if (response && (response?.status === 200 || response?.status === 201)) {
         setAlert((prev) => ({
           ...prev,

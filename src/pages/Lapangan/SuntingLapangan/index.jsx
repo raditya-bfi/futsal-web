@@ -247,7 +247,7 @@ function SuntingLapanganPage() {
                                     <Box className={classes.closeWrapper}>
                                       <IconButton
                                         onClick={() => {
-                                          handler?.handleRemovePhoto(photo?.id)
+                                          handler?.handleRemovePhoto(photo?.gallery_id)
                                         }}
                                       >
                                         <CloseOutlined />

@@ -99,12 +99,12 @@ export const handleDeleteFieldPhoto = (fieldId, galleryId) =>
     method: 'DELETE',
   })
 
-export const handleAddFieldPhoto = (fieldId, galleryId, payload = {}) => {
+export const handleAddFieldPhoto = (fieldId, payload = {}) => {
   const data = toFormData(payload)
   return Axios({
     MAIN_URL: apiUrl,
-    url: `fields/${fieldId}/gallery/${galleryId}`,
-    method: 'PATCH',
+    url: `fields/${fieldId}`,
+    method: 'POST',
     data,
     isFormData: true,
   })
