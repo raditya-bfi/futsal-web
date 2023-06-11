@@ -4,14 +4,16 @@ import { colors, fontSize } from '~/styles/theme'
 
 const style = makeStyles(() => ({
   checkboxRoot: {
-    color: colors.Silver,
+    color: colors.White,
     '&.Mui-checked .MuiSvgIcon-root': {
-      color: colors.Black,
+      color: colors.White,
     },
   },
   labelRoot: {
-    fontSize: fontSize[12],
-    color: colors.RiverStyx,
+    fontSize: fontSize[14],
+    fontWeight: 400,
+    lineHeight: '16.94px',
+    color: colors.White,
   },
 }))
 

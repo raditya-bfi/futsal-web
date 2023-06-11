@@ -2,6 +2,7 @@ import loadable from '@loadable/component'
 
 const DashboardPage = loadable(() => import('~/pages/Dashboard'))
 const LapanganPage = loadable(() => import('~/pages/Lapangan'))
+const SuntingLapanganPage = loadable(() => import('~/pages/Lapangan/SuntingLapangan'))
 const OperatorPage = loadable(() => import('~/pages/Operator'))
 const ArchivedPage = loadable(() => import('~/pages/Archived'))
 const NotFoundPage = loadable(() => import('~/pages/NotFound'))
@@ -36,6 +37,15 @@ export default [
     withHeader: true,
   },
   {
+    id: 'lapangan-edit',
+    title: 'Halaman Sunting Lapangan',
+    path: '/lapangan/edit',
+    defaultPath: '/lapangan/edit',
+    component: <SuntingLapanganPage />,
+    exact: true,
+    withHeader: false,
+  },
+  {
     id: 'operator',
     title: 'Halaman Operator',
     path: '/operator',
@@ -46,7 +56,7 @@ export default [
   },
   {
     id: 'operator-archived',
-    title: 'Operator Archived Page',
+    title: 'Halaman Arsip Operator',
     path: '/operator/archived',
     defaultPath: '/operator/archived',
     component: <ArchivedPage />,
@@ -54,20 +64,20 @@ export default [
     withHeader: false,
   },
   {
-    id: 'not-found',
-    title: 'Not Found Page',
-    path: '/404',
-    defaultPath: '/404',
-    component: <NotFoundPage />,
+    id: 'forbidden',
+    title: 'Halaman 403',
+    path: '/403',
+    defaultPath: '/434',
+    component: <ForbiddenPage />,
     exact: true,
     withHeader: true,
   },
   {
-    id: 'forbidden',
-    title: 'Forbidden Page',
-    path: '/403',
-    defaultPath: '/434',
-    component: <ForbiddenPage />,
+    id: 'not-found',
+    title: 'Halaman 404',
+    path: '/404',
+    defaultPath: '/404',
+    component: <NotFoundPage />,
     exact: true,
     withHeader: true,
   },

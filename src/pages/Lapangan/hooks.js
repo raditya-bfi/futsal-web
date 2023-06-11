@@ -3,13 +3,11 @@ import { useEffect, useMemo, useState } from 'react'
 
 import { getListOfFields } from '~/helpers/request'
 import useLoading from '~/utils/loading/useLoading'
-import { useNavigateParams } from '~/utils/routing'
 
 import { getSliderData } from './helper'
 
 const useCustom = () => {
   const { setIsLoading } = useLoading()
-  const navigate = useNavigateParams()
 
   const [fieldsData, setFieldsData] = useState([])
   const [openDetailModal, setOpenDetailModal] = useState(false)

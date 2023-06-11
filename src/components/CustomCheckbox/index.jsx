@@ -16,7 +16,7 @@ function CustomCheckBox({ checked, label, name, onChange }) {
           classes={{ root: classes.checkboxRoot }}
           checked={checked}
           name={name}
-          onChange={onChange}
+          onChange={(event) => onChange(event)}
           size='small'
         />
       }

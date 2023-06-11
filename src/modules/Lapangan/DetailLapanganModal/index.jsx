@@ -6,7 +6,7 @@ import {
   Schedule,
 } from '@mui/icons-material'
 import { Box, Typography } from '@mui/material'
-import { truncate } from 'lodash-es'
+import { toLower, truncate } from 'lodash-es'
 
 import { MenuLapangan } from '~/assets/svg'
 import Button from '~/components/Button'
@@ -25,9 +25,8 @@ function DetailLapanganModal({
   open,
   setOpenModal,
   fieldId,
-  handleSuntingLapangan,
 }) {
-  const { state } = useCustom({
+  const { handler, state } = useCustom({
     alert,
     setAlert,
     setIsNeedRefetch,
@@ -130,14 +129,16 @@ function DetailLapanganModal({
               </Box>
             </Box>
           </Box>
-          <Box className={classes.option}>
-            <Button
-              handleOnClick={() => handleSuntingLapangan()}
-              label='Sunting Lapangan'
-              type='button'
-              variant='secondary'
-            />
-          </Box>
+          {toLower(state?.userData.type) === 'admin' && (
+            <Box className={classes.option}>
+              <Button
+                handleOnClick={() => handler.handleEditNavigation(fieldId)}
+                label='Sunting Lapangan'
+                type='button'
+                variant='secondary'
+              />
+            </Box>
+          )}
         </Box>
       </CustomModal.Content>
     </CustomModal>
