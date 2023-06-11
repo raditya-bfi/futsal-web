@@ -1,12 +1,12 @@
 import { useDropzone } from 'react-dropzone'
 
-const useCustom = ({ photoId, handleUpload }) => {
+const useCustom = ({ handleUpload }) => {
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
       'image/*': [],
     },
     onDrop: (acceptedFiles) => {
-      handleUpload(photoId, {
+      handleUpload({
         fieldImages: acceptedFiles && acceptedFiles.length > 0 ? acceptedFiles[0] : null,
       })
     },
