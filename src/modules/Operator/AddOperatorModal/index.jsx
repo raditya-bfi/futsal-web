@@ -66,7 +66,11 @@ function AddOperatorModal({ alert, setAlert, setIsNeedRefetch, onClose, open, se
             <Form>
               <Box className={classes.addModal}>
                 <Box className={classes.userPhoto}>
-                  <OperatorPhoto setFiles={handler?.setPhotoFiles} files={state?.photoFiles} />
+                  <OperatorPhoto
+                    setAlert={setAlert}
+                    setFiles={handler?.setPhotoFiles}
+                    files={state?.photoFiles}
+                  />
                 </Box>
                 <Box className={classes.userInfoWrapper}>
                   <Box className={classes.userInfo}>
@@ -177,7 +181,11 @@ function AddOperatorModal({ alert, setAlert, setIsNeedRefetch, onClose, open, se
                       <Box className={classes.input}>
                         <img src={FieldKtpIcon} alt='add-user-ktp-field-icon' />
                         <Box className={classes.ktpBox}>
-                          <OperatorKTP files={state?.ktpFiles} setFiles={handler?.setKtpFiles} />
+                          <OperatorKTP
+                            files={state?.ktpFiles}
+                            setAlert={setAlert}
+                            setFiles={handler?.setKtpFiles}
+                          />
                         </Box>
                       </Box>
                     </Box>

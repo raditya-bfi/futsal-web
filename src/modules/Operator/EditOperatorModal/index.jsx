@@ -92,6 +92,7 @@ function EditOperatorModal({
                     setFiles={handler?.setPhotoFiles}
                     files={state?.photoFiles}
                     editMode={editPhotoMode}
+                    setAlert={setAlert}
                     setEditMode={setEditPhotoMode}
                   />
                 </Box>
@@ -192,6 +193,7 @@ function EditOperatorModal({
                             files={state?.ktpFiles}
                             setFiles={handler?.setKtpFiles}
                             editMode={editKtpMode}
+                            setAlert={setAlert}
                             setEditMode={setEditKtpMode}
                           />
                         </Box>

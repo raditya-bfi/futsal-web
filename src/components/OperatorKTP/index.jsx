@@ -8,8 +8,8 @@ import { Typography } from '@mui/material'
 import useCustom from './hooks'
 import useStyle from './style'
 
-function OperatorKTP({ editMode, files, maxFiles, setFiles }) {
-  const { dropZone, refs, state } = useCustom({ editMode, files, maxFiles, setFiles })
+function OperatorKTP({ editMode, files, maxFiles, setAlert, setFiles }) {
+  const { dropZone, refs, state } = useCustom({ editMode, files, maxFiles, setAlert, setFiles })
   const classes = useStyle()
 
   // ? : Multiple Files
@@ -79,6 +79,7 @@ OperatorKTP.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   files: PropTypes.array,
   maxFiles: PropTypes.number,
+  setAlert: PropTypes.func.isRequired,
   setFiles: PropTypes.func.isRequired,
 }
 

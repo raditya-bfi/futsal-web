@@ -261,6 +261,7 @@ function SuntingLapanganPage() {
                                   key={`field-photo-preview-${photo?.id}`}
                                   photoId={photo?.id}
                                   handleUpload={handler.handleAddPhoto}
+                                  setAlert={handler.setAlert}
                                 />
                               )
                             })}
