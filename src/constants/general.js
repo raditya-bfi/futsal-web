@@ -1,5 +1,7 @@
 import { MenuDashboard, MenuLapangan, MenuOperator, MenuPenyewaan } from '~/assets/svg'
 
+export const MAXIMUM_UPLOAD_FILE_SIZE = 512000
+
 export const MENU_TAB_KEY = {
   DASBOR: 'DASBOR',
   PENYEWAAN: 'PENYEWAAN',

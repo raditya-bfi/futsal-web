@@ -8,8 +8,8 @@ import { Box } from '@mui/material'
 import useCustom from './hooks'
 import useStyle from './style'
 
-function LapanganFieldPhoto({ handleUpload }) {
-  const { dropZone } = useCustom({ handleUpload })
+function LapanganFieldPhoto({ handleUpload, setAlert }) {
+  const { dropZone } = useCustom({ handleUpload, setAlert })
   const classes = useStyle()
 
   return (
@@ -28,6 +28,7 @@ function LapanganFieldPhoto({ handleUpload }) {
 
 LapanganFieldPhoto.propTypes = {
   handleUpload: PropTypes.func.isRequired,
+  setAlert: PropTypes.func.isRequired,
 }
 
 export default LapanganFieldPhoto

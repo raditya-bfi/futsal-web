@@ -2,7 +2,9 @@ import { useEffect, useState, useRef } from 'react'
 
 import { useDropzone } from 'react-dropzone'
 
-const useCustom = ({ editMode, files, maxFiles, setFiles }) => {
+import { MAXIMUM_UPLOAD_FILE_SIZE } from '~/constants/general'
+
+const useCustom = ({ editMode, files, maxFiles, setAlert, setFiles }) => {
   const previewImageRef = useRef(null)
   const [filePreview, setFilePreview] = useState([])
   const [previewImageSize, setPreviewImageSize] = useState({ height: '0px', width: '0px' })
@@ -10,23 +12,38 @@ const useCustom = ({ editMode, files, maxFiles, setFiles }) => {
     accept: {
       'image/*': [],
     },
-    onDrop: (acceptedFiles) => {
-      setFiles(
-        acceptedFiles.map((file) =>
-          Object.assign(file, {
-            changed: true,
-          }),
-        ),
-      )
-      setFilePreview(
-        acceptedFiles.map((file) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file),
-          }),
-        ),
-      )
+    onDrop: (acceptedFiles, fileRejections) => {
+      if (
+        fileRejections &&
+        fileRejections.length > 0 &&
+        fileRejections[0].errors[0].code === 'file-too-large'
+      ) {
+        setAlert((prev) => ({
+          ...prev,
+          open: true,
+          title: '',
+          severity: 'error',
+          message: 'Ukuran file melebihi 512kb',
+        }))
+      } else {
+        setFiles(
+          acceptedFiles.map((file) =>
+            Object.assign(file, {
+              changed: true,
+            }),
+          ),
+        )
+        setFilePreview(
+          acceptedFiles.map((file) =>
+            Object.assign(file, {
+              preview: URL.createObjectURL(file),
+            }),
+          ),
+        )
+      }
     },
     maxFiles,
+    maxSize: MAXIMUM_UPLOAD_FILE_SIZE, // ? 512kb
     multiple: maxFiles > 1,
   })
 
