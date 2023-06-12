@@ -12,6 +12,7 @@ import {
 } from '~/helpers/request'
 import useLoading from '~/utils/loading/useLoading'
 import { useNavigateParams } from '~/utils/routing'
+import { removeSeconds } from '~/utils/string'
 
 import { getFieldGalleries } from './helper'
 
@@ -125,7 +126,7 @@ const useCustom = () => {
       if (isFlagActive !== true) {
         Object.assign(payload, {
           harga_malam: values?.harga_malam,
-          waktu_mulai_malam: values?.waktu_mulai_malam,
+          waktu_mulai_malam: removeSeconds(values?.waktu_mulai_malam),
         })
       }
       const response = await handleEditField(queryParams?.id, payload)
@@ -166,7 +167,7 @@ const useCustom = () => {
         description: data?.description,
         harga: data?.harga,
         harga_malam: data?.harga_malam,
-        waktu_mulai_malam: data?.waktu_mulai_malam,
+        waktu_mulai_malam: removeSeconds(data?.waktu_mulai_malam),
       })
     }
     await setIsLoading(false)

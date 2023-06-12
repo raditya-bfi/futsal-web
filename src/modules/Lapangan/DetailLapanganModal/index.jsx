@@ -13,6 +13,7 @@ import Button from '~/components/Button'
 import CustomModal from '~/components/CustomModal'
 import VerticalPhotoSlider from '~/components/VerticalPhotoSlider'
 import { thousandSeparator } from '~/utils/number'
+import { removeSeconds } from '~/utils/string'
 
 import useCustom from './hooks'
 import useStyles from './style'
@@ -84,9 +85,9 @@ function DetailLapanganModal({
                         <span className={classes.descTitle} />
                         {`Rp ${thousandSeparator(state?.fieldData?.harga_malam, 0, false)} / Jam`}
                       </Typography>
-                      <Typography
-                        className={classes.descLabelInfo}
-                      >{`mulai pukul ${state?.fieldData?.waktu_mulai_malam}`}</Typography>
+                      <Typography className={classes.descLabelInfo}>{`mulai pukul ${removeSeconds(
+                        state?.fieldData?.waktu_mulai_malam,
+                      )}`}</Typography>
                     </Box>
                   </Box>
                 </Box>
@@ -112,7 +113,9 @@ function DetailLapanganModal({
                     </Typography>
                     <Typography className={classes.descLabel}>
                       <span className={classes.descTitle} />
-                      {`${state?.fieldData?.booking_open} hingga ${state?.fieldData?.booking_close}`}
+                      {`${removeSeconds(state?.fieldData?.booking_open)} hingga ${removeSeconds(
+                        state?.fieldData?.booking_close,
+                      )}`}
                     </Typography>
                   </Box>
                 </Box>

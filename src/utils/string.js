@@ -19,3 +19,12 @@ export const stringAvatar = (name) => {
 
   return initials
 }
+
+export const removeSeconds = (time = '') => {
+  const res = ''
+  if (time && time.length > 0) {
+    const tempTime = time.split(':')
+    return `${tempTime[0]}:${tempTime[1]}`
+  }
+  return res
+}
