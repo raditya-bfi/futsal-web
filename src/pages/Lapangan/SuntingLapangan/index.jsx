@@ -8,6 +8,7 @@ import CustomCheckBox from '~/components/CustomCheckbox'
 import CustomField from '~/components/CustomField'
 import LapanganFieldPhoto from '~/components/LapanganFieldPhoto'
 import Snackbar from '~/components/Snackbar'
+import { removeSeconds } from '~/utils/string'
 
 import useCustom from './hooks'
 import { EditFieldSchema, EditFieldSchemaOption } from './schema'
@@ -107,7 +108,7 @@ function SuntingLapanganPage() {
                                   Waktu Buka Sewa
                                 </Typography>
                                 <Typography className={classes.inputValue}>
-                                  {data?.fieldData?.booking_open}
+                                  {removeSeconds(data?.fieldData?.booking_open)}
                                 </Typography>
                               </Box>
                               <Box>
@@ -115,7 +116,7 @@ function SuntingLapanganPage() {
                                   Waktu Tutup Sewa
                                 </Typography>
                                 <Typography className={classes.inputValue}>
-                                  {data?.fieldData?.booking_close}
+                                  {removeSeconds(data?.fieldData?.booking_close)}
                                 </Typography>
                               </Box>
                               <Box>
