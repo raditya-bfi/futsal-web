@@ -220,6 +220,7 @@ const style = makeStyles((theme) => ({
     lineHeight: '16.94px',
     color: colors.White,
     marginTop: '24px',
+    textAlign: 'justify',
 
     '& > svg': {
       width: '20px',

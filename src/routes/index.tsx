@@ -1,6 +1,7 @@
 import loadable from '@loadable/component'
 
 const DashboardPage = loadable(() => import('~/pages/Dashboard'))
+const PenyewaanPage = loadable(() => import('~/pages/Penyewaan'))
 const LapanganPage = loadable(() => import('~/pages/Lapangan'))
 const SuntingLapanganPage = loadable(() => import('~/pages/Lapangan/SuntingLapangan'))
 const OperatorPage = loadable(() => import('~/pages/Operator'))
@@ -23,7 +24,7 @@ export default [
     title: 'Halaman Penyewaan',
     path: '/penyewaan',
     defaultPath: '/penyewaan',
-    component: <>Penyewaan</>,
+    component: <PenyewaanPage />,
     exact: true,
     withHeader: true,
   },

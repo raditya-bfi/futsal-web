@@ -120,4 +120,6 @@ export const colors = {
   Tundora: '#414141',
   Vermilion: '#FF3D00',
   Malachite: '#00FF47',
+  Hacienda: '#8A7E14',
+  Parsley: '#105122',
 }

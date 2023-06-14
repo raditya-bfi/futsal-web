@@ -109,3 +109,11 @@ export const handleAddFieldPhoto = (fieldId, payload = {}) => {
     isFormData: true,
   })
 }
+
+export const getListOfBookings = (params = {}) =>
+  Axios({
+    MAIN_URL: apiUrl,
+    url: `/bookings/fields`,
+    method: 'GET',
+    params,
+  })
