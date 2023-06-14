@@ -1,9 +1,9 @@
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { handleAddOperator } from '~/helpers/request'
 import useLoading from '~/utils/loading/useLoading'
 
-const useCustom = ({ setAlert, setIsNeedRefetch, setOpenModal }) => {
+const useCustom = ({ setAlert, setIsNeedRefetch, open, setOpenModal }) => {
   const formikRef = useRef()
   const { setIsLoading } = useLoading()
 
@@ -84,6 +84,14 @@ const useCustom = ({ setAlert, setIsNeedRefetch, setOpenModal }) => {
     },
     [setAlert, setIsNeedRefetch, setOpenModal, setIsLoading, selectedGender, photoFiles, ktpFiles],
   )
+
+  useEffect(() => {
+    if (open) {
+      // ? : Reset Upload files
+      setPhotoFiles([])
+      setKtpFiles([])
+    }
+  }, [open])
 
   return {
     data: {},
