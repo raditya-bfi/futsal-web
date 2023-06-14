@@ -21,7 +21,13 @@ import { AddOperatorSchema } from './schema'
 import useStyles from './style'
 
 function AddOperatorModal({ alert, setAlert, setIsNeedRefetch, onClose, open, setOpenModal }) {
-  const { handler, ref, state } = useCustom({ alert, setAlert, setIsNeedRefetch, setOpenModal })
+  const { handler, ref, state } = useCustom({
+    alert,
+    setAlert,
+    setIsNeedRefetch,
+    open,
+    setOpenModal,
+  })
   const classes = useStyles()
 
   return (

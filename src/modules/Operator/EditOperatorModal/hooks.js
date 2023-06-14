@@ -152,6 +152,11 @@ const useCustom = ({ setAlert, setIsNeedRefetch, open, setOpenModal, userId }) =
   }
 
   useEffect(() => {
+    if (open) {
+      // ? : Reset Upload files
+      setPhotoFiles([])
+      setKtpFiles([])
+    }
     if (userId) {
       fetchOperatorData()
     }
