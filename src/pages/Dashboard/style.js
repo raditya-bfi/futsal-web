@@ -47,6 +47,7 @@ const style = makeStyles((theme) => ({
     fontSize: fontSize[20],
     lineHeight: '24.2px',
     color: colors.White,
+    textAlign: 'justify',
 
     '& > svg': {
       marginRight: theme.spacing(3),

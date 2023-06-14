@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-import { getCurrentRoute, getPageAuthorization } from '~/helpers/general'
+import { getCurrentRoute, getPageAuthorization, isRouteExist } from '~/helpers/general'
 import routes from '~/routes'
 import useAuth from '~/utils/auth/useAuth'
 import useLoading from '~/utils/loading/useLoading'
@@ -18,6 +18,11 @@ const useCustom = () => {
     if (location?.pathname && location?.pathname != '/' && state?.userData) {
       const currRoute = getCurrentRoute(routes, location?.pathname)
       setCurrentRoute(currRoute)
+      const isExist = isRouteExist(routes, currentRoute)
+      if (!isExist) {
+        // ? : force into 404 page when user doesn't have authorization
+        navigate('/404')
+      }
       const isAccessible = getPageAuthorization(currRoute, state?.userData)
       if (!isAccessible) {
         // ? : force into 403 page when user doesn't have authorization

@@ -13,7 +13,7 @@ const useCustom = () => {
     time: new Date().toLocaleTimeString('id', {
       hour: 'numeric',
       minute: 'numeric',
-      hourCycle: 'h12',
+      hourCycle: 'h24',
     }),
   })
 
@@ -31,7 +31,7 @@ const useCustom = () => {
         time: new Date().toLocaleTimeString('id', {
           hour: 'numeric',
           minute: 'numeric',
-          hourCycle: 'h12',
+          hourCycle: 'h24',
         }),
       })
     }, 1000)

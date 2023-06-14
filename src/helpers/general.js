@@ -22,6 +22,11 @@ export const getCurrentRoute = (routes, pathname) => {
   return res
 }
 
+export const isRouteExist = (routes, currentRoute) => {
+  const isExist = findIndex(routes, (route) => route?.path === currentRoute?.path)
+  return isExist >= 0
+}
+
 export const getPageAuthorization = (currentRoute, userData) => {
   const accessableMenu = ROLE_MENU_MAPPING[toLower(userData?.type)]
   const isAccessible = findIndex(accessableMenu, (menu) => menu === currentRoute?.path)
