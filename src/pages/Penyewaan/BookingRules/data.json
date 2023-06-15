@@ -1,0 +1,34 @@
+{
+  "rules": [
+    {
+      "title": "Durasi minimal penyewaan",
+      "tooltip": "Durasi waktu yang dibutuhkan sebagai batasan paling rendah dalam memberi durasi penyewaan sebuah lapangan.",
+      "desc": "1 Jam"
+    },
+    {
+      "title": "Durasi maksimal penyewaan",
+      "tooltip": "Durasi waktu yang dibutuhkan sebagai batasan paling tinggi dalam memberi durasi penyewaan sebuah lapangan.",
+      "desc": "5 Jam"
+    },
+    {
+      "title": "Selisih waktu minimal antara waktu pemesanan sewa dan waktu penggunaan lapangan",
+      "tooltip": "Perbedaan waktu paling rendah antara waktu ketika pengguna memesan penyewaan dan waktu lapangan yang disewa.",
+      "desc": "120 Menit"
+    },
+    {
+      "title": "Selisih hari maksimal antara hari pemesanan sewa dan hari penggunaan lapangan",
+      "tooltip": "Perbedaan hari paling tinggi antara hari ketika pengguna memesan penyewaan dan hari lapangan yang disewa.",
+      "desc": "14 Hari"
+    },
+    {
+      "title": "Durasi masa pembayaran penyewaan lapangan",
+      "tooltip": "Durasi waktu yang diberikan kepada pengguna setelah lapangan yang dipilih oleh pengguna telah disetujui oleh sistem.",
+      "desc": "15 Menit"
+    },
+    {
+      "title": "Ijinkan pengguna untuk menyewa lapangan lain ketika ada penyewaan yang statusnya masih menunggu pembayaran",
+      "tooltip": "Sebuah ijin yang diberikan kepada pengguna jika terdapat penyewaan lapagan lain yang statusnya masih menunggu pembayaran",
+      "desc": "Tidak"
+    }
+  ]
+}
