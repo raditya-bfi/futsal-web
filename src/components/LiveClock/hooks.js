@@ -11,8 +11,8 @@ const useCustom = () => {
       weekday: 'long',
     }),
     time: new Date().toLocaleTimeString('id', {
-      hour: 'numeric',
-      minute: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
       hourCycle: 'h24',
     }),
   })
@@ -29,8 +29,8 @@ const useCustom = () => {
           weekday: 'long',
         }),
         time: new Date().toLocaleTimeString('id', {
-          hour: 'numeric',
-          minute: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
           hourCycle: 'h24',
         }),
       })

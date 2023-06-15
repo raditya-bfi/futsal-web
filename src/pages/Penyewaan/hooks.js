@@ -1,11 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import moment from 'moment'
 
 import { getListOfBookings } from '~/helpers/request'
 import useLoading from '~/utils/loading/useLoading'
 import { useNavigateParams } from '~/utils/routing'
+
+import { getBookingList } from './helper'
 
 const useCustom = () => {
   const { setIsLoading } = useLoading()
@@ -15,6 +17,14 @@ const useCustom = () => {
 
   const [bookingsData, setBookingsData] = useState([])
   const [isNeedRefetch, setIsNeedRefetch] = useState(false)
+  const [locale, setLocale] = useState({
+    time: new Date().toLocaleTimeString('id', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hourCycle: 'h24',
+    }),
+  })
 
   const [alert, setAlert] = useState({
     open: false,
@@ -55,6 +65,11 @@ const useCustom = () => {
     await setIsLoading(false)
   }
 
+  const bookingListData = useMemo(
+    () => getBookingList(bookingsData, locale.time),
+    [bookingsData, locale.time],
+  )
+
   useEffect(() => {
     if (isNeedRefetch) {
       fetchBookingData()
@@ -65,9 +80,23 @@ const useCustom = () => {
     fetchBookingData()
   }, [])
 
+  useEffect(() => {
+    const itv = setInterval(() => {
+      setLocale({
+        time: new Date().toLocaleTimeString('id', {
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hourCycle: 'h24',
+        }),
+      })
+    }, 60000)
+    return () => clearInterval(itv)
+  }, [])
+
   return {
     data: {
-      bookingsData,
+      bookingListData,
     },
     handler: {
       handleCloseSnackbar,
