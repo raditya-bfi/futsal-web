@@ -3,6 +3,7 @@ import loadable from '@loadable/component'
 const DashboardPage = loadable(() => import('~/pages/Dashboard'))
 const PenyewaanPage = loadable(() => import('~/pages/Penyewaan'))
 const AturanPenyewaanPage = loadable(() => import('~/pages/Penyewaan/BookingRules'))
+const ListPenyewaanPage = loadable(() => import('~/pages/Penyewaan/MoreList'))
 const LapanganPage = loadable(() => import('~/pages/Lapangan'))
 const SuntingLapanganPage = loadable(() => import('~/pages/Lapangan/SuntingLapangan'))
 const OperatorPage = loadable(() => import('~/pages/Operator'))
@@ -35,6 +36,15 @@ export default [
     path: '/penyewaan/aturan',
     defaultPath: '/penyewaan/aturan',
     component: <AturanPenyewaanPage />,
+    exact: true,
+    withHeader: false,
+  },
+  {
+    id: 'more-list',
+    title: 'Halaman Daftar Sewa Lebih Banyak',
+    path: '/penyewaan/list',
+    defaultPath: '/penyewaan/list',
+    component: <ListPenyewaanPage />,
     exact: true,
     withHeader: false,
   },
@@ -81,7 +91,7 @@ export default [
     defaultPath: '/434',
     component: <ForbiddenPage />,
     exact: true,
-    withHeader: true,
+    withHeader: false,
   },
   {
     id: 'not-found',
@@ -90,6 +100,6 @@ export default [
     defaultPath: '/404',
     component: <NotFoundPage />,
     exact: true,
-    withHeader: true,
+    withHeader: false,
   },
 ]

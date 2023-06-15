@@ -7,12 +7,33 @@ import { DatePicker as MuiDatePicker } from '@mui/x-date-pickers/DatePicker'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import moment from 'moment'
 
+import { CalendarIcon } from '~/assets/svg'
 import dateConfig from '~/config/date'
 
-function DatePicker({ dateConf, handleDateChange, label, maxDate, minDate, mode, selectedDate }) {
+import useStyles from './style'
+
+function NewCalendarIcon() {
+  return <img src={CalendarIcon} alt='date-picker-calendar-icon' />
+}
+
+function DatePicker({
+  dateConf,
+  handleDateChange,
+  label,
+  maxDate,
+  minDate,
+  mode,
+  selectedDate,
+  width,
+}) {
+  const classes = useStyles({ width })
   return (
     <LocalizationProvider dateAdapter={AdapterMoment}>
       <MuiDatePicker
+        className={classes.datepickerRoot}
+        components={{
+          OpenPickerIcon: NewCalendarIcon,
+        }}
         inputFormat={dateConf[mode].viewFormat}
         label={label}
         maxDate={maxDate}
@@ -32,6 +53,7 @@ DatePicker.defaultProps = {
   maxDate: moment().format(dateConfig.daily.format),
   minDate: moment('2012-01-01').format(dateConfig.daily.format),
   mode: 'daily',
+  width: '11vw',
 }
 
 DatePicker.propTypes = {
@@ -42,6 +64,7 @@ DatePicker.propTypes = {
   minDate: PropTypes.string,
   mode: PropTypes.oneOf(['daily', 'monthly', 'yearly']),
   selectedDate: PropTypes.string.isRequired,
+  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 }
 
 export default DatePicker

@@ -21,6 +21,7 @@ const style = makeStyles(() => ({
     color: colors.White,
     fontSize: fontSize[20],
     lineHeight: '24px',
+    marginBottom: '18px',
   },
 }))
 
