@@ -117,6 +117,7 @@ export const MENU_KEY = {
   DASHBOARD: '/dashboard',
   PENYEWAAN: '/penyewaan',
   ATURAN_PENYEWAAN: '/penyewaan/aturan',
+  LIST_PENYEWAAN: '/penyewaan/list',
   LAPANGAN: '/lapangan',
   SUNTING_LAPANGAN: '/lapangan/edit',
   OPERATOR: '/operator',
@@ -129,6 +130,7 @@ export const ADMIN_MENUS = [
   MENU_KEY.DASHBOARD,
   MENU_KEY.PENYEWAAN,
   MENU_KEY.ATURAN_PENYEWAAN,
+  MENU_KEY.LIST_PENYEWAAN,
   MENU_KEY.LAPANGAN,
   MENU_KEY.SUNTING_LAPANGAN,
   MENU_KEY.OPERATOR,
@@ -140,6 +142,7 @@ export const ADMIN_MENUS = [
 export const OPERATOR_MENUS = [
   MENU_KEY.PENYEWAAN,
   MENU_KEY.ATURAN_PENYEWAAN,
+  MENU_KEY.LIST_PENYEWAAN,
   MENU_KEY.LAPANGAN,
   MENU_KEY.FORBIDDEN,
   MENU_KEY.NOTFOUND,
@@ -148,4 +151,16 @@ export const OPERATOR_MENUS = [
 export const ROLE_MENU_MAPPING = {
   [ROLE_KEY.ADMIN]: ADMIN_MENUS,
   [ROLE_KEY.OPERATOR]: OPERATOR_MENUS,
+}
+
+export const BOOKING_PAYMENT_STATUS_KEY = {
+  PAID: 'paid',
+  WAITING: 'waiting',
+  CANCELED: 'canceled',
+}
+
+export const BOOKING_PAYMENT_STATUS_LABEL_MAPPING = {
+  [BOOKING_PAYMENT_STATUS_KEY.PAID]: 'Sudah Dibayar',
+  [BOOKING_PAYMENT_STATUS_KEY.WAITING]: 'Menunggu Pembayaran',
+  [BOOKING_PAYMENT_STATUS_KEY.CANCELED]: 'Transaksi Dibatalkan',
 }

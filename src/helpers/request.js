@@ -117,3 +117,11 @@ export const getListOfBookings = (params = {}) =>
     method: 'GET',
     params,
   })
+
+export const getMoreBookingsList = (params = {}) =>
+  Axios({
+    MAIN_URL: apiUrl,
+    url: `/bookings/list`,
+    method: 'GET',
+    params,
+  })

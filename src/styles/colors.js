@@ -122,4 +122,5 @@ export const colors = {
   Malachite: '#00FF47',
   Hacienda: '#8A7E14',
   Parsley: '#105122',
+  ChristmasSilver: '#E0E0E0',
 }

@@ -38,7 +38,7 @@ const useCustom = () => {
   }
 
   const handleRedirectToMoreList = () => {
-    navigate('/penyewaan/morelist')
+    navigate('/penyewaan/list')
   }
 
   const handleCloseSnackbar = () => {
