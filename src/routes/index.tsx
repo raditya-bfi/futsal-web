@@ -2,6 +2,7 @@ import loadable from '@loadable/component'
 
 const DashboardPage = loadable(() => import('~/pages/Dashboard'))
 const PenyewaanPage = loadable(() => import('~/pages/Penyewaan'))
+const AturanPenyewaanPage = loadable(() => import('~/pages/Penyewaan/BookingRules'))
 const LapanganPage = loadable(() => import('~/pages/Lapangan'))
 const SuntingLapanganPage = loadable(() => import('~/pages/Lapangan/SuntingLapangan'))
 const OperatorPage = loadable(() => import('~/pages/Operator'))
@@ -27,6 +28,15 @@ export default [
     component: <PenyewaanPage />,
     exact: true,
     withHeader: true,
+  },
+  {
+    id: 'penyewaan-rules',
+    title: 'Halaman Aturan Penyewaan Mobile',
+    path: '/penyewaan/aturan',
+    defaultPath: '/penyewaan/aturan',
+    component: <AturanPenyewaanPage />,
+    exact: true,
+    withHeader: false,
   },
   {
     id: 'lapangan',

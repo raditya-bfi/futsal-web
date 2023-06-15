@@ -116,6 +116,7 @@ export const ROLE_KEY = {
 export const MENU_KEY = {
   DASHBOARD: '/dashboard',
   PENYEWAAN: '/penyewaan',
+  ATURAN_PENYEWAAN: '/penyewaan/aturan',
   LAPANGAN: '/lapangan',
   SUNTING_LAPANGAN: '/lapangan/edit',
   OPERATOR: '/operator',
@@ -127,6 +128,7 @@ export const MENU_KEY = {
 export const ADMIN_MENUS = [
   MENU_KEY.DASHBOARD,
   MENU_KEY.PENYEWAAN,
+  MENU_KEY.ATURAN_PENYEWAAN,
   MENU_KEY.LAPANGAN,
   MENU_KEY.SUNTING_LAPANGAN,
   MENU_KEY.OPERATOR,
@@ -137,6 +139,7 @@ export const ADMIN_MENUS = [
 
 export const OPERATOR_MENUS = [
   MENU_KEY.PENYEWAAN,
+  MENU_KEY.ATURAN_PENYEWAAN,
   MENU_KEY.LAPANGAN,
   MENU_KEY.FORBIDDEN,
   MENU_KEY.NOTFOUND,

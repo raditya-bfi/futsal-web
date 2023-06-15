@@ -34,7 +34,7 @@ const useCustom = () => {
   })
 
   const handleRedirectToMobileRules = () => {
-    navigate('/penyewaan/rules')
+    navigate('/penyewaan/aturan')
   }
 
   const handleRedirectToMoreList = () => {
