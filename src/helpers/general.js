@@ -23,13 +23,13 @@ export const getCurrentRoute = (routes, pathname) => {
 }
 
 export const isRouteExist = (routes, currentRoute) => {
-  const isExist = findIndex(routes, (route) => route?.path === currentRoute?.path)
+  const isExist = findIndex(routes, (route) => route?.path === currentRoute)
   return isExist >= 0
 }
 
 export const getPageAuthorization = (currentRoute, userData) => {
   const accessableMenu = ROLE_MENU_MAPPING[toLower(userData?.type)]
-  const isAccessible = findIndex(accessableMenu, (menu) => menu === currentRoute?.path)
+  const isAccessible = findIndex(accessableMenu, (menu) => menu === currentRoute)
 
   return isAccessible >= 0
 }

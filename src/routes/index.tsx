@@ -81,7 +81,7 @@ export default [
     defaultPath: '/434',
     component: <ForbiddenPage />,
     exact: true,
-    withHeader: true,
+    withHeader: false,
   },
   {
     id: 'not-found',
@@ -90,6 +90,6 @@ export default [
     defaultPath: '/404',
     component: <NotFoundPage />,
     exact: true,
-    withHeader: true,
+    withHeader: false,
   },
 ]

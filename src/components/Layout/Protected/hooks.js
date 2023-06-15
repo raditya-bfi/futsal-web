@@ -18,15 +18,16 @@ const useCustom = () => {
     if (location?.pathname && location?.pathname !== '/' && state?.userData) {
       const currRoute = getCurrentRoute(routes, location?.pathname)
       setCurrentRoute(currRoute)
-      const isExist = isRouteExist(routes, currRoute)
+      const isExist = isRouteExist(routes, location?.pathname)
       if (!isExist) {
         // ? : force into 404 page when user doesn't have authorization
         navigate('/404')
-      }
-      const isAccessible = getPageAuthorization(currRoute, state?.userData)
-      if (!isAccessible) {
-        // ? : force into 403 page when user doesn't have authorization
-        navigate('/403')
+      } else {
+        const isAccessible = getPageAuthorization(location?.pathname, state?.userData)
+        if (!isAccessible) {
+          // ? : force into 403 page when user doesn't have authorization
+          navigate('/403')
+        }
       }
     }
   }, [location?.pathname, state?.userData])
