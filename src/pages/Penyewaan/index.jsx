@@ -1,8 +1,15 @@
-import { AddRounded, InfoOutlined, Language, PhoneAndroid } from '@mui/icons-material'
+import {
+  AddRounded,
+  InfoOutlined,
+  KeyboardArrowRightOutlined,
+  Language,
+  PhoneAndroid,
+} from '@mui/icons-material'
 import { Box, Tooltip, Typography } from '@mui/material'
+import { get } from 'lodash-es'
 import { Helmet } from 'react-helmet-async'
 
-import { MenuDetailIcon, MobileInfoIcon } from '~/assets/svg'
+import { MenuDetailIcon, MobileInfoIcon, NoDataAvailable } from '~/assets/svg'
 import LiveClock from '~/components/LiveClock'
 import Snackbar from '~/components/Snackbar'
 import { colors } from '~/styles/theme'
@@ -50,7 +57,69 @@ function PenyewaanPage() {
               </Box>
             </Box>
             <Box className={classes.content}>
-              <Box className={classes.bookingList} />
+              {!data?.bookingListData || data?.bookingListData.length === 0 ? (
+                <Box className={classes.noDataPlaceholder}>
+                  <img className={classes.illustration} alt='not-data' src={NoDataAvailable} />
+                </Box>
+              ) : (
+                <Box className={classes.bookingList}>
+                  <Box className={classes.fieldNameWrapper}>
+                    {data?.bookingListData &&
+                      data?.bookingListData.length > 0 &&
+                      data?.bookingListData.map((field) => (
+                        <Box className={classes.fieldNameBox} key={`field-box-${field?.fieldId}`}>
+                          <Typography className={classes.fieldName}>{field?.fieldName}</Typography>
+                        </Box>
+                      ))}
+                  </Box>
+                  <Box className={classes.fieldBookingsWrapper}>
+                    {data?.bookingListData &&
+                      data?.bookingListData.length > 0 &&
+                      data?.bookingListData.map((field) => (
+                        <Box
+                          className={classes.fieldBookingsList}
+                          key={`field-booking-list-${field?.fieldId}`}
+                        >
+                          {field?.bookings &&
+                            field?.bookings.length > 0 &&
+                            field?.bookings.map((booking) => (
+                              <Box
+                                className={`${classes.fieldBookingCard} ${get(
+                                  classes,
+                                  `${booking.bookingStatus}`,
+                                  '',
+                                )}`}
+                                key={`field-booking-card-${field?.fieldId}-${booking?.bookingId}`}
+                              >
+                                <Typography
+                                  className={
+                                    booking?.bookingPlatform === 'mobile'
+                                      ? classes.fieldBookingUser
+                                      : classes.fieldBookingUserWeb
+                                  }
+                                >
+                                  {booking?.bookingPlatform === 'mobile'
+                                    ? booking?.bookingUser?.name
+                                    : ''}
+                                  <KeyboardArrowRightOutlined />
+                                </Typography>
+                                <Typography className={classes.fieldBookingTime}>
+                                  {booking?.bookingTime}
+                                </Typography>
+                                <Box className={classes.fieldBookingPlatform}>
+                                  {booking?.bookingPlatform === 'mobile' ? (
+                                    <PhoneAndroid />
+                                  ) : (
+                                    <Language />
+                                  )}
+                                </Box>
+                              </Box>
+                            ))}
+                        </Box>
+                      ))}
+                  </Box>
+                </Box>
+              )}
             </Box>
             <Box className={classes.legends}>
               <Box className={classes.legendInfo}>

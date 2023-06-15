@@ -15,10 +15,10 @@ const useCustom = () => {
   const [currentRoute, setCurrentRoute] = useState({})
 
   useEffect(() => {
-    if (location?.pathname && location?.pathname != '/' && state?.userData) {
+    if (location?.pathname && location?.pathname !== '/' && state?.userData) {
       const currRoute = getCurrentRoute(routes, location?.pathname)
       setCurrentRoute(currRoute)
-      const isExist = isRouteExist(routes, currentRoute)
+      const isExist = isRouteExist(routes, currRoute)
       if (!isExist) {
         // ? : force into 404 page when user doesn't have authorization
         navigate('/404')

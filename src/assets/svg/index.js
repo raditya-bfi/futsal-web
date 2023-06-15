@@ -9,6 +9,7 @@ import MenuLapangan from './menu-lapangan-icon.svg'
 import MenuOperator from './menu-operator-icon.svg'
 import MenuPenyewaan from './menu-penyewaan-icon.svg'
 import MobileInfoIcon from './mobile-info-icon.svg'
+import NoDataAvailable from './no-data-available.svg'
 import FieldPasswordIcon from './password-field-icon.svg'
 import FieldPhoneIcon from './phone-field-icon.svg'
 import UserIcon from './user-icon.svg'
@@ -26,6 +27,7 @@ export {
   MenuLapangan,
   MenuOperator,
   MobileInfoIcon,
+  NoDataAvailable,
   NotFoundIllustration,
   UserIcon,
 }

@@ -140,15 +140,148 @@ const style = makeStyles((theme) => ({
       marginBottom: theme.spacing(9),
     },
   },
+  noDataPlaceholder: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  illustration: {
+    height: '500px',
+    width: '500px',
+  },
   bookingList: {
     display: 'flex',
     overflow: 'auto',
     maxWidth: '100%',
-    maxHeight: '100%',
+    maxHeight: '537px',
+    border: `1px solid ${colors.White}`,
+    borderRadius: '5px',
+  },
+  fieldNameWrapper: {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    borderRight: `1px solid ${colors.AgedMoustacheGrey}`,
+
+    '& > div:not(:first-child)': {
+      height: '154.25px',
+    },
+    '& > div:first-child': {
+      height: '154.25px',
+    },
+    '& > div:last-child': {
+      height: '174.25px',
+    },
+  },
+  fieldNameBox: {
+    width: '120px',
+    height: '134.25px',
+    padding: '20px 8px',
+  },
+  fieldName: {
+    fontSize: fontSize[16],
+    fontWeight: 600,
+    lineHeight: '19.36px',
+    color: colors.White,
+  },
+  fieldBookingsWrapper: {
+    height: '100%',
+    width: 'max-content',
+    display: 'flex',
+    flexDirection: 'column',
+    backgroundColor: colors.TricornBlack,
 
     '& > div:not(:last-child)': {
+      paddingTop: '20px',
+      height: '154.25px',
+      paddingBottom: '20px',
+    },
+    '& > div:first-child': {
+      paddingTop: '20px',
+      height: '154.25px',
+      paddingBottom: '0px',
+    },
+    '& > div:last-child': {
+      paddingTop: '20px',
+      height: '174.25px',
+      paddingBottom: '20px',
+    },
+  },
+  fieldBookingsList: {
+    width: 'max-content',
+    display: 'flex',
+
+    '& > div:first-child': {
+      marginLeft: '25px',
+    },
+    '& > div': {
       marginRight: '19px',
     },
+  },
+  fieldBookingCard: {
+    height: '134.25px',
+    width: '259px',
+    padding: '14px 17px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+
+    '& > div:not(:last-child)': {
+      marginBottom: '4px',
+    },
+  },
+  done: {
+    border: `2px solid ${colors.AgedMoustacheGrey}`,
+    borderRadius: '5px',
+    backgroundColor: colors.Tundora,
+  },
+  onprogress: {
+    border: `2px solid ${colors.ForestGreen}`,
+    borderRadius: '5px',
+    backgroundColor: colors.Parsley,
+  },
+  waiting: {
+    border: `2px solid ${colors.KeyLimePie}`,
+    borderRadius: '5px',
+    backgroundColor: colors.Hacienda,
+  },
+  fieldBookingUser: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    fontSize: fontSize[20],
+    fontWeight: 600,
+    lineHeight: '24.2px',
+    color: colors.White,
+  },
+  fieldBookingUserWeb: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    fontSize: fontSize[20],
+    fontWeight: 600,
+    lineHeight: '24.2px',
+    color: colors.White,
+  },
+  fieldBookingTime: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    fontSize: fontSize[20],
+    fontWeight: 600,
+    lineHeight: '24.2px',
+    color: colors.White,
+  },
+  fieldBookingPlatform: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    fontSize: fontSize[20],
+    fontWeight: 600,
+    lineHeight: '24.2px',
+    color: colors.White,
   },
   legends: {
     marginTop: '27px',
