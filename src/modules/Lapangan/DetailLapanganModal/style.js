@@ -15,9 +15,6 @@ const style = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     flex: 1,
-    '& > div:not(:last-child)': {
-      marginRight: '40.54px',
-    },
   },
   fieldInfo: {
     height: '100%',

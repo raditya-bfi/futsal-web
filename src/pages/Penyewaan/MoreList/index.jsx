@@ -7,8 +7,10 @@ import { Helmet } from 'react-helmet-async'
 import CustomSelect from '~/components/CustomSelect'
 import DatePicker from '~/components/DatePicker'
 import GridTable from '~/components/GridTable'
+import Snackbar from '~/components/Snackbar'
 import date from '~/config/date'
 import { BOOKING_PAYMENT_STATUS_LABEL_MAPPING } from '~/constants/general'
+import DetailPenyewaanModal from '~/modules/Penyewaan/DetailPenyewaanModal'
 import { useNavigateParams } from '~/utils/routing'
 
 import { STATUS_OPTIONS } from './helper'
@@ -64,6 +66,12 @@ function MoreListPage() {
       <Helmet title='Daftar Sewa Lebih Banyak'>
         <meta name='description' content='Daftar Sewa Lebih Banyak | Futsal Gembira' />
       </Helmet>
+      <Snackbar
+        handleClose={handler.handleCloseSnackbar}
+        message={state?.alert?.message}
+        open={state?.alert?.open}
+        severity={state?.alert?.severity}
+      />
       <Box className={classes.container}>
         <Box className={classes.pageTitle}>
           <Box className={classes.titleWrapper}>
@@ -130,11 +138,21 @@ function MoreListPage() {
                 totalData={state?.pagination?.totalData}
                 totalPage={state?.pagination?.totalPage}
                 handleChangePage={handler?.handleChangePage}
+                handleClickRow={handler?.handleOpenDetailModal}
               />
             </Box>
           </Box>
         </Box>
       </Box>
+      <DetailPenyewaanModal
+        alert={state?.alert}
+        bookingId={state?.selectedBookingId}
+        onClose={handler?.handleCloseDetailModal}
+        open={state?.openDetailModal}
+        setAlert={handler?.setAlert}
+        setIsNeedRefetch={handler?.setIsNeedRefetch}
+        setOpenModal={handler?.setOpenDetailModal}
+      />
     </>
   )
 }

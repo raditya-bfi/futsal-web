@@ -1,3 +1,5 @@
+import { orderBy } from 'lodash-es'
+
 export const getBookingStatusByTime = (currentTime, startTime, endTime) => {
   const currentDate = new Date()
   currentDate.setHours(currentTime.split('.')[0])
@@ -47,7 +49,8 @@ export const getBookingList = (bookingsData, currentTime) => {
         )
         fieldBookings.push(tempBooking)
       })
-      fieldData.bookings = fieldBookings
+      // order data by booking time
+      fieldData.bookings = orderBy(fieldBookings, ['bookingTime'], ['asc'])
       res.push(fieldData)
     })
   }
