@@ -125,3 +125,10 @@ export const getMoreBookingsList = (params = {}) =>
     method: 'GET',
     params,
   })
+
+export const getDetailBooking = (bookingId) =>
+  Axios({
+    MAIN_URL: apiUrl,
+    url: `/bookings/${bookingId}`,
+    method: 'GET',
+  })

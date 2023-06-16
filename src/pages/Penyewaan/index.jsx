@@ -12,6 +12,7 @@ import { Helmet } from 'react-helmet-async'
 import { MenuDetailIcon, MobileInfoIcon, NoDataAvailable } from '~/assets/svg'
 import LiveClock from '~/components/LiveClock'
 import Snackbar from '~/components/Snackbar'
+import DetailPenyewaanModal from '~/modules/Penyewaan/DetailPenyewaanModal'
 import { colors } from '~/styles/theme'
 
 import useCustom from './hooks'
@@ -90,6 +91,7 @@ function PenyewaanPage() {
                                   '',
                                 )}`}
                                 key={`field-booking-card-${field?.fieldId}-${booking?.bookingId}`}
+                                onClick={() => handler?.handleOpenDetailModal(booking?.bookingId)}
                               >
                                 <Typography
                                   className={
@@ -198,6 +200,15 @@ function PenyewaanPage() {
           </Box>
         </Box>
       </Box>
+      <DetailPenyewaanModal
+        alert={state?.alert}
+        bookingId={state?.selectedBookingId}
+        onClose={handler?.handleCloseDetailModal}
+        open={state?.openDetailModal}
+        setAlert={handler?.setAlert}
+        setIsNeedRefetch={handler?.setIsNeedRefetch}
+        setOpenModal={handler?.setOpenDetailModal}
+      />
     </>
   )
 }

@@ -16,6 +16,8 @@ const useCustom = () => {
   const navigate = useNavigateParams()
 
   const [bookingsData, setBookingsData] = useState([])
+  const [openDetailModal, setOpenDetailModal] = useState(false)
+  const [selectedBookingId, setSelectedBookingId] = useState(null)
   const [isNeedRefetch, setIsNeedRefetch] = useState(false)
   const [selectedDate, setSelectedDate] = useState(moment().format(date.daily.format))
   const [selectedPaymentStatus, setSelectedPaymentStatus] = useState(
@@ -28,6 +30,29 @@ const useCustom = () => {
     totalData: 0,
     totalPage: 0,
   })
+
+  const [alert, setAlert] = useState({
+    open: false,
+    severity: 'error',
+    title: '',
+    message: '',
+  })
+
+  const handleOpenDetailModal = (userId) => {
+    setOpenDetailModal(true)
+    setSelectedBookingId(userId)
+  }
+
+  const handleCloseDetailModal = () => {
+    setOpenDetailModal(false)
+  }
+
+  const handleCloseSnackbar = () => {
+    setAlert((prev) => ({
+      ...prev,
+      open: false,
+    }))
+  }
 
   const handleBackButton = () => {
     navigate('/penyewaan')
@@ -89,14 +114,21 @@ const useCustom = () => {
     },
     handler: {
       handleBackButton,
+      handleCloseDetailModal,
+      handleCloseSnackbar,
       handleChangePage,
       handleChangeStatus,
       handleSearchButton,
+      handleOpenDetailModal,
       setIsNeedRefetch,
       setSelectedDate,
+      setOpenDetailModal,
     },
     state: {
+      alert,
       pagination,
+      openDetailModal,
+      selectedBookingId,
       selectedDate,
       selectedPaymentStatus,
     },

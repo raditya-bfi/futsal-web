@@ -61,7 +61,7 @@ function CustomField({
                 onMouseDown={handler.handleMouseDownPassword}
                 edge='end'
               >
-                {state.showPassword ? <VisibilityOff /> : <Visibility />}
+                {state.showPassword ? <Visibility /> : <VisibilityOff />}
               </IconButton>
             </InputAdornment>
           ) : (

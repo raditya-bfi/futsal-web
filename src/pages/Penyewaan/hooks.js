@@ -16,6 +16,8 @@ const useCustom = () => {
   const todayDate = moment().format('YYYY-MM-DD')
 
   const [bookingsData, setBookingsData] = useState([])
+  const [openDetailModal, setOpenDetailModal] = useState(false)
+  const [selectedBookingId, setSelectedBookingId] = useState(null)
   const [isNeedRefetch, setIsNeedRefetch] = useState(false)
   const [locale, setLocale] = useState({
     time: new Date().toLocaleTimeString('id', {
@@ -32,6 +34,15 @@ const useCustom = () => {
     title: '',
     message: '',
   })
+
+  const handleOpenDetailModal = (userId) => {
+    setOpenDetailModal(true)
+    setSelectedBookingId(userId)
+  }
+
+  const handleCloseDetailModal = () => {
+    setOpenDetailModal(false)
+  }
 
   const handleRedirectToMobileRules = () => {
     navigate('/penyewaan/aturan')
@@ -99,14 +110,19 @@ const useCustom = () => {
       bookingListData,
     },
     handler: {
+      handleCloseDetailModal,
       handleCloseSnackbar,
       handleRedirectToMobileRules,
       handleRedirectToMoreList,
+      handleOpenDetailModal,
       setAlert,
       setIsNeedRefetch,
+      setOpenDetailModal,
     },
     state: {
       alert,
+      openDetailModal,
+      selectedBookingId,
     },
   }
 }

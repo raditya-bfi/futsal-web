@@ -227,6 +227,7 @@ const style = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
+    cursor: 'pointer',
 
     '& > div:not(:last-child)': {
       marginBottom: '4px',
