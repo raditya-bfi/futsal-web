@@ -153,8 +153,8 @@ const style = makeStyles((theme) => ({
   },
   bookingList: {
     display: 'flex',
-    overflow: 'auto',
-    maxWidth: '100%',
+    overflowY: 'auto',
+    width: '100%',
     maxHeight: '537px',
     border: `1px solid ${colors.White}`,
     borderRadius: '5px',
@@ -189,6 +189,8 @@ const style = makeStyles((theme) => ({
   fieldBookingsWrapper: {
     height: '100%',
     width: 'max-content',
+    maxWidth: '100%',
+    overflowX: 'auto',
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: colors.TricornBlack,
