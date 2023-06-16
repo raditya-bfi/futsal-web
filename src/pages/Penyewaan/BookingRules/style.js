@@ -30,10 +30,14 @@ const style = makeStyles((theme) => ({
     width: '100%',
   },
   backIcon: {
-    height: '20px',
-    width: '20px',
+    width: '45px',
+    height: '45px',
     color: colors.White,
     marginRight: '54px',
+    '& > svg': {
+      width: '45px',
+      height: '45px',
+    },
   },
   title: {
     fontSize: fontSize[32],
