@@ -12,7 +12,7 @@ import {
   Visibility,
   VisibilityOff,
 } from '@mui/icons-material'
-import { Box, IconButton, Typography } from '@mui/material'
+import { Box, IconButton, Tooltip, Typography } from '@mui/material'
 import { capitalize, get, truncate } from 'lodash-es'
 
 import { MenuLapangan, MenuPenyewaan, UserIcon } from '~/assets/svg'
@@ -86,12 +86,14 @@ function DetailPenyewaanModal({
                 </Box>
                 <Box className={classes.userInfoWrapper}>
                   <Box className={classes.userData}>
-                    <Typography className={classes.name}>
-                      {truncate(state?.bookingData?.user?.name, {
-                        length: 15,
-                        omission: '...',
-                      })}
-                    </Typography>
+                    <Tooltip title={state?.bookingData?.user?.name} placement='top'>
+                      <Typography className={classes.name}>
+                        {truncate(state?.bookingData?.user?.name, {
+                          length: 15,
+                          omission: '...',
+                        })}
+                      </Typography>
+                    </Tooltip>
                     <span className={classes.genderWrapper}>
                       {state?.bookingData?.user?.gender === 'LK' ? (
                         <MaleRounded className={classes.maleIcon} />
@@ -100,12 +102,14 @@ function DetailPenyewaanModal({
                       )}
                     </span>
                   </Box>
-                  <Typography className={classes.username}>
-                    {`@${truncate(state?.bookingData?.user?.username, {
-                      length: 20,
-                      omission: '...',
-                    })}`}
-                  </Typography>
+                  <Tooltip title={state?.bookingData?.user?.username} placement='top'>
+                    <Typography className={classes.username}>
+                      {`@${truncate(state?.bookingData?.user?.username, {
+                        length: 20,
+                        omission: '...',
+                      })}`}
+                    </Typography>
+                  </Tooltip>
                   <Box className={classes.userData} sx={{ marginBottom: '8px' }}>
                     <Typography className={classes.userInfoLabel}>
                       <Phone />
@@ -121,7 +125,7 @@ function DetailPenyewaanModal({
                   <Box className={classes.userData}>
                     <Typography className={classes.userInfoLabel}>
                       <Room />
-                      {state?.bookingData?.user?.alamat}
+                      {state?.bookingData?.user?.alamat || 'Tidak ada data'}
                     </Typography>
                   </Box>
                 </Box>
