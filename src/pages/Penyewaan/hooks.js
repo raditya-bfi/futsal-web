@@ -44,6 +44,10 @@ const useCustom = () => {
     setOpenDetailModal(false)
   }
 
+  const handleRedirectToTambahPenyewaan = () => {
+    navigate('/penyewaan/tambah')
+  }
+
   const handleRedirectToMobileRules = () => {
     navigate('/penyewaan/aturan')
   }
@@ -114,6 +118,7 @@ const useCustom = () => {
       handleCloseSnackbar,
       handleRedirectToMobileRules,
       handleRedirectToMoreList,
+      handleRedirectToTambahPenyewaan,
       handleOpenDetailModal,
       setAlert,
       setIsNeedRefetch,

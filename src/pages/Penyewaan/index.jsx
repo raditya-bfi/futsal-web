@@ -1,3 +1,5 @@
+import { useLocation } from 'react-router-dom'
+
 import {
   AddRounded,
   InfoOutlined,
@@ -20,6 +22,8 @@ import useStyles from './style'
 
 function PenyewaanPage() {
   const { data, handler, state } = useCustom()
+  const location = useLocation()
+  const stateLocation = location?.state
   const classes = useStyles()
   return (
     <>
@@ -28,9 +32,15 @@ function PenyewaanPage() {
       </Helmet>
       <Snackbar
         handleClose={handler.handleCloseSnackbar}
-        message={state?.alert?.message}
-        open={state?.alert?.open}
-        severity={state?.alert?.severity}
+        message={state?.alert?.message || stateLocation?.message}
+        open={state?.alert?.open || stateLocation?.open}
+        severity={state?.alert?.severity || stateLocation?.severity}
+      />
+      <Snackbar
+        handleClose={handler.handleCloseSnackbar}
+        message={stateLocation?.message}
+        open={stateLocation?.open}
+        severity={stateLocation?.severity}
       />
       <Box className={classes.container}>
         <Box className={classes.pageTitle}>
@@ -172,7 +182,10 @@ function PenyewaanPage() {
           </Box>
           <Box className={classes.navigation}>
             <Tooltip title='Tambah Penyewaan' placement='left'>
-              <Box className={classes.addButton} onClick={() => {}}>
+              <Box
+                className={classes.addButton}
+                onClick={() => handler?.handleRedirectToTambahPenyewaan()}
+              >
                 <AddRounded />
               </Box>
             </Tooltip>

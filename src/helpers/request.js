@@ -132,3 +132,21 @@ export const getDetailBooking = (bookingId) =>
     url: `/bookings/${bookingId}`,
     method: 'GET',
   })
+
+export const getAvailableField = (fieldId, params = {}) =>
+  Axios({
+    MAIN_URL: apiUrl,
+    url: `/bookings/field/${fieldId}`,
+    method: 'GET',
+    params,
+  })
+
+export const handleAddBooking = (payload = {}) => {
+  const data = toFormData(payload)
+  return Axios({
+    MAIN_URL: apiUrl,
+    url: `bookings`,
+    method: 'POST',
+    data,
+  })
+}

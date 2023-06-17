@@ -2,7 +2,7 @@ import { makeStyles } from '@mui/styles'
 
 import { colors, fontSize } from '~/styles/theme'
 
-const style = makeStyles((theme) => ({
+const style = makeStyles(() => ({
   modalHeaderIcon: {
     width: '50px',
     height: '50px',
