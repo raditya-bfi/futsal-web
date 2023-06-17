@@ -5,7 +5,7 @@
 html {
   height: 100%;
   font-size: 16px;
-  @media (max-width: 1680px) : {
+  @media (max-width: 1680px)  {
     font-size: 12px;
   }
 }
@@ -31,6 +31,9 @@ code {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  @media (max-width: 900px)  {
+    width: 380vh;
+  }
 }
 
 .wrapper {
@@ -38,7 +41,7 @@ code {
   display: flex;
   flex-direction: column;
   padding: 0.833vw 1.458vw;
-  @media (min-width: 1367px) : {
+  @media (min-width: 1367px)  {
     height: 100vh;
   }
 }
@@ -52,7 +55,7 @@ code {
   flex-direction: column;
   position: absolute;
   width: 100%;
-  @media (min-width: 1367px) : {
+  @media (min-width: 1367px)  {
     height: 100%;
     display: flex;
   }
