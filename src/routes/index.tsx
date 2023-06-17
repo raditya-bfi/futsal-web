@@ -2,6 +2,7 @@ import loadable from '@loadable/component'
 
 const DashboardPage = loadable(() => import('~/pages/Dashboard'))
 const PenyewaanPage = loadable(() => import('~/pages/Penyewaan'))
+const AddPenyewaanPage = loadable(() => import('~/pages/Penyewaan/TambahPenyewaan'))
 const AturanPenyewaanPage = loadable(() => import('~/pages/Penyewaan/BookingRules'))
 const ListPenyewaanPage = loadable(() => import('~/pages/Penyewaan/MoreList'))
 const LapanganPage = loadable(() => import('~/pages/Lapangan'))
@@ -29,6 +30,15 @@ export default [
     component: <PenyewaanPage />,
     exact: true,
     withHeader: true,
+  },
+  {
+    id: 'penyewaan-tambah',
+    title: 'Halaman Tambah Penyewaan',
+    path: '/penyewaan/tambah',
+    defaultPath: '/penyewaan/tambah',
+    component: <AddPenyewaanPage />,
+    exact: true,
+    withHeader: false,
   },
   {
     id: 'penyewaan-rules',
