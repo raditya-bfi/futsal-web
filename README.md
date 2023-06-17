@@ -11,7 +11,7 @@ Clone the project
 Go to the project directory
 
 ```bash
-  cd main-web
+  cd futsal-web
 ```
 
 Install dependencies
@@ -20,7 +20,13 @@ Install dependencies
   yarn install
 ```
 
-Start the DEV server
+Start the Local server with .env
+
+```bash
+  yarn start
+```
+
+Start the DEV server .env.dev
 
 ```bash
   yarn dev
