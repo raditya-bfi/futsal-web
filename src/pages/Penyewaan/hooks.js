@@ -9,7 +9,7 @@ import { useNavigateParams } from '~/utils/routing'
 
 import { getBookingList } from './helper'
 
-const useCustom = () => {
+const useCustom = ({ stateLocation }) => {
   const { setIsLoading } = useLoading()
   const navigate = useNavigateParams()
 
@@ -61,6 +61,15 @@ const useCustom = () => {
       ...prev,
       open: false,
     }))
+  }
+
+  const handleCloseSnackbarState = () => {
+    navigate('/lapangan', '', {
+      state: {
+        ...stateLocation,
+        open: false,
+      },
+    })
   }
 
   const fetchBookingData = async () => {
@@ -116,6 +125,7 @@ const useCustom = () => {
     handler: {
       handleCloseDetailModal,
       handleCloseSnackbar,
+      handleCloseSnackbarState,
       handleRedirectToMobileRules,
       handleRedirectToMoreList,
       handleRedirectToTambahPenyewaan,

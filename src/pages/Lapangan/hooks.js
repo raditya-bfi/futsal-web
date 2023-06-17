@@ -3,11 +3,13 @@ import { useEffect, useMemo, useState } from 'react'
 
 import { getListOfFields } from '~/helpers/request'
 import useLoading from '~/utils/loading/useLoading'
+import { useNavigateParams } from '~/utils/routing'
 
 import { getSliderData } from './helper'
 
-const useCustom = () => {
+const useCustom = ({ stateLocation }) => {
   const { setIsLoading } = useLoading()
+  const navigate = useNavigateParams()
 
   const [fieldsData, setFieldsData] = useState([])
   const [openDetailModal, setOpenDetailModal] = useState(false)
@@ -26,6 +28,15 @@ const useCustom = () => {
       ...prev,
       open: false,
     }))
+  }
+
+  const handleCloseSnackbarState = () => {
+    navigate('/lapangan', '', {
+      state: {
+        ...stateLocation,
+        open: false,
+      },
+    })
   }
 
   const handleOpenDetailModal = (userId) => {
@@ -71,6 +82,7 @@ const useCustom = () => {
     handler: {
       handleCloseDetailModal,
       handleCloseSnackbar,
+      handleCloseSnackbarState,
       handleOpenDetailModal,
       setAlert,
       setIsNeedRefetch,

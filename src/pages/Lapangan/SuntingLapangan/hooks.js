@@ -138,6 +138,23 @@ const useCustom = () => {
           severity: 'success',
           message: 'Berhasil menyunting Lapangan',
         }))
+        const notification = {
+          open: true,
+          title: '',
+          severity: 'success',
+          message: 'Berhasil menyunting Lapangan',
+        }
+        navigate(
+          '/lapangan',
+          {},
+          {
+            state: {
+              ...notification,
+            },
+          },
+        )
+        await setIsNeedRefetch(true)
+        await setIsLoading(false)
       } else {
         setAlert((prev) => ({
           ...prev,
@@ -146,9 +163,9 @@ const useCustom = () => {
           severity: 'error',
           message: response?.data?.message || response?.statusText,
         }))
+        await setIsNeedRefetch(true)
+        await setIsLoading(false)
       }
-      await setIsNeedRefetch(true)
-      await setIsLoading(false)
     },
     [queryParams?.id, fieldData, isFlagActive, setAlert, setIsNeedRefetch, setIsLoading],
   )
