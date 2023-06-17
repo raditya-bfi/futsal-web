@@ -1,3 +1,5 @@
+import { useLocation } from 'react-router-dom'
+
 import { Circle, DarkModeOutlined, InfoOutlined, LightModeOutlined } from '@mui/icons-material'
 import { Box, Typography } from '@mui/material'
 import { Helmet } from 'react-helmet-async'
@@ -10,7 +12,9 @@ import useCustom from './hooks'
 import useStyles from './style'
 
 function LapanganPage() {
-  const { data, handler, state } = useCustom()
+  const location = useLocation()
+  const stateLocation = location?.state
+  const { data, handler, state } = useCustom({ stateLocation })
   const classes = useStyles()
   return (
     <>
@@ -22,6 +26,12 @@ function LapanganPage() {
         message={state?.alert?.message}
         open={state?.alert?.open}
         severity={state?.alert?.severity}
+      />
+      <Snackbar
+        handleClose={handler.handleCloseSnackbarState}
+        message={stateLocation?.message}
+        open={stateLocation?.open}
+        severity={stateLocation?.severity}
       />
       <Box className={classes.container}>
         <Box className={classes.pageTitle}>

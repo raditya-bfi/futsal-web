@@ -21,9 +21,9 @@ import useCustom from './hooks'
 import useStyles from './style'
 
 function PenyewaanPage() {
-  const { data, handler, state } = useCustom()
   const location = useLocation()
   const stateLocation = location?.state
+  const { data, handler, state } = useCustom({ stateLocation })
   const classes = useStyles()
   return (
     <>
@@ -37,7 +37,7 @@ function PenyewaanPage() {
         severity={state?.alert?.severity || stateLocation?.severity}
       />
       <Snackbar
-        handleClose={handler.handleCloseSnackbar}
+        handleClose={handler.handleCloseSnackbarState}
         message={stateLocation?.message}
         open={stateLocation?.open}
         severity={stateLocation?.severity}
