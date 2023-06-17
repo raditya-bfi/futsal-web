@@ -245,7 +245,7 @@ function DetailPenyewaanModal({
                           get(state?.bookingData, 'admin_price', 0) || 0,
                           0,
                           false,
-                        )} x 1`}
+                        )}`}
                       </Typography>
                     </Box>
                   )}

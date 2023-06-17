@@ -247,7 +247,7 @@ function TambahPenyewaanPage() {
                                 get(data?.invoiceData, 'admin_price', 0) || 0,
                                 0,
                                 false,
-                              )} x 1`}
+                              )}`}
                             </Typography>
                           </Box>
                         ) : (

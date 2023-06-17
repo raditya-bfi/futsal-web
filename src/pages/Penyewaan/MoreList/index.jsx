@@ -97,6 +97,7 @@ function MoreListPage() {
                 <Typography className={classes.optionTitle}>Tanggal Sewa</Typography>
                 <DatePicker
                   minDate={moment('2023-06-01').format(date.daily.format)}
+                  maxDate={moment().add(1, 'months').format(date.daily.format)}
                   handleDateChange={(value) => handler?.setSelectedDate(value.format('YYYY-MM-DD'))}
                   selectedDate={state.selectedDate}
                   width='100%'
