@@ -80,6 +80,7 @@ export const getScheduleTableData = (duration, selectedStartTime, fieldSchedule)
 
   if (fieldSchedule && selectedStartTime) {
     let lookupTime = selectedStartTime + 0.5
+    let durationRemaining = duration
     Object.keys(fieldSchedule).forEach((schedule) => {
       const scheduleStatus = get(fieldSchedule, schedule, false)
       const scheduleTime = schedule.split('-')
@@ -99,8 +100,9 @@ export const getScheduleTableData = (duration, selectedStartTime, fieldSchedule)
             set(res, 'endTime', scheduleTime[1])
             set(res, 'end', toNumber(endTime))
           }
-          if (duration > 1) {
+          if (duration > 1 && durationRemaining > 1) {
             lookupTime += 1
+            durationRemaining -= 1
           }
           res.table.push({
             schedule,
