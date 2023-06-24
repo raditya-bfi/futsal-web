@@ -236,6 +236,7 @@ const useCustom = () => {
       handleCloseSnackbar,
       setAlert,
       setSelectedDate,
+      setSelectedStartTime,
     },
     refs: {
       formikRef,

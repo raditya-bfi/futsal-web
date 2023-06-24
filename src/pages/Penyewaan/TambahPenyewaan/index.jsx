@@ -65,9 +65,10 @@ function TambahPenyewaanPage() {
                         <DatePicker
                           minDate={moment().format(date.daily.format)}
                           maxDate={moment().add(1, 'months').format(date.daily.format)}
-                          handleDateChange={(value) =>
+                          handleDateChange={(value) => {
                             handler?.setSelectedDate(value.format('YYYY-MM-DD'))
-                          }
+                            handler?.setSelectedStartTime(null)
+                          }}
                           selectedDate={state.selectedDate}
                           width='100%'
                         />
@@ -360,6 +361,7 @@ function TambahPenyewaanPage() {
                 Batalkan
               </Typography>
               <Button
+                disabled={state?.selectedStartTime === null}
                 handleOnClick={() => handler?.handleAddBookingField()}
                 label='Tambah Penyewaan'
                 type='button'
