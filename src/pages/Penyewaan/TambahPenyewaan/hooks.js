@@ -91,10 +91,13 @@ const useCustom = () => {
 
   const fieldOptions = useMemo(() => getListOfFieldOptions(fieldList), [fieldList])
   const fieldPhotos = useMemo(() => getFieldGalleries(fieldData?.galleries), [fieldData])
-  const startTimeOptions = useMemo(() => getStartTimeOptions(fieldSchedule), [fieldSchedule])
+  const startTimeOptions = useMemo(
+    () => getStartTimeOptions(fieldSchedule, selectedDate),
+    [fieldSchedule, selectedDate],
+  )
   const fieldScheduleTable = useMemo(
-    () => getScheduleTableData(selectedDuration, selectedStartTime, fieldSchedule),
-    [selectedDuration, selectedStartTime, fieldSchedule],
+    () => getScheduleTableData(selectedDuration, selectedStartTime, fieldSchedule, selectedDate),
+    [selectedDuration, selectedStartTime, fieldSchedule, selectedDate],
   )
   const invoiceData = useMemo(
     () => getInvoiceData(selectedDuration, fieldScheduleTable, fieldData),
