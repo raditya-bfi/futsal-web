@@ -1,4 +1,5 @@
 import { get, set, toNumber } from 'lodash-es'
+import moment from 'moment'
 
 export const getFieldGalleries = (savedPhotos = []) => {
   const res = [
@@ -51,13 +52,17 @@ export const getListOfFieldOptions = (fieldList = []) => {
 
 export const getStartTimeOptions = (fieldSchedule = []) => {
   const res = []
+  let sysDate = moment().format('HH')
+  sysDate = sysDate.charAt(0) === '0' ? sysDate.charAt(1) : sysDate
   if (fieldSchedule) {
     Object.keys(fieldSchedule).forEach((schedule) => {
       const scheduleStatus = get(fieldSchedule, schedule, false)
       const scheduleTime = schedule.split('-')[0]
       const startTemp = scheduleTime.split(':')[0]
       const startTime = startTemp.charAt(0) === '0' ? startTemp.charAt(1) : startTemp
-      if (scheduleStatus === true) {
+      // check start time must be greater or equal than sys date time
+      const checked = toNumber(startTime) >= toNumber(sysDate)
+      if (scheduleStatus === true && checked) {
         res.push({
           key: startTime,
           value: toNumber(startTime),
@@ -81,6 +86,8 @@ export const getScheduleTableData = (duration, selectedStartTime, fieldSchedule)
   if (fieldSchedule && selectedStartTime) {
     let lookupTime = selectedStartTime + 0.5
     let durationRemaining = duration
+    let sysDate = moment().format('HH')
+    sysDate = sysDate.charAt(0) === '0' ? sysDate.charAt(1) : sysDate
     Object.keys(fieldSchedule).forEach((schedule) => {
       const scheduleStatus = get(fieldSchedule, schedule, false)
       const scheduleTime = schedule.split('-')
@@ -88,8 +95,9 @@ export const getScheduleTableData = (duration, selectedStartTime, fieldSchedule)
       const startTime = startTemp.charAt(0) === '0' ? startTemp.charAt(1) : startTemp
       const endTemp = scheduleTime[1].split(':')[0]
       const endTime = endTemp.charAt(0) === '0' ? endTemp.charAt(1) : endTemp
-
-      if (scheduleStatus) {
+      // check start time must be greater or equal than sys date time
+      const checked = toNumber(startTime) >= toNumber(sysDate)
+      if (scheduleStatus && checked) {
         if (toNumber(startTime) <= lookupTime && lookupTime <= toNumber(endTime)) {
           if (lookupTime > selectedStartTime + 0.5) {
             set(res, 'endTime', scheduleTime[1])
@@ -116,6 +124,12 @@ export const getScheduleTableData = (duration, selectedStartTime, fieldSchedule)
             type: 'available',
           })
         }
+      } else if (scheduleStatus && !checked) {
+        res.table.push({
+          schedule,
+          status: 'Tidak tersedia',
+          type: 'notAvailable',
+        })
       } else {
         res.table.push({
           schedule,
