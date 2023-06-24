@@ -147,6 +147,14 @@ export const getScheduleTableData = (
         })
       }
     })
+  } else if (fieldSchedule && selectedStartTime === null) {
+    Object.keys(fieldSchedule).forEach((schedule) => {
+      res.table.push({
+        schedule,
+        status: 'Tidak tersedia',
+        type: 'notAvailable',
+      })
+    })
   }
 
   return res
