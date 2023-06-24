@@ -1,6 +1,8 @@
 import { get, set, toNumber } from 'lodash-es'
 import moment from 'moment'
 
+import date from '~/config/date'
+
 export const getFieldGalleries = (savedPhotos = []) => {
   const res = [
     {
@@ -50,18 +52,19 @@ export const getListOfFieldOptions = (fieldList = []) => {
   return res
 }
 
-export const getStartTimeOptions = (fieldSchedule = []) => {
+export const getStartTimeOptions = (fieldSchedule = [], selectedDate = '') => {
   const res = []
-  let sysDate = moment().format('HH')
-  sysDate = sysDate.charAt(0) === '0' ? sysDate.charAt(1) : sysDate
+  const sysDate = moment().format(date.daily.format)
+  let sysHour = moment().format('HH')
+  sysHour = sysHour.charAt(0) === '0' ? sysHour.charAt(1) : sysHour
   if (fieldSchedule) {
     Object.keys(fieldSchedule).forEach((schedule) => {
       const scheduleStatus = get(fieldSchedule, schedule, false)
       const scheduleTime = schedule.split('-')[0]
       const startTemp = scheduleTime.split(':')[0]
       const startTime = startTemp.charAt(0) === '0' ? startTemp.charAt(1) : startTemp
-      // check start time must be greater or equal than sys date time
-      const checked = toNumber(startTime) >= toNumber(sysDate)
+      // check start time must be greater or equal than sys date time when booking on today
+      const checked = sysDate !== selectedDate ? true : toNumber(startTime) >= toNumber(sysHour)
       if (scheduleStatus === true && checked) {
         res.push({
           key: startTime,
@@ -74,7 +77,12 @@ export const getStartTimeOptions = (fieldSchedule = []) => {
   return res
 }
 
-export const getScheduleTableData = (duration, selectedStartTime, fieldSchedule) => {
+export const getScheduleTableData = (
+  duration,
+  selectedStartTime,
+  fieldSchedule,
+  selectedDate = '',
+) => {
   const res = {
     startTime: '',
     start: 0,
@@ -86,8 +94,9 @@ export const getScheduleTableData = (duration, selectedStartTime, fieldSchedule)
   if (fieldSchedule && selectedStartTime) {
     let lookupTime = selectedStartTime + 0.5
     let durationRemaining = duration
-    let sysDate = moment().format('HH')
-    sysDate = sysDate.charAt(0) === '0' ? sysDate.charAt(1) : sysDate
+    const sysDate = moment().format(date.daily.format)
+    let sysHour = moment().format('HH')
+    sysHour = sysHour.charAt(0) === '0' ? sysHour.charAt(1) : sysHour
     Object.keys(fieldSchedule).forEach((schedule) => {
       const scheduleStatus = get(fieldSchedule, schedule, false)
       const scheduleTime = schedule.split('-')
@@ -95,8 +104,8 @@ export const getScheduleTableData = (duration, selectedStartTime, fieldSchedule)
       const startTime = startTemp.charAt(0) === '0' ? startTemp.charAt(1) : startTemp
       const endTemp = scheduleTime[1].split(':')[0]
       const endTime = endTemp.charAt(0) === '0' ? endTemp.charAt(1) : endTemp
-      // check start time must be greater or equal than sys date time
-      const checked = toNumber(startTime) >= toNumber(sysDate)
+      // check start time must be greater or equal than sys date time when booking on today
+      const checked = sysDate !== selectedDate ? true : toNumber(startTime) >= toNumber(sysHour)
       if (scheduleStatus && checked) {
         if (toNumber(startTime) <= lookupTime && lookupTime <= toNumber(endTime)) {
           if (lookupTime > selectedStartTime + 0.5) {
