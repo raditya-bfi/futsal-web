@@ -45,6 +45,9 @@ function DetailPenyewaanModal({
   })
   const classes = useStyles()
 
+  console.log(state?.bookingData)
+  console.log(state?.bookingData?.night_price_quantity > 0)
+
   return (
     <CustomModal
       onClose={onClose}
@@ -184,7 +187,8 @@ function DetailPenyewaanModal({
                   </Typography>
                 </Box>
                 <Box className={classes.invoiceDetailWrapper}>
-                  {state?.bookingData?.day_price && (
+                  {state?.bookingData?.day_price_quantity &&
+                  state?.bookingData?.day_price_quantity > 0 ? (
                     <Box className={classes.invoiceWrapper}>
                       <Typography className={classes.invoiceDetail} variant='div'>
                         Sewa per Jam
@@ -205,8 +209,11 @@ function DetailPenyewaanModal({
                         )}`}
                       </Typography>
                     </Box>
+                  ) : (
+                    <> </>
                   )}
-                  {state?.bookingData?.night_price && (
+                  {state?.bookingData?.night_price_quantity &&
+                  state?.bookingData?.night_price_quantity > 0 ? (
                     <Box className={classes.invoiceWrapper}>
                       <Typography className={classes.invoiceDetail} variant='div'>
                         Sewa Khusus Malam per Jam
@@ -227,8 +234,10 @@ function DetailPenyewaanModal({
                         )}`}
                       </Typography>
                     </Box>
+                  ) : (
+                    <> </>
                   )}
-                  {state?.bookingData?.admin_price && (
+                  {state?.bookingData?.admin_price && state?.bookingData?.admin_price > 0 ? (
                     <Box className={classes.invoiceWrapper}>
                       <Typography className={classes.invoiceDetail} variant='div'>
                         Biaya Admin
@@ -248,6 +257,8 @@ function DetailPenyewaanModal({
                         )}`}
                       </Typography>
                     </Box>
+                  ) : (
+                    <> </>
                   )}
                 </Box>
                 <Box className={classes.invoiceWrapper}>
