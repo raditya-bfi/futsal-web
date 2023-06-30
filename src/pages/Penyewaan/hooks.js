@@ -42,6 +42,13 @@ const useCustom = ({ stateLocation }) => {
 
   const handleCloseDetailModal = () => {
     setOpenDetailModal(false)
+    navigate('/penyewaan', '', {
+      state: {
+        ...stateLocation,
+        open: false,
+        newBookingId: null,
+      },
+    })
   }
 
   const handleRedirectToTambahPenyewaan = () => {
@@ -68,6 +75,7 @@ const useCustom = ({ stateLocation }) => {
       state: {
         ...stateLocation,
         open: false,
+        newBookingId: null,
       },
     })
   }
@@ -96,7 +104,9 @@ const useCustom = ({ stateLocation }) => {
 
   useEffect(() => {
     // ? : trigger to open detail modal after add booking
-    handleOpenDetailModal(stateLocation?.newBookingId)
+    if (stateLocation?.newBookingId) {
+      handleOpenDetailModal(stateLocation?.newBookingId)
+    }
   }, [stateLocation?.newBookingId])
 
   useEffect(() => {
