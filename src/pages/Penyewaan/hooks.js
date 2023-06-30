@@ -35,9 +35,9 @@ const useCustom = ({ stateLocation }) => {
     message: '',
   })
 
-  const handleOpenDetailModal = (userId) => {
+  const handleOpenDetailModal = (bookingId) => {
     setOpenDetailModal(true)
-    setSelectedBookingId(userId)
+    setSelectedBookingId(bookingId)
   }
 
   const handleCloseDetailModal = () => {
@@ -64,7 +64,7 @@ const useCustom = ({ stateLocation }) => {
   }
 
   const handleCloseSnackbarState = () => {
-    navigate('/lapangan', '', {
+    navigate('/penyewaan', '', {
       state: {
         ...stateLocation,
         open: false,
@@ -93,6 +93,11 @@ const useCustom = ({ stateLocation }) => {
     () => getBookingList(bookingsData, locale.time),
     [bookingsData, locale.time],
   )
+
+  useEffect(() => {
+    // ? : trigger to open detail modal after add booking
+    handleOpenDetailModal(stateLocation?.newBookingId)
+  }, [stateLocation?.newBookingId])
 
   useEffect(() => {
     if (isNeedRefetch) {
