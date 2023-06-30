@@ -45,9 +45,6 @@ function DetailPenyewaanModal({
   })
   const classes = useStyles()
 
-  console.log(state?.bookingData)
-  console.log(state?.bookingData?.night_price_quantity > 0)
-
   return (
     <CustomModal
       onClose={onClose}

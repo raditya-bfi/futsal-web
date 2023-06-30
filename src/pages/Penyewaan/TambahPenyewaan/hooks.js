@@ -126,6 +126,7 @@ const useCustom = () => {
         title: '',
         severity: 'success',
         message: 'Berhasil menambah Penyewaan',
+        newBookingId: response?.data?.data?.booking_id,
       }
       navigate(
         '/penyewaan',
