@@ -19,7 +19,10 @@ const useCustom = () => {
   const [openDetailModal, setOpenDetailModal] = useState(false)
   const [selectedBookingId, setSelectedBookingId] = useState(null)
   const [isNeedRefetch, setIsNeedRefetch] = useState(false)
-  const [selectedDate, setSelectedDate] = useState(moment().format(date.daily.format))
+  const [selectedStartDate, setSelectedStartDate] = useState(moment().format(date.daily.format))
+  const [selectedEndDate, setSelectedEndDate] = useState(
+    moment().add(1, 'week').format(date.daily.format),
+  )
   const [selectedPaymentStatus, setSelectedPaymentStatus] = useState(
     BOOKING_PAYMENT_STATUS_KEY.PAID,
   )
@@ -70,8 +73,15 @@ const useCustom = () => {
   }, [])
 
   const bookingTableData = useMemo(
-    () => getBookingTableData(bookingsData, selectedPaymentStatus, selectedDate, pagination),
-    [bookingsData, selectedPaymentStatus, selectedDate, pagination],
+    () =>
+      getBookingTableData(
+        bookingsData,
+        selectedPaymentStatus,
+        selectedStartDate,
+        selectedEndDate,
+        pagination,
+      ),
+    [bookingsData, selectedPaymentStatus, selectedStartDate, selectedEndDate, pagination],
   )
 
   const fetchBookingsData = async () => {
@@ -80,7 +90,8 @@ const useCustom = () => {
     setBookingsData([])
     // ? Bookings
     const response = await getMoreBookingsList({
-      date: selectedDate,
+      start_date: selectedStartDate,
+      end_date: selectedEndDate,
       status_bayar: selectedPaymentStatus,
     })
     if (response && response.status === 200) {
@@ -106,7 +117,7 @@ const useCustom = () => {
 
   useEffect(() => {
     fetchBookingsData()
-  }, [selectedDate, selectedPaymentStatus])
+  }, [selectedStartDate, selectedEndDate, selectedPaymentStatus])
 
   return {
     data: {
@@ -121,7 +132,8 @@ const useCustom = () => {
       handleSearchButton,
       handleOpenDetailModal,
       setIsNeedRefetch,
-      setSelectedDate,
+      setSelectedStartDate,
+      setSelectedEndDate,
       setOpenDetailModal,
     },
     state: {
@@ -129,7 +141,8 @@ const useCustom = () => {
       pagination,
       openDetailModal,
       selectedBookingId,
-      selectedDate,
+      selectedStartDate,
+      selectedEndDate,
       selectedPaymentStatus,
     },
   }

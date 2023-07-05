@@ -35,7 +35,8 @@ const style = makeStyles((theme) => ({
       fontSize: '20px',
       color: colors.White,
     },
-    backgroundColor: 'transparent',
+    backgroundColor: ({ isError }) =>
+      isError ? `transparent` : `${colors.TricornBlack} !important`,
     borderColor: ({ isError }) => (isError ? colors.AlizarinCrimson : colors.White),
   },
   focused: {
