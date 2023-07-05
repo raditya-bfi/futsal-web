@@ -1,6 +1,7 @@
 import ForbiddenIllustration from './403-page-forbidden.svg'
 import NotFoundIllustration from './404-page-not-found.svg'
 import FieldAddressIcon from './address-field-icon.svg'
+import ArrowTimeSeparator from './arrow-time-separator.svg'
 import CalendarIcon from './calendar-icon.svg'
 import FieldEmailIcon from './email-field-icon.svg'
 import FieldGenderIcon from './gender-field-icon.svg'
@@ -17,6 +18,7 @@ import FieldPhoneIcon from './phone-field-icon.svg'
 import UserIcon from './user-icon.svg'
 
 export {
+  ArrowTimeSeparator,
   CalendarIcon,
   FieldAddressIcon,
   FieldEmailIcon,
