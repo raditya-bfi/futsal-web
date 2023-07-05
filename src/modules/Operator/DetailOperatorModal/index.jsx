@@ -1,9 +1,10 @@
-import { Circle, FemaleRounded, MaleRounded } from '@mui/icons-material'
+import { Circle } from '@mui/icons-material'
 import { Box, Tooltip, Typography } from '@mui/material'
 import { truncate } from 'lodash-es'
 
 import {
   MenuOperator,
+  FieldGenderIcon,
   FieldPhoneIcon,
   FieldEmailIcon,
   FieldAddressIcon,
@@ -75,18 +76,18 @@ function DetailOperatorModal({
                   <Tooltip title={state?.operatorData?.name} placement='top'>
                     <Typography className={classes.name}>
                       {truncate(state?.operatorData?.name, {
-                        length: 10,
+                        length: 15,
                         omission: '...',
                       })}
                     </Typography>
                   </Tooltip>
-                  <Box className={classes.genderWrapper}>
+                  {/* <Box className={classes.genderWrapper}>
                     {state?.operatorData?.gender === 'LK' ? (
                       <MaleRounded className={classes.maleIcon} />
                     ) : (
                       <FemaleRounded className={classes.femaleIcon} />
                     )}
-                  </Box>
+                  </Box> */}
                 </Box>
                 <Typography
                   className={classes.username}
@@ -107,6 +108,12 @@ function DetailOperatorModal({
                 </Typography>
               </Box>
               <Box className={classes.inputContainer}>
+                <Box className={classes.input}>
+                  <img src={FieldGenderIcon} alt='detail-user-gender-field-icon' />
+                  <Typography className={classes.inputValue}>
+                    {state?.operatorData?.gender === 'LK' ? 'Pria' : 'Wanita'}
+                  </Typography>
+                </Box>
                 <Box className={classes.input}>
                   <img src={FieldPhoneIcon} alt='detail-user-phone-field-icon' />
                   <Typography className={classes.inputValue}>
