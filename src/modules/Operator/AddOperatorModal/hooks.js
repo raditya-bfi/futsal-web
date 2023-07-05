@@ -16,7 +16,7 @@ const useCustom = ({ setAlert, setIsNeedRefetch, open, setOpenModal }) => {
   })
 
   // ? : LK : Laki-laki | PR : Perempuan
-  const [selectedGender, setSelectedGender] = useState('LK')
+  const [selectedGender, setSelectedGender] = useState('')
   const [photoFiles, setPhotoFiles] = useState([])
   const [ktpFiles, setKtpFiles] = useState([])
 
@@ -81,6 +81,7 @@ const useCustom = ({ setAlert, setIsNeedRefetch, open, setOpenModal }) => {
       await setIsLoading(false)
       setOpenModal(false)
       setIsNeedRefetch(true)
+      setSelectedGender('')
     },
     [setAlert, setIsNeedRefetch, setOpenModal, setIsLoading, selectedGender, photoFiles, ktpFiles],
   )

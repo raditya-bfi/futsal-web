@@ -5,6 +5,7 @@ export const AddOperatorSchema = Yup.object().shape({
     .min(3, 'Nama must contain at least 3 characters')
     .max(30, `Nama should be less than 30 characters`)
     .required('Required'),
+  gender: Yup.string().required('Required'),
   phone: Yup.string()
     .min(5, 'No. HP must contain at least 5 characters')
     .max(15, `No. HP should be less than 15 characters`)
