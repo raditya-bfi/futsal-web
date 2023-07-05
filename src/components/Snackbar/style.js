@@ -5,6 +5,9 @@ import { colors, fontSize } from '~/styles/theme'
 import { ALERT_STYLE_MAPPING } from './helper'
 
 const style = makeStyles(() => ({
+  snackBar: {
+    top: '135px',
+  },
   action: {
     display: 'flex',
     justifyContent: 'center',
@@ -21,7 +24,7 @@ const style = makeStyles(() => ({
   },
   message: {
     color: ({ severity }) => ALERT_STYLE_MAPPING[severity].textColor,
-    fontSize: fontSize[14],
+    fontSize: fontSize[22],
   },
 }))
 
