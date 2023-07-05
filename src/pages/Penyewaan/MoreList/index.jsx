@@ -94,12 +94,28 @@ function MoreListPage() {
                 />
               </Box>
               <Box className={classes.optionInput}>
-                <Typography className={classes.optionTitle}>Tanggal Sewa</Typography>
+                <Typography className={classes.optionTitle}>Dimulai Dari</Typography>
                 <DatePicker
                   minDate={moment('2023-06-01').format(date.daily.format)}
                   maxDate={moment().add(1, 'months').format(date.daily.format)}
-                  handleDateChange={(value) => handler?.setSelectedDate(value.format('YYYY-MM-DD'))}
-                  selectedDate={state.selectedDate}
+                  handleDateChange={(value) =>
+                    handler?.selectedStartDate(value.format('YYYY-MM-DD'))
+                  }
+                  selectedDate={state.selectedStartDate}
+                  width='100%'
+                />
+              </Box>
+              <Box className={classes.optionInput}>
+                <Typography className={classes.optionTitle}>Sampai</Typography>
+                <DatePicker
+                  minDate={moment(state.selectedStartDate).add(1, 'day').format(date.daily.format)}
+                  maxDate={moment(state.selectedStartDate)
+                    .add(1, 'months')
+                    .format(date.daily.format)}
+                  handleDateChange={(value) =>
+                    handler?.setSelectedEndDate(value.format('YYYY-MM-DD'))
+                  }
+                  selectedDate={state.selectedEndDate}
                   width='100%'
                 />
               </Box>
@@ -128,7 +144,9 @@ function MoreListPage() {
                   {BOOKING_PAYMENT_STATUS_LABEL_MAPPING[data?.bookingTableData?.status]}
                 </Typography>
                 <Typography className={classes.dateInfo}>
-                  {moment(data?.bookingTableData?.date).format('DD MMM YYYY')}
+                  {`${moment(data?.bookingTableData?.startDate).format('DD MMM YYYY')} - ${moment(
+                    data?.bookingTableData?.endDate,
+                  ).format('DD MMM YYYY')}`}
                 </Typography>
               </Box>
               <GridTable

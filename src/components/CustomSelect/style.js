@@ -36,7 +36,7 @@ const style = makeStyles((theme) => ({
       color: colors.White,
     },
     backgroundColor: ({ isError }) =>
-      isError ? `${colors.FairPink} ` : `${colors.TricornBlack} !important`,
+      isError ? `transparent` : `${colors.TricornBlack} !important`,
     borderColor: ({ isError }) => (isError ? colors.AlizarinCrimson : colors.White),
   },
   focused: {
@@ -88,7 +88,8 @@ const style = makeStyles((theme) => ({
     fontWeight: theme.typography.fontWeightMedium,
     color: colors.AlizarinCrimson,
     position: 'absolute',
-    bottom: '-18px',
+    bottom: '-16px',
+    left: '15px',
   },
   paper: {
     backgroundColor: colors.TricornBlack,

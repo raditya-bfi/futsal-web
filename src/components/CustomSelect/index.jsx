@@ -8,6 +8,7 @@ import {
   Select,
   MenuItem,
   OutlinedInput,
+  FilledInput,
 } from '@mui/material'
 import { isObject, isUndefined } from 'lodash-es'
 
@@ -26,6 +27,7 @@ function CustomSelect({
   helperText,
   handleChange,
   handleSearchCustom,
+  isFormControlFullWidth,
   isFullWidth,
   isReadOnly,
   keyValue,
@@ -38,6 +40,7 @@ function CustomSelect({
   required,
   searchCustomVal,
   value,
+  variant,
   width,
 }) {
   const isError = error !== '' && error !== false
@@ -46,7 +49,10 @@ function CustomSelect({
   const classes = useStyle({ isError, isEmpty, isFullWidth, labelSize, width })
   const { handler, state, refs } = useCustom({ options })
   return (
-    <FormControl variant='outlined' sx={{ m: '0px !important', left: '0px' }}>
+    <FormControl
+      variant={variant}
+      sx={{ m: '0px !important', left: '0px', width: isFormControlFullWidth ? '100%' : 'auto' }}
+    >
       {label && !isEmpty && (
         <InputLabel
           classes={{
@@ -67,12 +73,21 @@ function CustomSelect({
         error={error}
         IconComponent={ExpandMore}
         input={
-          <OutlinedInput
-            classes={{
-              root: classes.outlinedInput,
-              notchedOutline: classes.notchedOutline,
-            }}
-          />
+          variant === 'outlined' ? (
+            <OutlinedInput
+              classes={{
+                root: classes.outlinedInput,
+                notchedOutline: classes.notchedOutline,
+              }}
+            />
+          ) : (
+            <FilledInput
+              classes={{
+                root: classes.outlinedInput,
+                notchedOutline: classes.notchedOutline,
+              }}
+            />
+          )
         }
         inputProps={{ readOnly: isReadOnly }}
         MenuProps={{
@@ -108,7 +123,7 @@ function CustomSelect({
                 }}
               >
                 <Search
-                  variant='outlined'
+                  variant={variant}
                   inputRef={refs.inputRef}
                   searchVal={isUndefined(searchCustomVal) ? state.searchVal : searchCustomVal}
                   handleSearch={
@@ -146,6 +161,7 @@ CustomSelect.defaultProps = {
   disabled: false,
   error: false,
   helperText: '',
+  isFormControlFullWidth: false,
   isFullWidth: false,
   isReadOnly: false,
   keyValue: 'value',
@@ -156,6 +172,7 @@ CustomSelect.defaultProps = {
   placeholder: undefined,
   placeholderSearch: undefined,
   value: '',
+  variant: 'outlined',
   width: '20vw',
 }
 
@@ -166,6 +183,7 @@ CustomSelect.propTypes = {
   error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   handleChange: PropTypes.func.isRequired,
   helperText: PropTypes.string,
+  isFormControlFullWidth: PropTypes.bool,
   isFullWidth: PropTypes.bool,
   isReadOnly: PropTypes.bool,
   keyValue: PropTypes.oneOf(['key', 'value']),
@@ -181,6 +199,7 @@ CustomSelect.propTypes = {
     PropTypes.arrayOf(PropTypes.string),
     PropTypes.number,
   ]),
+  variant: PropTypes.string,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 }
 

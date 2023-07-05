@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 export const getPagination = (operatorData = []) => {
   const res = {
     rowPerPage: 10,
@@ -32,6 +34,7 @@ export const getOperatorTableData = (operatorData = [], pagination = {}) => {
         username: operatorData[counter]?.username,
         no_hp: operatorData[counter]?.no_hp,
         isaktif: operatorData[counter]?.isaktif,
+        updated_at: moment(operatorData[counter]?.updated_at).format('YYYY-MM-DD hh:mm:ss'),
       })
     }
   }

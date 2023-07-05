@@ -36,6 +36,14 @@ export const getArchivedColumns = () => [
     renderCell: (cellValues) => <div>{cellValues?.no_hp}</div>,
   },
   {
+    field: 'updated_at',
+    headerName: 'Tanggal diarsipkan',
+    width: '160px',
+    editable: false,
+    justifyContentHeader: 'start',
+    renderCell: (cellValues) => <div>{cellValues?.updated_at}</div>,
+  },
+  {
     field: 'isaktif',
     headerName: 'Status',
     width: '160px',

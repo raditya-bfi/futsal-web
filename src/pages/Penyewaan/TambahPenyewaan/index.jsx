@@ -2,22 +2,27 @@ import {
   CalendarMonth,
   DarkModeOutlined,
   InfoOutlined,
+  HighlightOffOutlined,
   LightModeOutlined,
   Schedule,
   NavigateBeforeRounded,
   HelpOutline,
+  TimerOutlined,
+  WarningAmberRounded,
 } from '@mui/icons-material'
 import { Box, IconButton, Typography } from '@mui/material'
 import { get } from 'lodash-es'
 import moment from 'moment'
 import { Helmet } from 'react-helmet-async'
 
+import { ArrowTimeSeparator } from '~/assets/svg'
 import Button from '~/components/Button'
 import CustomSelect from '~/components/CustomSelect'
 import DatePicker from '~/components/DatePicker'
 import Snackbar from '~/components/Snackbar'
 import VerticalPhotoSlider from '~/components/VerticalPhotoSlider'
 import date from '~/config/date'
+import KonfirmasiTambahPenyewaanModal from '~/modules/Penyewaan/KonfirmasiTambahPenyewaanModal'
 import { thousandSeparator } from '~/utils/number'
 import { removeSeconds } from '~/utils/string'
 
@@ -49,7 +54,6 @@ function TambahPenyewaanPage() {
             <Typography className={classes.title}>Tambah Penyewaan</Typography>
           </Box>
         </Box>
-
         <Box className={classes.pageContent}>
           <Box className={classes.content}>
             <Box className={classes.bookingContent}>
@@ -82,8 +86,17 @@ function TambahPenyewaanPage() {
                           value={state?.selectedStartTime}
                         />
                       </Box>
+                      <Box className={classes.scheduleWrapper} sx={{ width: '180px' }}>
+                        <Typography className={classes.scheduleLabel}>Durasi Sewa</Typography>
+                        <CustomSelect
+                          isFullWidth
+                          handleChange={handler.handleChangeDuration}
+                          options={DURATION_OPTIONS}
+                          value={state?.selectedDuration}
+                        />
+                      </Box>
                     </Box>
-                    <Box className={classes.scheduleContent}>
+                    {/* <Box className={classes.scheduleContent}>
                       <Box className={classes.scheduleWrapper} sx={{ width: '180px' }}>
                         <Typography className={classes.scheduleLabel}>Durasi Sewa</Typography>
                         <CustomSelect
@@ -132,23 +145,63 @@ function TambahPenyewaanPage() {
                           </Box>
                         </Box>
                       </Box>
-                    </Box>
+                    </Box> */}
                     <Box className={classes.scheduleContent}>
-                      <Box className={classes.scheduleWrapper} sx={{ width: '180px' }}>
+                      <Box className={classes.scheduleWrapper} sx={{ width: '100%' }}>
                         <Typography className={classes.scheduleInfoLabel}>
                           <InfoOutlined />
-                          Pilih Durasi
+                          Maksimal durasi penyewaan hanya 2 jam
                         </Typography>
                       </Box>
-                      <Box
-                        className={classes.scheduleWrapper}
-                        sx={{ width: '370px', alignItems: 'flex-end' }}
-                      >
+                    </Box>
+                    <Box className={classes.scheduleContent}>
+                      <Box className={classes.scheduleWrapper} sx={{ width: '100%' }}>
                         <Box className={classes.scheduleTimeBox}>
-                          <Schedule />
-                          <Typography className={classes.scheduleTimeLabel}>
-                            {`${data?.fieldScheduleTable.startTime} - ${data?.fieldScheduleTable.endTime}`}
-                          </Typography>
+                          <Box className={classes.rentTime}>
+                            <Typography className={classes.rentTimeTitle}>
+                              Waktu Mulai Sewa
+                            </Typography>
+                            <Box className={classes.rentTimeBox}>
+                              <TimerOutlined className={classes.rentTimeStart} />
+                              <Typography
+                                className={classes.rentTimeLabel}
+                                sx={{
+                                  justifyContent:
+                                    (data?.fieldScheduleTable.endTime || '-') !== '-'
+                                      ? 'flex-start'
+                                      : 'center',
+                                }}
+                              >
+                                {data?.fieldScheduleTable.startTime || '-'}
+                              </Typography>
+                            </Box>
+                          </Box>
+                          <Box className={classes.rentTime}>
+                            <img
+                              className={classes.arrowSeparator}
+                              src={ArrowTimeSeparator}
+                              alt='arrow-time-separator'
+                            />
+                          </Box>
+                          <Box className={classes.rentTime}>
+                            <Typography className={classes.rentTimeTitle}>
+                              Waktu Berhenti Sewa
+                            </Typography>
+                            <Box className={classes.rentTimeBox}>
+                              <HighlightOffOutlined className={classes.rentTimeStop} />
+                              <Typography
+                                className={classes.rentTimeLabel}
+                                sx={{
+                                  justifyContent:
+                                    (data?.fieldScheduleTable.endTime || '-') !== '-'
+                                      ? 'flex-start'
+                                      : 'center',
+                                }}
+                              >
+                                {data?.fieldScheduleTable.endTime || '-'}
+                              </Typography>
+                            </Box>
+                          </Box>
                         </Box>
                       </Box>
                     </Box>
@@ -353,6 +406,13 @@ function TambahPenyewaanPage() {
                 </Box>
               </Box>
             </Box>
+            <Box className={classes.descWrapper}>
+              <WarningAmberRounded className={classes.warningIcon} />
+              <Typography className={classes.desc}>
+                Setelah menekan tombol Tambah Penyewaan, maka akan langsung meyimpan penyewaan
+                lapangan dengan status <span className={classes.infoPaid}>Sudah Dibayar </span>
+              </Typography>
+            </Box>
             <Box className={classes.option}>
               <Typography
                 className={classes.cancelButton}
@@ -362,7 +422,8 @@ function TambahPenyewaanPage() {
               </Typography>
               <Button
                 disabled={state?.selectedStartTime === null}
-                handleOnClick={() => handler?.handleAddBookingField()}
+                // handleOnClick={() => handler?.handleAddBookingField()}
+                handleOnClick={() => handler?.handleOpenConfirmModal()}
                 label='Tambah Penyewaan'
                 type='button'
                 variant='secondary'
@@ -371,6 +432,12 @@ function TambahPenyewaanPage() {
           </Box>
         </Box>
       </Box>
+      <KonfirmasiTambahPenyewaanModal
+        open={state?.openConfirmModal}
+        onClose={handler?.handleCloseConfirmModal}
+        handleAdd={handler?.handleAddBookingField}
+        summaryBookingData={state?.summaryBookingData}
+      />
     </>
   )
 }

@@ -38,6 +38,8 @@ const useCustom = () => {
   const [selectedPayment, setSelectedPayment] = useState(first(PAYMENT_OPTIONS).value)
   const [fieldData, setFieldData] = useState({})
   const [selectedDate, setSelectedDate] = useState(moment().format(date.daily.format))
+  const [openConfirmModal, setOpenConfirmModal] = useState(false)
+  const [summaryBookingData, setSummaryBookingData] = useState({})
 
   const [alert, setAlert] = useState({
     open: false,
@@ -55,6 +57,11 @@ const useCustom = () => {
       ...prev,
       open: false,
     }))
+  }
+
+  const handleCloseConfirmModal = () => {
+    setOpenConfirmModal(false)
+    setSummaryBookingData({})
   }
 
   const handleChangeField = (event) => {
@@ -103,6 +110,18 @@ const useCustom = () => {
     () => getInvoiceData(selectedDuration, fieldScheduleTable, fieldData),
     [selectedDuration, fieldScheduleTable, fieldData],
   )
+
+  const handleOpenConfirmModal = useCallback(() => {
+    setOpenConfirmModal(true)
+    const summaryData = {
+      bookingTime: fieldScheduleTable.startTime,
+      date: moment(selectedDate).format('DD MMMM YYYY'),
+      duration: selectedDuration,
+      fieldName: fieldOptions.find((data) => data?.value === selectedFieldId).label,
+      totalPrice: invoiceData?.total_price,
+    }
+    setSummaryBookingData(summaryData)
+  }, [fieldScheduleTable, invoiceData, selectedDate, selectedDuration, selectedFieldId])
 
   const handleAddBookingField = useCallback(async () => {
     await setIsLoading(true)
@@ -234,7 +253,9 @@ const useCustom = () => {
       handleChangeField,
       handleChangePayment,
       handleChangeStartTime,
+      handleCloseConfirmModal,
       handleCloseSnackbar,
+      handleOpenConfirmModal,
       setAlert,
       setSelectedDate,
       setSelectedStartTime,
@@ -244,11 +265,13 @@ const useCustom = () => {
     },
     state: {
       alert,
+      openConfirmModal,
       selectedDate,
       selectedDuration,
       selectedFieldId,
       selectedPayment,
       selectedStartTime,
+      summaryBookingData,
     },
   }
 }

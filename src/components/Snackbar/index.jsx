@@ -17,6 +17,7 @@ function Snackbar({
   const classes = useStyle({ severity })
   return (
     <MaterialSnackbar
+      className={classes.snackBar}
       anchorOrigin={{
         vertical: verticalPosition,
         horizontal: horizontalPosition,

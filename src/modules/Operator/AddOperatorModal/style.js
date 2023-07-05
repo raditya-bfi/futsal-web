@@ -87,6 +87,10 @@ const style = makeStyles(() => ({
       bottom: '-18px',
     },
   },
+  select: {
+    width: '100%',
+    height: '100%',
+  },
   inputContainer: {
     '& > div:not(:last-child)': {
       marginBottom: '18px',

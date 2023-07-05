@@ -167,3 +167,16 @@ export const BOOKING_PAYMENT_STATUS_LABEL_MAPPING = {
   [BOOKING_PAYMENT_STATUS_KEY.WAITING]: 'Menunggu Pembayaran',
   [BOOKING_PAYMENT_STATUS_KEY.CANCELED]: 'Transaksi Dibatalkan',
 }
+
+export const GENDER_OPTIONS = [
+  {
+    key: 'LK',
+    value: 'LK',
+    label: 'Pria',
+  },
+  {
+    key: 'PR',
+    value: 'PR',
+    label: 'Wanita',
+  },
+]

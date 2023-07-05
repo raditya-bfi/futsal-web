@@ -56,6 +56,8 @@ export const getStartTimeOptions = (fieldSchedule = [], selectedDate = '') => {
   const res = []
   const sysDate = moment().format(date.daily.format)
   let sysHour = moment().format('HH')
+  let sysMinutes = moment().format('mm')
+  sysMinutes = sysMinutes.charAt(0) === '0' ? sysMinutes.charAt(1) : sysMinutes
   sysHour = sysHour.charAt(0) === '0' ? sysHour.charAt(1) : sysHour
   if (fieldSchedule) {
     Object.keys(fieldSchedule).forEach((schedule) => {
@@ -64,7 +66,13 @@ export const getStartTimeOptions = (fieldSchedule = [], selectedDate = '') => {
       const startTemp = scheduleTime.split(':')[0]
       const startTime = startTemp.charAt(0) === '0' ? startTemp.charAt(1) : startTemp
       // check start time must be greater or equal than sys date time when booking on today
-      const checked = sysDate !== selectedDate ? true : toNumber(startTime) >= toNumber(sysHour)
+      let checkedMinutes = true
+      if (toNumber(startTime) === toNumber(sysHour)) {
+        // user still choose start time when late 15 minutes
+        checkedMinutes = toNumber(sysMinutes) <= 15
+      }
+      const checked =
+        sysDate !== selectedDate ? true : toNumber(startTime) >= toNumber(sysHour) && checkedMinutes
       if (scheduleStatus === true && checked) {
         res.push({
           key: startTime,

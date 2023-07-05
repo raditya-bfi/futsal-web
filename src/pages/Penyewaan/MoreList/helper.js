@@ -1,3 +1,5 @@
+import { orderBy } from 'lodash-es'
+
 import {
   BOOKING_PAYMENT_STATUS_KEY,
   BOOKING_PAYMENT_STATUS_LABEL_MAPPING,
@@ -24,21 +26,24 @@ export const getPagination = (bookingsData = []) => {
 export const getBookingTableData = (
   bookingsData = [],
   selectedPaymentStatus = '',
-  selectedDate = '',
+  selectedStartDate = '',
+  selectedEndDate = '',
   pagination = {},
 ) => {
   const res = {
     status: selectedPaymentStatus,
-    date: selectedDate,
+    startDate: selectedStartDate,
+    endDate: selectedEndDate,
     tableData: [],
   }
+  let tempTableData = []
   if (bookingsData && bookingsData.length > 0) {
     // calculate start and end item indexes
     const startIndex = (pagination.currentPage - 1) * pagination.rowPerPage
     const endIndex = Math.min(startIndex + pagination.rowPerPage - 1, pagination.totalData - 1)
 
     for (let counter = startIndex; counter <= endIndex; counter += 1) {
-      res.tableData.push({
+      tempTableData.push({
         key: counter,
         id: bookingsData[counter]?.booking_id,
         userName: bookingsData[counter]?.user_name,
@@ -48,6 +53,9 @@ export const getBookingTableData = (
       })
     }
   }
+
+  tempTableData = orderBy(tempTableData, ['date'])
+  res.tableData = tempTableData
 
   return res
 }
