@@ -1,5 +1,5 @@
 import ChartDataLabels from 'chartjs-plugin-datalabels'
-import { get, orderBy, set } from 'lodash-es'
+import { first, get, orderBy, set } from 'lodash-es'
 
 import {
   DASHBOARD_MENU_TAB_KEY,
@@ -17,21 +17,19 @@ export const getSummary = (laporanPendapatanData = [], laporanWaktuSewaData = []
 
   // ? : Pendapatan
   if (laporanPendapatanData && laporanPendapatanData?.length > 0) {
-    laporanPendapatanData.forEach((data) => {
-      Object.keys(data).forEach((key) => {
-        res.pendapatan = data[key]?.total_all || 0
-      })
+    const latestMonthData = first(laporanPendapatanData)
+    Object.keys(latestMonthData).forEach((key) => {
+      res.pendapatan = latestMonthData[key]?.total_all || 0
     })
   }
 
   // ? : Jam
   if (laporanWaktuSewaData && laporanWaktuSewaData?.length > 0) {
-    laporanWaktuSewaData.forEach((data) => {
-      Object.keys(data).forEach((key) => {
-        if (key === 'total_time_rent') {
-          res.jam = data[key]
-        }
-      })
+    const latestMonthData = first(laporanWaktuSewaData)
+    Object.keys(latestMonthData).forEach((key) => {
+      if (key === 'total_time_rent') {
+        res.jam = latestMonthData[key]
+      }
     })
   }
 
@@ -92,7 +90,7 @@ export const getVerticalChartData = (
           },
         ],
       },
-      decimalPlaces: 1,
+      decimalPlaces: 2,
       metric: 'Juta',
     }
   }
