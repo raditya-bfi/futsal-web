@@ -26,9 +26,12 @@ export const getSummary = (laporanPendapatanData = [], laporanWaktuSewaData = []
   // ? : Jam
   if (laporanWaktuSewaData && laporanWaktuSewaData?.length > 0) {
     const latestMonthData = first(laporanWaktuSewaData)
+    const latestMonthName = Object.keys(latestMonthData)[0]
     Object.keys(latestMonthData).forEach((key) => {
-      if (key === 'total_time_rent') {
-        res.jam = latestMonthData[key]
+      if (key === latestMonthName) {
+        latestMonthData[key].forEach((scheduleData) => {
+          res.jam += scheduleData.total
+        })
       }
     })
   }
@@ -104,10 +107,13 @@ export const getVerticalChartData = (
         total: 0,
       }
       Object.keys(data).forEach((key) => {
-        if (key === 'total_time_rent') {
-          monthlyData.total = data[key]
-        } else {
+        if (key !== 'total_time_rent') {
+          let totalHourPerMonth = 0
+          data[key].forEach((scheduleData) => {
+            totalHourPerMonth += scheduleData.total
+          })
           monthlyData.monthName = key
+          monthlyData.total = totalHourPerMonth
         }
       })
       chartData.push(monthlyData)
