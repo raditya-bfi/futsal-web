@@ -160,12 +160,14 @@ export const BOOKING_PAYMENT_STATUS_KEY = {
   PAID: 'paid',
   WAITING: 'waiting',
   CANCELED: 'canceled',
+  CANCELED_BY_ADMIN: 'canceled_admin',
 }
 
 export const BOOKING_PAYMENT_STATUS_LABEL_MAPPING = {
   [BOOKING_PAYMENT_STATUS_KEY.PAID]: 'Sudah Dibayar',
   [BOOKING_PAYMENT_STATUS_KEY.WAITING]: 'Menunggu Pembayaran',
   [BOOKING_PAYMENT_STATUS_KEY.CANCELED]: 'Transaksi Dibatalkan',
+  [BOOKING_PAYMENT_STATUS_KEY.CANCELED_BY_ADMIN]: 'Dibatalkan Admin',
 }
 
 export const GENDER_OPTIONS = [

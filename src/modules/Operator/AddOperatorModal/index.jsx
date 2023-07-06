@@ -68,6 +68,7 @@ function AddOperatorModal({ alert, setAlert, setIsNeedRefetch, onClose, open, se
           }}
           validateOnChange
           validateOnBlur={false}
+          validateOnMount={false}
           enableReinitialize
         >
           {({ errors, handleSubmit, isSubmitting, setFieldValue, touched, values }) => (
