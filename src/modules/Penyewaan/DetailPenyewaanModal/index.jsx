@@ -50,7 +50,6 @@ function DetailPenyewaanModal({
   })
   const classes = useStyles()
 
-  console.log(state?.bookingData?.status_bayar)
   return (
     <>
       <CustomModal
@@ -397,11 +396,15 @@ function DetailPenyewaanModal({
                           <Typography
                             className={`${classes.infoBoxDesc} ${get(
                               classes,
-                              state?.bookingData?.status_bayar,
+                              state?.bookingData?.status_previous,
                               '',
                             )}`}
                           >
-                            {BOOKING_PAYMENT_STATUS_LABEL_MAPPING[state?.bookingData?.status_bayar]}
+                            {
+                              BOOKING_PAYMENT_STATUS_LABEL_MAPPING[
+                                state?.bookingData?.status_previous
+                              ]
+                            }
                           </Typography>
                         </Box>
                       </Box>
