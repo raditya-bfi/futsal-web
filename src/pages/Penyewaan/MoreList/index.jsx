@@ -1,4 +1,4 @@
-import { NavigateBeforeRounded, Search } from '@mui/icons-material'
+import { NavigateBeforeRounded } from '@mui/icons-material'
 import { Box, Button, IconButton, Typography } from '@mui/material'
 import { get } from 'lodash-es'
 import moment from 'moment'
@@ -129,7 +129,7 @@ function MoreListPage() {
                   handler?.handleSearchButton()
                 }}
               >
-                <Search />
+                Cari
               </Button>
             </Box>
             <Box className={classes.table}>
