@@ -147,6 +147,9 @@ const style = makeStyles((theme) => ({
   canceled: {
     color: colors.Vermilion,
   },
+  canceled_admin: {
+    color: colors.White,
+  },
   dateInfo: {
     fontSize: fontSize[20],
     fontWeight: 400,

@@ -99,7 +99,7 @@ function CustomSelect({
         renderValue={generateValue(options, placeholder, keyValue, isOptionObject)}
         required={required}
       >
-        {/* {placeholder && (
+        {placeholder && (
           <MenuItem
             value=''
             className={`${classes.menuItem} ${classes.menuItemPlaceholder}`}
@@ -107,7 +107,7 @@ function CustomSelect({
           >
             {placeholder}
           </MenuItem>
-        )} */}
+        )}
         {allowSearch && (
           <MenuItem
             autoFocus={false}

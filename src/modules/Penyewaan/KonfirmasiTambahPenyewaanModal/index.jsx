@@ -25,7 +25,7 @@ function KonfirmasiTambahPenyewaanModal({ handleAdd, onClose, open, summaryBooki
       modalBorderRadius='10px'
       width='1041px'
     >
-      <CustomModal.Header onClose={onClose}>
+      <CustomModal.Header onClose={onClose} closeButton={false}>
         <HelpOutline className={classes.modalHeaderIcon} />
         <CustomModal.HeaderTitle size={36}>
           Apakah anda yakin bahwa informasi penyewaan telah sesuai?

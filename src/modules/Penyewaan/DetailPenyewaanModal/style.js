@@ -174,13 +174,16 @@ const style = makeStyles(() => ({
     lineHeight: '24.2px',
   },
   paid: {
-    color: colors.Malachite,
+    color: `${colors.Malachite} !important`,
   },
   waiting: {
-    color: colors.Turbo,
+    color: `${colors.Turbo} !important`,
   },
   canceled: {
-    color: colors.Vermilion,
+    color: `${colors.Vermilion} !important`,
+  },
+  canceled_admin: {
+    color: colors.White,
   },
   infoWrapper: {
     display: 'flex',
@@ -268,6 +271,24 @@ const style = makeStyles(() => ({
     fontWeight: 500,
     lineHeight: '19.36px',
     color: colors.White,
+  },
+  option: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    '& > *:not(:last-child)': {
+      marginRight: '75px',
+    },
+  },
+  cancelButton: {
+    fontSize: fontSize[20],
+    fontWeight: 500,
+    lineHeight: '24.2px',
+    color: colors.Turbo,
+    cursor: 'pointer',
+    border: `1px solid ${colors.Turbo}`,
+    borderRadius: '10px',
+    padding: '16px 30px',
   },
 }))
 

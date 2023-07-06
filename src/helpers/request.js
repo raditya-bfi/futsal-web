@@ -150,3 +150,10 @@ export const handleAddBooking = (payload = {}) => {
     data,
   })
 }
+
+export const handleCancelBooking = (bookingId) =>
+  Axios({
+    MAIN_URL: apiUrl,
+    url: `/bookings/cancel/${bookingId}`,
+    method: 'PUT',
+  })
