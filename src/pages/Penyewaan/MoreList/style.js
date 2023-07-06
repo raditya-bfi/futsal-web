@@ -100,19 +100,22 @@ const style = makeStyles((theme) => ({
     color: colors.White,
   },
   buttonSearch: {
-    backgroundColor: colors.TricornBlack,
-    border: `1px solid ${colors.White}`,
+    backgroundColor: colors.ForestGreen,
+    border: `1px solid ${colors.ForestGreen}`,
     borderRadius: '5px',
+    fontSize: fontSize[16],
+    fontWeight: 500,
+    color: colors.White,
 
     '&:focus': {
-      backgroundColor: colors.TricornBlack,
-      border: `1px solid ${colors.White}`,
+      backgroundColor: colors.ForestGreen,
+      border: `1px solid ${colors.ForestGreen}`,
       borderRadius: '5px',
     },
 
     '&:hover': {
-      backgroundColor: colors.TricornBlack,
-      border: `1px solid ${colors.White}`,
+      backgroundColor: colors.ForestGreen,
+      border: `1px solid ${colors.ForestGreen}`,
       borderRadius: '5px',
     },
 
