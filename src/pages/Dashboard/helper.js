@@ -253,7 +253,6 @@ export const getHorizontalChartData = (
     laporanWaktuSewaData.forEach((data) => {
       Object.keys(data).forEach((key) => {
         if (key !== 'total_time_rent') {
-          totalJam.total_all += data?.total_time_rent || 0
           // ? : iterate by month
           if (data[key] && data[key].length > 0) {
             data[key].forEach((monthlyData) => {
@@ -262,6 +261,11 @@ export const getHorizontalChartData = (
                 `${DASHBOARD_RENT_TIME_MAPPING[monthlyData?.time]}`,
                 get(totalJam.monthly, `${DASHBOARD_RENT_TIME_MAPPING[monthlyData?.time]}`, 0) +
                   get(monthlyData, 'total', 0),
+              )
+              set(
+                totalJam,
+                'total_all',
+                get(totalJam, 'total_all', 0) + get(monthlyData, 'total', 0),
               )
             })
           }
