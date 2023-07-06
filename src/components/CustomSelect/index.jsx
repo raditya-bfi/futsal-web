@@ -33,6 +33,7 @@ function CustomSelect({
   keyValue,
   label,
   labelSize,
+  multiple,
   name,
   options,
   placeholder,
@@ -96,12 +97,16 @@ function CustomSelect({
         }}
         onChange={handleChange}
         value={value}
+        multiple={multiple}
         renderValue={generateValue(options, placeholder, keyValue, isOptionObject)}
         required={required}
       >
         {placeholder && (
           <MenuItem
             value=''
+            classes={{
+              selected: classes.menuItemSelected,
+            }}
             className={`${classes.menuItem} ${classes.menuItemPlaceholder}`}
             selected
           >
@@ -110,6 +115,9 @@ function CustomSelect({
         )}
         {allowSearch && (
           <MenuItem
+            classes={{
+              selected: classes.menuItemSelected,
+            }}
             autoFocus={false}
             onKeyDown={(e) => e.stopPropagation()}
             className={classes.searchFieldContainer}
@@ -140,6 +148,9 @@ function CustomSelect({
         )}
         {state.searchOptions?.map((option) => (
           <MenuItem
+            classes={{
+              selected: classes.menuItemSelected,
+            }}
             onKeyDown={(e) => e.stopPropagation()}
             key={option.key}
             value={option.value}
@@ -167,6 +178,7 @@ CustomSelect.defaultProps = {
   keyValue: 'value',
   label: '',
   labelSize: fontSize[16],
+  multiple: false,
   name: '',
   options: [],
   placeholder: undefined,
@@ -189,6 +201,7 @@ CustomSelect.propTypes = {
   keyValue: PropTypes.oneOf(['key', 'value']),
   label: PropTypes.string,
   labelSize: PropTypes.string,
+  multiple: PropTypes.bool,
   name: PropTypes.string,
   options: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})])),
   placeholder: PropTypes.string,

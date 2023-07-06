@@ -39,6 +39,10 @@ const useCustom = ({ stateLocation }) => {
     })
   }
 
+  const handleAddLapangan = () => {
+    navigate('/lapangan/add')
+  }
+
   const handleOpenDetailModal = (userId) => {
     setOpenDetailModal(true)
     setSelectedFieldId(userId)
@@ -80,6 +84,7 @@ const useCustom = ({ stateLocation }) => {
       fieldSliderData,
     },
     handler: {
+      handleAddLapangan,
       handleCloseDetailModal,
       handleCloseSnackbar,
       handleCloseSnackbarState,

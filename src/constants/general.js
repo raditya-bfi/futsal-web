@@ -120,6 +120,7 @@ export const MENU_KEY = {
   ATURAN_PENYEWAAN: '/penyewaan/aturan',
   LIST_PENYEWAAN: '/penyewaan/list',
   LAPANGAN: '/lapangan',
+  ADD_LAPANGAN: '/lapangan/add',
   SUNTING_LAPANGAN: '/lapangan/edit',
   OPERATOR: '/operator',
   ARSIP_OPERATOR: '/operator/archived',
@@ -134,6 +135,7 @@ export const ADMIN_MENUS = [
   MENU_KEY.ATURAN_PENYEWAAN,
   MENU_KEY.LIST_PENYEWAAN,
   MENU_KEY.LAPANGAN,
+  MENU_KEY.ADD_LAPANGAN,
   MENU_KEY.SUNTING_LAPANGAN,
   MENU_KEY.OPERATOR,
   MENU_KEY.ARSIP_OPERATOR,
@@ -147,6 +149,7 @@ export const OPERATOR_MENUS = [
   MENU_KEY.ATURAN_PENYEWAAN,
   MENU_KEY.LIST_PENYEWAAN,
   MENU_KEY.LAPANGAN,
+  MENU_KEY.ADD_LAPANGAN,
   MENU_KEY.FORBIDDEN,
   MENU_KEY.NOTFOUND,
 ]
@@ -180,5 +183,48 @@ export const GENDER_OPTIONS = [
     key: 'PR',
     value: 'PR',
     label: 'Wanita',
+  },
+]
+
+export const DAYS_ACTIVE_OPTIONS = [
+  {
+    key: 'all',
+    value: 'all',
+    label: 'Pilih Semua',
+  },
+  {
+    key: 'Senin',
+    value: 1,
+    label: 'Senin',
+  },
+  {
+    key: 'Selasa',
+    value: 2,
+    label: 'Selasa',
+  },
+  {
+    key: 'Rabu',
+    value: 3,
+    label: 'Rabu',
+  },
+  {
+    key: 'Kamis',
+    value: 4,
+    label: 'Kamis',
+  },
+  {
+    key: 'Jumat',
+    value: 5,
+    label: 'Jumat',
+  },
+  {
+    key: 'Sabtu',
+    value: 7,
+    label: 'Sabtu',
+  },
+  {
+    key: 'Minggu',
+    value: 6,
+    label: 'Minggu',
   },
 ]

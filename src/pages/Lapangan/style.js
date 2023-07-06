@@ -37,6 +37,29 @@ const style = makeStyles((theme) => ({
     border: `3px solid ${colors.White}`,
     padding: '65px 60px 0px 60px',
   },
+  navigation: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+    height: 'max-content',
+    width: '8%',
+
+    '& > div:not(:last-child)': {
+      marginBottom: '15px',
+    },
+  },
+  addButton: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '54.02px',
+    height: '55px',
+    backgroundColor: colors.ForestGreen,
+    border: `1px solid ${colors.White}`,
+    borderRadius: '5px',
+    color: colors.White,
+    cursor: 'pointer',
+  },
   contentInfo: {
     marginBottom: '52px',
   },

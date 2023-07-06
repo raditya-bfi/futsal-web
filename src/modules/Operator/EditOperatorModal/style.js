@@ -147,6 +147,10 @@ const style = makeStyles(() => ({
     height: 'calc(10% - 18px)',
     marginTop: '18px',
   },
+  select: {
+    width: '100%',
+    height: '100%',
+  },
 }))
 
 export default style

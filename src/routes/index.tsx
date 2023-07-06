@@ -6,6 +6,7 @@ const AddPenyewaanPage = loadable(() => import('~/pages/Penyewaan/TambahPenyewaa
 const AturanPenyewaanPage = loadable(() => import('~/pages/Penyewaan/BookingRules'))
 const ListPenyewaanPage = loadable(() => import('~/pages/Penyewaan/MoreList'))
 const LapanganPage = loadable(() => import('~/pages/Lapangan'))
+const AddLapanganPage = loadable(() => import('~/pages/Lapangan/TambahLapangan'))
 const SuntingLapanganPage = loadable(() => import('~/pages/Lapangan/SuntingLapangan'))
 const OperatorPage = loadable(() => import('~/pages/Operator'))
 const ArchivedPage = loadable(() => import('~/pages/Archived'))
@@ -66,6 +67,15 @@ export default [
     component: <LapanganPage />,
     exact: true,
     withHeader: true,
+  },
+  {
+    id: 'lapangan-add',
+    title: 'Halaman Tambah Lapangan',
+    path: '/lapangan/add',
+    defaultPath: '/lapangan/add',
+    component: <AddLapanganPage />,
+    exact: true,
+    withHeader: false,
   },
   {
     id: 'lapangan-edit',

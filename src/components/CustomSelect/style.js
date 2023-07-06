@@ -84,7 +84,7 @@ const style = makeStyles((theme) => ({
     borderColor: ({ isError }) => (isError ? colors.AlizarinCrimson : colors.White),
   },
   helperText: {
-    fontSize: fontSize[10],
+    fontSize: fontSize[12],
     fontWeight: theme.typography.fontWeightMedium,
     color: colors.AlizarinCrimson,
     position: 'absolute',
@@ -107,6 +107,19 @@ const style = makeStyles((theme) => ({
     whiteSpace: 'normal',
     '&:hover ': {
       backgroundColor: `${colors.TricornBlack} !important`,
+    },
+    '& .Mui-selected': {
+      backgroundColor: colors.DustyGrey,
+    },
+    color: colors.White,
+  },
+  menuItemSelected: {
+    padding: 12,
+    fontSize: fontSize[16],
+    whiteSpace: 'normal',
+    backgroundColor: `${colors.DustyGrey} !important`,
+    '&:hover ': {
+      backgroundColor: `${colors.DustyGrey} !important`,
     },
     color: colors.White,
   },

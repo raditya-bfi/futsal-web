@@ -157,3 +157,12 @@ export const handleCancelBooking = (bookingId) =>
     url: `/bookings/cancel/${bookingId}`,
     method: 'PUT',
   })
+
+export const handleAddField = (data = {}) =>
+  Axios({
+    MAIN_URL: apiUrl,
+    url: `fields`,
+    method: 'POST',
+    data,
+    isFormData: true,
+  })

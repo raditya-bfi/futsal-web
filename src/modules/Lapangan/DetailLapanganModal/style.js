@@ -85,7 +85,6 @@ const style = makeStyles((theme) => ({
   },
   descLabelWrapper: {
     display: 'flex',
-    justifyContent: 'space-between',
     alignItems: 'flex-end',
     height: '100%',
     width: '100%',
@@ -100,10 +99,11 @@ const style = makeStyles((theme) => ({
     textAlign: 'justify',
   },
   descLabelInfo: {
-    fontSize: fontSize[12],
+    fontSize: fontSize[14],
     fontWeight: 300,
     lineHeight: '19.36px',
     color: colors.White,
+    marginLeft: '24px',
   },
 }))
 
