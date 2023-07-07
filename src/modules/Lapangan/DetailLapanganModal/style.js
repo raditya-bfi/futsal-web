@@ -33,6 +33,11 @@ const style = makeStyles((theme) => ({
     filter: 'drop-shadow(0px 4px 7px rgba(0, 0, 0, 0.2))',
     borderRadius: '5px',
     border: `1px solid ${colors.White}`,
+
+    '& > div > div > div': {
+      minWidth: '506px',
+      borderRadius: '5px',
+    },
   },
   fieldMain: {
     marginLeft: '24px',
