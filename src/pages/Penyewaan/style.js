@@ -188,7 +188,7 @@ const style = makeStyles((theme) => ({
   },
   fieldBookingsWrapper: {
     height: '100%',
-    width: 'max-content',
+    width: '100%',
     maxWidth: '100%',
     overflowX: 'auto',
     display: 'flex',
