@@ -6,9 +6,10 @@ import { Helmet } from 'react-helmet-async'
 import Button from '~/components/Button'
 import CustomCheckBox from '~/components/CustomCheckbox'
 import CustomField from '~/components/CustomField'
+import CustomSelect from '~/components/CustomSelect'
 import LapanganFieldPhoto from '~/components/LapanganFieldPhoto'
 import Snackbar from '~/components/Snackbar'
-import { removeSeconds } from '~/utils/string'
+import { DAYS_ACTIVE_OPTIONS } from '~/constants/general'
 
 import useCustom from './hooks'
 import { EditFieldSchema, EditFieldSchemaOption } from './schema'
@@ -54,7 +55,7 @@ function SuntingLapanganPage() {
           validateOnBlur={false}
           enableReinitialize
         >
-          {({ errors, handleSubmit, isSubmitting, touched, values }) => (
+          {({ errors, handleSubmit, isSubmitting, setFieldValue, touched, values }) => (
             <Form>
               <Box className={classes.pageContent}>
                 <Box className={classes.content}>
@@ -107,29 +108,55 @@ function SuntingLapanganPage() {
                                 <Typography className={classes.inpuTitle}>
                                   Waktu Buka Sewa
                                 </Typography>
-                                <Typography className={classes.inputValue}>
-                                  {removeSeconds(data?.fieldData?.booking_open)}
-                                </Typography>
+                                <Field
+                                  className={classes.numberInput}
+                                  name='booking_open'
+                                  type='text'
+                                  value={values?.booking_open}
+                                  required
+                                  error={errors?.booking_open}
+                                  touch={touched?.booking_open}
+                                  as={CustomField}
+                                />
                               </Box>
                               <Box>
                                 <Typography className={classes.inpuTitle}>
                                   Waktu Tutup Sewa
                                 </Typography>
-                                <Typography className={classes.inputValue}>
-                                  {removeSeconds(data?.fieldData?.booking_close)}
-                                </Typography>
+                                <Field
+                                  className={classes.numberInput}
+                                  name='booking_close'
+                                  type='text'
+                                  value={values?.booking_close}
+                                  required
+                                  error={errors?.booking_close}
+                                  touch={touched?.booking_close}
+                                  as={CustomField}
+                                />
                               </Box>
-                              <Box>
+                              <Box sx={{ width: '400px' }}>
                                 <Typography className={classes.inpuTitle}>
                                   Hari Buka Sewa
                                 </Typography>
-                                <Typography className={classes.inputValue}>
-                                  {data?.fieldData?.days_active &&
-                                    data?.fieldData?.days_active.length > 0 &&
-                                    data?.fieldData?.days_active
-                                      .map((day) => day.day_name)
-                                      .join(', ')}
-                                </Typography>
+                                <Field
+                                  className={classes.select}
+                                  isFormControlFullWidth
+                                  isFullWidth
+                                  handleChange={(e) => {
+                                    const selectedData = handler?.handleMultipleDays(e)
+                                    setFieldValue('daysActive', selectedData)
+                                  }}
+                                  options={DAYS_ACTIVE_OPTIONS}
+                                  multiple
+                                  name='daysActive'
+                                  label='Hari Buka Sewa'
+                                  value={state.selectedMultipleDays || []}
+                                  required
+                                  error={errors?.daysActive}
+                                  helperText={errors?.daysActive}
+                                  touch={touched?.daysActive}
+                                  as={CustomSelect}
+                                />
                               </Box>
                             </Box>
                             <Box className={classes.contentInfo}>

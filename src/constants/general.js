@@ -218,12 +218,12 @@ export const DAYS_ACTIVE_OPTIONS = [
   },
   {
     key: 'Sabtu',
-    value: 7,
+    value: 6,
     label: 'Sabtu',
   },
   {
     key: 'Minggu',
-    value: 6,
+    value: 7,
     label: 'Minggu',
   },
 ]
@@ -234,6 +234,6 @@ export const DAYS_ACTIVE_MAPPING = {
   Rabu: 3,
   Kamis: 4,
   Jumat: 5,
-  Sabtu: 7,
-  Minggu: 6,
+  Sabtu: 6,
+  Minggu: 7,
 }

@@ -22,10 +22,6 @@ const style = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
   },
-  option: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-  },
   fieldMainInfo: {
     height: 'max-content',
     width: '100%',
@@ -104,6 +100,23 @@ const style = makeStyles((theme) => ({
     lineHeight: '19.36px',
     color: colors.White,
     marginLeft: '24px',
+  },
+  option: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    marginTop: '40px',
+
+    '& > *:not(:last-child)': {
+      marginRight: '75px',
+    },
+  },
+  cancelButton: {
+    fontSize: fontSize[20],
+    fontWeight: 500,
+    lineHeight: '24.2px',
+    color: colors.Vermilion,
+    cursor: 'pointer',
   },
 }))
 

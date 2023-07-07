@@ -2,8 +2,10 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 
+import { difference, findIndex, sortBy } from 'lodash-es'
 import queryString from 'query-string'
 
+import { DAYS_ACTIVE_MAPPING, DAYS_ACTIVE_OPTIONS } from '~/constants/general'
 import {
   getDetailField,
   handleAddFieldPhoto,
@@ -36,10 +38,16 @@ const useCustom = () => {
   const [initialValue, setInitialValue] = useState({
     name: '',
     description: '',
+    booking_open: '',
+    booking_close: '',
     harga: 0,
     harga_malam: 0,
     waktu_mulai_malam: '',
+    daysActive: [],
   })
+  // Hari Buka Sewa
+  const [selectedMultipleDays, setSelectedMultipleDays] = useState([])
+  const [selectedAll, setSelectedAll] = useState(false)
 
   const handleCheckBox = (event) => {
     setIsFlagActive(event.target.checked)
@@ -54,6 +62,31 @@ const useCustom = () => {
       ...prev,
       open: false,
     }))
+  }
+
+  const handleMultipleDays = (e) => {
+    const lengthOfValueWithoutAll = e.target.value.filter((val) => val !== 'all').length
+    const lengthOfOptionWithoutAll = DAYS_ACTIVE_OPTIONS.filter((val) => val.value !== 'all').length
+    if (
+      !selectedAll &&
+      (e.target.value.indexOf('all') >= 0 || lengthOfValueWithoutAll === lengthOfOptionWithoutAll)
+    ) {
+      // select all
+      setSelectedAll(true)
+      const datas = DAYS_ACTIVE_OPTIONS.map((option) => option.value)
+      setSelectedMultipleDays(datas)
+      return datas
+    }
+    if (selectedAll && lengthOfValueWithoutAll === lengthOfOptionWithoutAll) {
+      // deselect all
+      setSelectedAll(false)
+      setSelectedMultipleDays([])
+      return []
+    }
+    // select one by one
+    setSelectedAll(false)
+    setSelectedMultipleDays(e.target.value.filter((val) => val !== 'all'))
+    return e.target.value.filter((val) => val !== 'all')
   }
 
   const handleAddPhoto = useCallback(
@@ -113,13 +146,31 @@ const useCustom = () => {
   const handleEdit = useCallback(
     async (values) => {
       await setIsLoading(true)
+      const newDaysActive = sortBy(values?.daysActive.filter((day) => day !== 'all'))
+      const oldDaysActive = []
+      fieldData?.days_active.forEach((day) => {
+        oldDaysActive.push(DAYS_ACTIVE_MAPPING[day?.day_name])
+      })
+      const deleteDays = []
+      const deletedDaysByUser = difference(oldDaysActive, newDaysActive)
+      fieldData?.days_active.forEach((day) => {
+        const isExist = findIndex(
+          deletedDaysByUser,
+          (deletedDay) => deletedDay === DAYS_ACTIVE_MAPPING[day?.day_name],
+        )
+        if (isExist >= 0) {
+          deleteDays.push(day?.days_active_id)
+        }
+      })
+
       const payload = {
         name: values?.name,
         description: values?.description,
         harga: values?.harga,
-        booking_close: fieldData?.booking_close,
-        booking_open: fieldData?.booking_open,
-        daysActive: fieldData?.days_active,
+        booking_close: removeSeconds(values?.booking_close),
+        booking_open: removeSeconds(values?.booking_open),
+        addDays: difference(newDaysActive, oldDaysActive),
+        deleteDays,
       }
 
       // ? : add harga malam and waktu_mulai_malamwhen flag is active
@@ -166,8 +217,19 @@ const useCustom = () => {
         await setIsNeedRefetch(true)
         await setIsLoading(false)
       }
+      await setSelectedAll(false)
+      await setSelectedMultipleDays([])
     },
-    [queryParams?.id, fieldData, isFlagActive, setAlert, setIsNeedRefetch, setIsLoading],
+    [
+      queryParams?.id,
+      fieldData,
+      isFlagActive,
+      setAlert,
+      setIsNeedRefetch,
+      setIsLoading,
+      setSelectedAll,
+      setSelectedMultipleDays,
+    ],
   )
 
   const fetchFieldData = async () => {
@@ -179,13 +241,24 @@ const useCustom = () => {
     if (response && response.status === 200) {
       const data = response?.data?.data || {}
       setFieldData(data)
+      const currentDays = []
+      data?.days_active.forEach((day) => {
+        currentDays.push(DAYS_ACTIVE_MAPPING[day?.day_name])
+      })
       setInitialValue({
         name: data?.name,
         description: data?.description,
+        booking_open: removeSeconds(data?.booking_open),
+        booking_close: removeSeconds(data?.booking_close),
         harga: data?.harga,
         harga_malam: data?.harga_malam,
         waktu_mulai_malam: removeSeconds(data?.waktu_mulai_malam),
+        daysActive: currentDays,
       })
+      if (currentDays.length === 7) {
+        setSelectedAll(true)
+      }
+      setSelectedMultipleDays(currentDays)
     }
     await setIsLoading(false)
   }
@@ -214,6 +287,7 @@ const useCustom = () => {
       handleCheckBox,
       handleCloseSnackbar,
       handleEdit,
+      handleMultipleDays,
       handleRemovePhoto,
       setAlert,
     },
@@ -224,6 +298,8 @@ const useCustom = () => {
       alert,
       initialValue,
       isFlagActive,
+      selectedAll,
+      selectedMultipleDays,
     },
   }
 }

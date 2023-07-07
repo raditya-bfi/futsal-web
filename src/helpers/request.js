@@ -166,3 +166,10 @@ export const handleAddField = (data = {}) =>
     data,
     isFormData: true,
   })
+
+export const handleDeleteField = (fieldId) =>
+  Axios({
+    MAIN_URL: apiUrl,
+    url: `fields/${fieldId}`,
+    method: 'DELETE',
+  })

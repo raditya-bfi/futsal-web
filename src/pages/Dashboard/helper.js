@@ -1,5 +1,5 @@
 import ChartDataLabels from 'chartjs-plugin-datalabels'
-import { first, get, orderBy, set } from 'lodash-es'
+import { get, orderBy, set } from 'lodash-es'
 
 import {
   DASHBOARD_MENU_TAB_KEY,
@@ -9,7 +9,7 @@ import {
 import { colors } from '~/styles/theme'
 import { thousandSeparator } from '~/utils/number'
 
-export const getSummary = (laporanPendapatanData = [], laporanWaktuSewaData = []) => {
+export const getSummary = (currentDate, laporanPendapatanData = [], laporanWaktuSewaData = []) => {
   const res = {
     pendapatan: 0,
     jam: 0,
@@ -17,22 +17,25 @@ export const getSummary = (laporanPendapatanData = [], laporanWaktuSewaData = []
 
   // ? : Pendapatan
   if (laporanPendapatanData && laporanPendapatanData?.length > 0) {
-    const latestMonthData = first(laporanPendapatanData)
-    Object.keys(latestMonthData).forEach((key) => {
-      res.pendapatan = latestMonthData[key]?.total_all || 0
+    laporanPendapatanData.forEach((pendapatanData) => {
+      Object.keys(pendapatanData).forEach((key) => {
+        if (key === currentDate) {
+          res.pendapatan = pendapatanData[key]?.total_all || 0
+        }
+      })
     })
   }
 
   // ? : Jam
   if (laporanWaktuSewaData && laporanWaktuSewaData?.length > 0) {
-    const latestMonthData = first(laporanWaktuSewaData)
-    const latestMonthName = Object.keys(latestMonthData)[0]
-    Object.keys(latestMonthData).forEach((key) => {
-      if (key === latestMonthName) {
-        latestMonthData[key].forEach((scheduleData) => {
-          res.jam += scheduleData.total
-        })
-      }
+    laporanWaktuSewaData.forEach((waktuData) => {
+      Object.keys(waktuData).forEach((key) => {
+        if (key === currentDate) {
+          waktuData[key].forEach((scheduleData) => {
+            res.jam += scheduleData.total
+          })
+        }
+      })
     })
   }
 
