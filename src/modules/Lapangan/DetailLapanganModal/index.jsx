@@ -55,7 +55,7 @@ function DetailLapanganModal({
           />
           <CustomModal.HeaderTitle size={36}>
             {truncate(state?.fieldData?.name, {
-              length: 20,
+              length: 25,
               omission: '...',
             })}
           </CustomModal.HeaderTitle>
