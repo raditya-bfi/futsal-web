@@ -1,7 +1,13 @@
 import { useLocation } from 'react-router-dom'
 
-import { Circle, DarkModeOutlined, InfoOutlined, LightModeOutlined } from '@mui/icons-material'
-import { Box, Typography } from '@mui/material'
+import {
+  AddRounded,
+  Circle,
+  DarkModeOutlined,
+  InfoOutlined,
+  LightModeOutlined,
+} from '@mui/icons-material'
+import { Box, Tooltip, Typography } from '@mui/material'
 import { Helmet } from 'react-helmet-async'
 
 import Snackbar from '~/components/Snackbar'
@@ -132,6 +138,13 @@ function LapanganPage() {
                 </Box>
               </Box>
             </Box>
+          </Box>
+          <Box className={classes.navigation}>
+            <Tooltip title='Tambah Lapangan' placement='left'>
+              <Box className={classes.addButton} onClick={() => handler.handleAddLapangan()}>
+                <AddRounded />
+              </Box>
+            </Tooltip>
           </Box>
         </Box>
       </Box>

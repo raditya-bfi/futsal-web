@@ -70,7 +70,7 @@ const useCustom = ({ open, bookingId, setIsNeedRefetch }) => {
       )
       await setIsLoading(false)
     }
-  }, [bookingId])
+  }, [bookingId, setIsLoading, setOpenConfirmModal, setIsNeedRefetch, setRefecthDetail])
 
   const fetchBookingData = async () => {
     await setIsLoading(true)

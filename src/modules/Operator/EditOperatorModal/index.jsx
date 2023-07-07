@@ -1,4 +1,3 @@
-import { FemaleRounded, MaleRounded } from '@mui/icons-material'
 import { Box } from '@mui/material'
 import { Formik, Form, Field } from 'formik'
 
@@ -8,12 +7,15 @@ import {
   FieldEmailIcon,
   FieldAddressIcon,
   FieldKtpIcon,
+  FieldGenderIcon,
 } from '~/assets/svg'
 import Button from '~/components/Button'
 import CustomField from '~/components/CustomField'
 import CustomModal from '~/components/CustomModal'
+import CustomSelect from '~/components/CustomSelect'
 import OperatorKTP from '~/components/OperatorKTP'
 import OperatorPhoto from '~/components/OperatorPhoto'
+import { GENDER_OPTIONS } from '~/constants/general'
 
 import useCustom from './hooks'
 import { EditOperatorSchema } from './schema'
@@ -84,7 +86,7 @@ function EditOperatorModal({
           validateOnBlur={false}
           enableReinitialize
         >
-          {({ errors, handleSubmit, isSubmitting, touched, values }) => (
+          {({ errors, handleSubmit, isSubmitting, setFieldValue, touched, values }) => (
             <Form>
               <Box className={classes.addModal}>
                 <Box className={classes.userPhoto}>
@@ -112,7 +114,7 @@ function EditOperatorModal({
                       as={CustomField}
                     />
                     <Box className={classes.genderWrapper}>
-                      <div
+                      {/* <div
                         role='presentation'
                         onClick={() => {
                           handler?.handleChangeGender('LK')
@@ -135,9 +137,32 @@ function EditOperatorModal({
                             classes.femaleIcon
                           }`}
                         />
-                      </div>
+                      </div> */}
                     </Box>
                     <Box className={classes.inputContainer}>
+                      <Box className={classes.input}>
+                        <img src={FieldGenderIcon} alt='edit-gender-field-icon' />
+                        <Field
+                          className={classes.select}
+                          isFormControlFullWidth
+                          isFullWidth
+                          handleChange={(e) => {
+                            setFieldValue('gender', e.target.value)
+                            handler.handleChangeGender(e.target.value)
+                          }}
+                          options={GENDER_OPTIONS}
+                          name='gender'
+                          label='Masukkan Jenis Kelamin'
+                          placeholder='Masukkan Jenis Kelamin'
+                          value={state.selectedGender || ''}
+                          required
+                          error={errors?.gender}
+                          helperText={errors?.gender}
+                          touch={touched?.gender}
+                          variant='standard'
+                          as={CustomSelect}
+                        />
+                      </Box>
                       <Box className={classes.input}>
                         <img src={FieldPhoneIcon} alt='edit-user-phone-field-icon' />
                         <Field
