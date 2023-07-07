@@ -149,7 +149,7 @@ function TambahLapanganPage() {
                                   options={DAYS_ACTIVE_OPTIONS}
                                   multiple
                                   name='daysActive'
-                                  label='Masukkan Jenis Kelamin'
+                                  label='Hari Buka Sewa'
                                   value={state.selectedMultipleDays || []}
                                   required
                                   error={errors?.daysActive}

@@ -79,7 +79,7 @@ const useCustom = () => {
 
   const handleEdit = useCallback(
     async (values) => {
-      // await setIsLoading(true)
+      await setIsLoading(true)
       let hariSewa = sortBy(values?.daysActive.filter((day) => day !== 'all'))
       hariSewa = hariSewa.join(',')
       const payload = {
@@ -144,7 +144,15 @@ const useCustom = () => {
       await setSelectedAll(false)
       await setSelectedMultipleDays([])
     },
-    [firstPhotos, secondPhotos, isFlagActive, setAlert, setIsLoading],
+    [
+      firstPhotos,
+      secondPhotos,
+      isFlagActive,
+      setAlert,
+      setIsLoading,
+      setSelectedAll,
+      setSelectedMultipleDays,
+    ],
   )
 
   return {

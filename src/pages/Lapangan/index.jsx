@@ -140,7 +140,7 @@ function LapanganPage() {
             </Box>
           </Box>
           <Box className={classes.navigation}>
-            <Tooltip title='Tambah Operator' placement='left'>
+            <Tooltip title='Tambah Lapangan' placement='left'>
               <Box className={classes.addButton} onClick={() => handler.handleAddLapangan()}>
                 <AddRounded />
               </Box>

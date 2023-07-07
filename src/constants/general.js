@@ -149,7 +149,6 @@ export const OPERATOR_MENUS = [
   MENU_KEY.ATURAN_PENYEWAAN,
   MENU_KEY.LIST_PENYEWAAN,
   MENU_KEY.LAPANGAN,
-  MENU_KEY.ADD_LAPANGAN,
   MENU_KEY.FORBIDDEN,
   MENU_KEY.NOTFOUND,
 ]
@@ -228,3 +227,13 @@ export const DAYS_ACTIVE_OPTIONS = [
     label: 'Minggu',
   },
 ]
+
+export const DAYS_ACTIVE_MAPPING = {
+  Senin: 1,
+  Selasa: 2,
+  Rabu: 3,
+  Kamis: 4,
+  Jumat: 5,
+  Sabtu: 7,
+  Minggu: 6,
+}
