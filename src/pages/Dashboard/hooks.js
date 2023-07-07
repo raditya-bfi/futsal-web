@@ -33,8 +33,8 @@ const useCustom = () => {
   }
 
   const summary = useMemo(
-    () => getSummary(laporanPendapatanData, laporanWaktuSewaData),
-    [laporanPendapatanData, laporanWaktuSewaData],
+    () => getSummary(locale?.date, laporanPendapatanData, laporanWaktuSewaData),
+    [locale?.date, laporanPendapatanData, laporanWaktuSewaData],
   )
 
   const horizontalChartData = useMemo(
