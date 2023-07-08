@@ -105,12 +105,27 @@ function DashboardPage() {
                 metric={data?.verticalChartData?.metric}
               />
             </Box>
-            <Box className={classes.horizontalChartWrapper}>
-              <HorizontalBarChart
-                chartData={data?.horizontalChartData?.data}
-                decimalPlaces={data?.horizontalChartData?.decimalPlaces}
-                metric={data?.horizontalChartData?.metric}
-              />
+            <Box className={classes.horizontalChartSection}>
+              <Box className={classes.horizontalChartWrapper}>
+                <HorizontalBarChart
+                  chartData={data?.horizontalChartData?.data}
+                  decimalPlaces={data?.horizontalChartData?.decimalPlaces}
+                  metric={data?.horizontalChartData?.metric}
+                />
+              </Box>
+              <Box className={classes.horizontalLegendWrapper}>
+                {data?.horizontalChartData?.data?.datasets &&
+                  data?.horizontalChartData?.data?.datasets.length > 0 &&
+                  data?.horizontalChartData?.data?.datasets.map((legendData) => (
+                    <Box className={classes.legendWrapper}>
+                      <Box
+                        className={classes.legendBox}
+                        sx={{ backgroundColor: legendData?.backgroundColor }}
+                      />
+                      <Typography className={classes.legendLabel}>{legendData?.label}</Typography>
+                    </Box>
+                  ))}
+              </Box>
             </Box>
           </Box>
         </Box>

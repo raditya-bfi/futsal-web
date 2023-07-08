@@ -1,6 +1,5 @@
 import { makeStyles } from '@mui/styles'
 
-import { DASHBOARD_MENU_TAB_KEY, DASHBOARD_MENU_TAB_VALUE } from '~/constants/general'
 import { colors, fontSize } from '~/styles/theme'
 
 const style = makeStyles((theme) => ({
@@ -132,13 +131,42 @@ const style = makeStyles((theme) => ({
     borderRadius: '10px',
     padding: '58px 66px',
   },
-  horizontalChartWrapper: {
-    height: ({ activeTab }) =>
-      activeTab === DASHBOARD_MENU_TAB_VALUE[DASHBOARD_MENU_TAB_KEY.PENDAPATAN] ? '300px' : '430px',
+  horizontalChartSection: {
+    display: 'flex',
+    flexDirection: 'column',
     width: '100%',
+    height: 'max-content',
     border: `1px solid ${colors.White}`,
     borderRadius: '10px',
     padding: '58px 66px',
+  },
+  horizontalChartWrapper: {
+    height: '150px',
+    width: '100%',
+    marginBottom: '15px',
+  },
+  horizontalLegendWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+    '& > div:not(:last-child)': {
+      marginBottom: '11px',
+    },
+    padding: `0px 25px`,
+  },
+  legendWrapper: {
+    display: 'flex',
+    width: '100%',
+  },
+  legendBox: {
+    width: '24px',
+    height: '24px',
+    marginRight: '28px',
+  },
+  legendLabel: {
+    fontSize: fontSize[24],
+    fontWeight: 500,
+    color: colors.White,
   },
 }))
 
