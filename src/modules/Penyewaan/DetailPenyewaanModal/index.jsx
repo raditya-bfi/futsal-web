@@ -453,7 +453,7 @@ function DetailPenyewaanModal({
                     className={classes.cancelButton}
                     onClick={() => handler?.handleOpenConfirmModal()}
                   >
-                    Batalkan sebagai Admin
+                    Batalkan penyewaan
                   </Typography>
                 </Box>
               )}
