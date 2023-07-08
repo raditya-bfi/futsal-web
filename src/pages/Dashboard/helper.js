@@ -172,14 +172,16 @@ export const getHorizontalChartData = (
       total_night: 0,
     }
 
+    // ? : Pendapatan
     if (laporanPendapatanData && laporanPendapatanData?.length > 0) {
-      laporanPendapatanData.forEach((data) => {
-        Object.keys(data).forEach((key) => {
-          // ? : iterate by month
-          totalPendapatan.total_admin += data[key]?.total_admin || 0
-          totalPendapatan.total_all += data[key]?.total_all || 0
-          totalPendapatan.total_day += data[key]?.total_day || 0
-          totalPendapatan.total_night += data[key]?.total_night || 0
+      laporanPendapatanData.forEach((pendapatanData) => {
+        Object.keys(pendapatanData).forEach((key) => {
+          if (key === currentDate) {
+            totalPendapatan.total_admin += pendapatanData[key]?.total_admin || 0
+            totalPendapatan.total_all += pendapatanData[key]?.total_all || 0
+            totalPendapatan.total_day += pendapatanData[key]?.total_day || 0
+            totalPendapatan.total_night += pendapatanData[key]?.total_night || 0
+          }
         })
       })
     }
@@ -252,26 +254,24 @@ export const getHorizontalChartData = (
     },
   }
 
+  // ? : Jam
   if (laporanWaktuSewaData && laporanWaktuSewaData?.length > 0) {
-    laporanWaktuSewaData.forEach((data) => {
-      Object.keys(data).forEach((key) => {
-        if (key !== 'total_time_rent') {
-          // ? : iterate by month
-          if (data[key] && data[key].length > 0) {
-            data[key].forEach((monthlyData) => {
-              set(
-                totalJam.monthly,
-                `${DASHBOARD_RENT_TIME_MAPPING[monthlyData?.time]}`,
-                get(totalJam.monthly, `${DASHBOARD_RENT_TIME_MAPPING[monthlyData?.time]}`, 0) +
-                  get(monthlyData, 'total', 0),
-              )
-              set(
-                totalJam,
-                'total_all',
-                get(totalJam, 'total_all', 0) + get(monthlyData, 'total', 0),
-              )
-            })
-          }
+    laporanWaktuSewaData.forEach((waktuData) => {
+      Object.keys(waktuData).forEach((key) => {
+        if (key === currentDate) {
+          waktuData[key].forEach((scheduleData) => {
+            set(
+              totalJam.monthly,
+              `${DASHBOARD_RENT_TIME_MAPPING[scheduleData?.time]}`,
+              get(totalJam.monthly, `${DASHBOARD_RENT_TIME_MAPPING[scheduleData?.time]}`, 0) +
+                get(scheduleData, 'total', 0),
+            )
+            set(
+              totalJam,
+              'total_all',
+              get(totalJam, 'total_all', 0) + get(scheduleData, 'total', 0),
+            )
+          })
         }
       })
     })
