@@ -31,6 +31,7 @@ function HorizontalBarChart({ chartData, decimalPlaces }) {
         },
       },
       legend: {
+        display: false,
         position: 'bottom',
         align: 'start',
         labels: {
