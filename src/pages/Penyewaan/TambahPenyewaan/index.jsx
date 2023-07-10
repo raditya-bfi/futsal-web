@@ -19,6 +19,7 @@ import { ArrowTimeSeparator } from '~/assets/svg'
 import Button from '~/components/Button'
 import CustomSelect from '~/components/CustomSelect'
 import DatePicker from '~/components/DatePicker'
+import NotificationModal from '~/components/NotificationModal'
 import Snackbar from '~/components/Snackbar'
 import VerticalPhotoSlider from '~/components/VerticalPhotoSlider'
 import date from '~/config/date'
@@ -446,6 +447,11 @@ function TambahPenyewaanPage() {
         onClose={handler?.handleCloseConfirmModal}
         handleAdd={handler?.handleAddBookingField}
         summaryBookingData={state?.summaryBookingData}
+      />
+      <NotificationModal
+        open={state?.notificationModal?.open}
+        onClose={handler?.handleCloseNotificationModal}
+        notificationMessage={state?.notificationModal?.message}
       />
     </>
   )

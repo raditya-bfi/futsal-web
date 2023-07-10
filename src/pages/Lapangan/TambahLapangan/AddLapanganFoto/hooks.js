@@ -16,8 +16,6 @@ const useCustom = ({ maxFiles, setAlert, setFiles }) => {
         setAlert((prev) => ({
           ...prev,
           open: true,
-          title: '',
-          severity: 'error',
           message: 'Ukuran file melebihi 512kb',
         }))
       } else {

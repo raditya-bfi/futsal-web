@@ -99,7 +99,7 @@ function MoreListPage() {
                   minDate={moment('2023-06-01').format(date.daily.format)}
                   maxDate={moment().add(1, 'months').format(date.daily.format)}
                   handleDateChange={(value) =>
-                    handler?.selectedStartDate(value.format('YYYY-MM-DD'))
+                    handler?.setSelectedStartDate(value.format('YYYY-MM-DD'))
                   }
                   selectedDate={state.selectedStartDate}
                   width='100%'
