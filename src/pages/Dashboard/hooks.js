@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
 
-import { first } from 'lodash-es'
 import moment from 'moment'
 
 import date from '~/config/date'
@@ -109,9 +108,13 @@ const useCustom = () => {
 
   useEffect(() => {
     if (monthYearOptions && monthYearOptions.length > 0) {
-      setSelectedMonthYear(first(monthYearOptions).value)
+      const currentMonthYear = locale.date.replace('Agu', 'Agt')
+      const currentMonthYearOption = monthYearOptions.find(
+        (monthYearOption) => monthYearOption.label === currentMonthYear,
+      )
+      setSelectedMonthYear(currentMonthYearOption.value)
     }
-  }, [monthYearOptions])
+  }, [monthYearOptions, locale])
 
   useEffect(() => {
     fetchLaporanData()
