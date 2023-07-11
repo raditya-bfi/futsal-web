@@ -1,5 +1,5 @@
 import ChartDataLabels from 'chartjs-plugin-datalabels'
-import { get, orderBy, set } from 'lodash-es'
+import { first, get, orderBy, set } from 'lodash-es'
 
 import {
   DASHBOARD_MENU_TAB_KEY,
@@ -25,12 +25,14 @@ export const getSummary = (currentDate, laporanPendapatanData = [], laporanWaktu
 
   // ? : Pendapatan
   if (laporanPendapatanData && laporanPendapatanData?.length > 0) {
+    const lastMonthName = Object.keys(first(laporanPendapatanData))[0]
+    res.pendapatan.currentMonth = lastMonthName
     laporanPendapatanData.forEach((pendapatanData) => {
       Object.keys(pendapatanData).forEach((key) => {
-        if (key === currentDate.replace('Agu', 'Agt')) {
-          res.pendapatan.value = pendapatanData[key]?.total_all || 0
-          res.pendapatan.currentMonth = key
-        }
+        // if (key === currentDate.replace('Agu', 'Agt')) {
+        //   res.pendapatan.currentMonth = key
+        // }
+        res.pendapatan.value += pendapatanData[key].total_all || 0
         res.pendapatan.lastMonth = key
       })
     })
@@ -38,16 +40,18 @@ export const getSummary = (currentDate, laporanPendapatanData = [], laporanWaktu
 
   // ? : Jam
   if (laporanWaktuSewaData && laporanWaktuSewaData?.length > 0) {
+    const lastMonthName = Object.keys(first(laporanWaktuSewaData))[0]
+    res.jam.currentMonth = lastMonthName
     laporanWaktuSewaData.forEach((waktuData) => {
       Object.keys(waktuData).forEach((key) => {
-        if (key === currentDate.replace('Agu', 'Agt')) {
-          res.jam.currentMonth = key
+        // if (key === currentDate.replace('Agu', 'Agt')) {
+        //   res.jam.currentMonth = key
+        // }
+        if (key !== 'total_time_rent') {
+          res.jam.lastMonth = key
           waktuData[key].forEach((scheduleData) => {
             res.jam.value += scheduleData.total
           })
-        }
-        if (key !== 'total_time_rent') {
-          res.jam.lastMonth = key
         }
       })
     })

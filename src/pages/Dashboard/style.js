@@ -71,7 +71,7 @@ const style = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'flex-start',
     padding: '20px 32px',
-    maxHeight: '114px',
+    maxHeight: '135px',
     borderBottom: `1px solid ${colors.AgedMoustacheGrey}`,
   },
   activeTab: {
@@ -80,7 +80,7 @@ const style = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'flex-start',
     padding: '20px 32px',
-    maxHeight: '114px',
+    maxHeight: '135px',
     borderWidth: '1px 1px 0px 1px',
     borderStyle: 'solid',
     borderColor: colors.AgedMoustacheGrey,
