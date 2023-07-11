@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 
+import { first } from 'lodash-es'
 import moment from 'moment'
 
 import date from '~/config/date'
@@ -10,6 +11,7 @@ import useLoading from '~/utils/loading/useLoading'
 import {
   getBelowChartData,
   getHorizontalChartData,
+  getOptions,
   getSummary,
   getVerticalChartData,
 } from './helper'
@@ -46,6 +48,11 @@ const useCustom = () => {
 
   const [laporanPendapatanData, setLaporanPendapatanData] = useState([])
   const [laporanWaktuSewaData, setLaporanWaktuSewaData] = useState([])
+  const [selectedMonthYear, setSelectedMonthYear] = useState(null)
+
+  const handleChangeMonthYear = (event) => {
+    setSelectedMonthYear(event.target.value)
+  }
 
   const handleChangeTab = (event, newValue) => {
     setCurrentTab(newValue)
@@ -54,6 +61,8 @@ const useCustom = () => {
   const handleChangeBelowTab = (event, newValue) => {
     setBelowCurrentTab(newValue)
   }
+
+  const monthYearOptions = useMemo(() => getOptions(laporanPendapatanData), [laporanPendapatanData])
 
   const summary = useMemo(
     () => getSummary(locale?.date, laporanPendapatanData, laporanWaktuSewaData),
@@ -68,8 +77,13 @@ const useCustom = () => {
 
   const belowChartData = useMemo(
     () =>
-      getBelowChartData(selectedDate, belowCurrentTab, laporanPendapatanData, laporanWaktuSewaData),
-    [belowCurrentTab, selectedDate, laporanPendapatanData, laporanWaktuSewaData],
+      getBelowChartData(
+        selectedMonthYear,
+        belowCurrentTab,
+        laporanPendapatanData,
+        laporanWaktuSewaData,
+      ),
+    [belowCurrentTab, selectedMonthYear, laporanPendapatanData, laporanWaktuSewaData],
   )
 
   const verticalChartData = useMemo(
@@ -94,6 +108,12 @@ const useCustom = () => {
   }
 
   useEffect(() => {
+    if (monthYearOptions && monthYearOptions.length > 0) {
+      setSelectedMonthYear(first(monthYearOptions).value)
+    }
+  }, [monthYearOptions])
+
+  useEffect(() => {
     fetchLaporanData()
   }, [])
 
@@ -101,12 +121,14 @@ const useCustom = () => {
     data: {
       belowChartData,
       horizontalChartData,
+      monthYearOptions,
       summary,
       verticalChartData,
     },
     handler: {
       handleChangeTab,
       handleChangeBelowTab,
+      handleChangeMonthYear,
       setSelectedDate,
       setSelectedLocaleDate,
     },
@@ -117,6 +139,7 @@ const useCustom = () => {
       locale,
       selectedDate,
       selectedLocaleDate,
+      selectedMonthYear,
     },
   }
 }
