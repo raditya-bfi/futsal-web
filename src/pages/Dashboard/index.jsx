@@ -1,12 +1,10 @@
 import { Circle, InfoOutlined } from '@mui/icons-material'
 import { Box, Tabs, Tab, Typography } from '@mui/material'
-import moment from 'moment'
 import { Helmet } from 'react-helmet-async'
 
 import BarChart from '~/components/Charts/BarChart'
-import DatePicker from '~/components/DatePicker'
+import CustomSelect from '~/components/CustomSelect'
 import LiveClock from '~/components/LiveClock'
-import date from '~/config/date'
 import {
   DASHBOARD_MENU_TAB_KEY,
   DASHBOARD_MENU_TAB_VALUE,
@@ -149,9 +147,15 @@ function DashboardPage() {
           </Box>
           <Box className={classes.dateWrapper}>
             <Typography className={classes.dateLabel}>Bulan - Tahun</Typography>
-            <DatePicker
-              minDate={moment('2022-01-01').format(date.daily.format)}
-              maxDate={moment().add(1, 'year').format(date.daily.format)}
+            <CustomSelect
+              handleChange={handler.handleChangeMonthYear}
+              options={data?.monthYearOptions}
+              value={state?.selectedMonthYear}
+              width='252px'
+            />
+            {/* <DatePicker
+              minDate={moment('2023-01-01').format(date.daily.format)}
+              maxDate={moment().endOf('year').format(date.daily.format)}
               handleDateChange={(value) => {
                 handler?.setSelectedDate(value.format('YYYY-MM-DD'))
                 const newLocale = new Date(value.format('YYYY-MM-DD'))
@@ -165,7 +169,7 @@ function DashboardPage() {
               selectedDate={state.selectedDate}
               mode='monthly'
               width='252px'
-            />
+            /> */}
           </Box>
           <Box className={classes.menuTabs}>
             <Tabs
@@ -191,12 +195,7 @@ function DashboardPage() {
                       Jumlah Pendapatan pada bulan
                     </Typography>
                     <Typography className={classes.tabLabelDesc}>
-                      {new Date(state?.selectedDate)
-                        .toLocaleDateString('id', {
-                          month: 'short',
-                          year: 'numeric',
-                        })
-                        .replace('Agu', 'Agt')}
+                      {state?.selectedMonthYear}
                       {/* {`${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.PENDAPATAN].prefix}
                       ${thousandSeparator(data?.summary?.pendapatan, 0, false)}
                       ${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.PENDAPATAN].suffix}`} */}
@@ -220,12 +219,7 @@ function DashboardPage() {
                       Jumlah Jam Penyewaan pada bulan
                     </Typography>
                     <Typography className={classes.tabLabelDesc}>
-                      {new Date(state?.selectedDate)
-                        .toLocaleDateString('id', {
-                          month: 'short',
-                          year: 'numeric',
-                        })
-                        .replace('Agu', 'Agt')}
+                      {state?.selectedMonthYear}
                       {/* {`${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.JAM_PENYEWAAN].prefix}
                       ${thousandSeparator(data?.summary?.jam, 0, false)}
                       ${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.JAM_PENYEWAAN].suffix}`} */}
@@ -244,25 +238,13 @@ function DashboardPage() {
                 </Typography>
                 <Typography className={classes.summaryTotalDesc}>
                   {`telah dikumpulkan dari total penyewaan yang disewakan untuk bulan `}
-                  <span className={classes.boldLabel}>
-                    {new Date(state?.selectedDate)
-                      .toLocaleDateString('id', {
-                        month: 'long',
-                        year: 'numeric',
-                      })
-                      .replace('Agu', 'Agt')}
-                  </span>
+                  <span className={classes.boldLabel}>{state?.selectedMonthYear}</span>
                 </Typography>
               </Box>
               <Box className={classes.summaryDetail}>
                 <Typography className={classes.summaryDetailabel}>
                   {`Dari 100% jumlah pendapatan yang didapat pada bulan `}
-                  <span className={classes.boldLabel}>{`${new Date(state?.selectedDate)
-                    .toLocaleDateString('id', {
-                      month: 'long',
-                      year: 'numeric',
-                    })
-                    .replace('Agu', 'Agt')}`}</span>
+                  <span className={classes.boldLabel}>{state?.selectedMonthYear}</span>
                   {` ditemukan rincian sebagai berikut antara lain sebagai berikut:`}
                 </Typography>
                 <Box className={classes.summaryDetailBreakdown}>

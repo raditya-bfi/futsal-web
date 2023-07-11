@@ -9,6 +9,26 @@ import {
 import { colors } from '~/styles/theme'
 import { thousandSeparator } from '~/utils/number'
 
+export const getOptions = (laporanPendapatanData) => {
+  let options = []
+
+  if (laporanPendapatanData && laporanPendapatanData?.length > 0) {
+    laporanPendapatanData.forEach((pendapatanData, index) => {
+      const currentMonth = Object.keys(pendapatanData)[0]
+      options.push({
+        index,
+        key: currentMonth,
+        value: currentMonth,
+        label: currentMonth,
+        monthName: currentMonth,
+      })
+    })
+  }
+
+  options = orderBy(options, ['index'], ['desc'])
+  return options
+}
+
 export const getSummary = (currentDate, laporanPendapatanData = [], laporanWaktuSewaData = []) => {
   const res = {
     pendapatan: {
@@ -399,17 +419,12 @@ export const getHorizontalChartData = (
 }
 
 export const getBelowChartData = (
-  currentDate,
+  selectedMonthYear,
   dashboardType = DASHBOARD_MENU_TAB_VALUE[DASHBOARD_MENU_TAB_KEY.PENDAPATAN],
   laporanPendapatanData = [],
   laporanWaktuSewaData = [],
 ) => {
-  const currentMonth = new Date(currentDate)
-    .toLocaleDateString('id', {
-      month: 'short',
-      year: 'numeric',
-    })
-    .replace('Agu', 'Agt')
+  const currentMonth = selectedMonthYear
 
   if (dashboardType === DASHBOARD_MENU_TAB_VALUE[DASHBOARD_MENU_TAB_KEY.PENDAPATAN]) {
     const totalPendapatan = {
@@ -544,7 +559,7 @@ export const getBelowChartData = (
 
   return {
     data: {
-      labels: [currentDate],
+      labels: [currentMonth],
       plugins: [ChartDataLabels],
       total: `${thousandSeparator(totalJam?.total_all, 0, false)} Jam`,
       datasets: resultDatasets,
