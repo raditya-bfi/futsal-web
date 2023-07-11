@@ -41,6 +41,11 @@ const useCustom = () => {
   const [openConfirmModal, setOpenConfirmModal] = useState(false)
   const [summaryBookingData, setSummaryBookingData] = useState({})
 
+  const [notificationModal, setNotificationModal] = useState({
+    open: false,
+    message: '',
+  })
+
   const [alert, setAlert] = useState({
     open: false,
     severity: 'error',
@@ -64,6 +69,14 @@ const useCustom = () => {
     setSummaryBookingData({})
   }
 
+  const handleCloseNotificationModal = () => {
+    setNotificationModal((prev) => ({
+      ...prev,
+      open: false,
+      message: '',
+    }))
+  }
+
   const handleChangeField = (event) => {
     setSelectedFieldId(event.target.value)
   }
@@ -80,12 +93,17 @@ const useCustom = () => {
       if (isValid) {
         setSelectedDuration(durationValue)
       } else {
-        setAlert((prev) => ({
+        // setAlert((prev) => ({
+        //   ...prev,
+        //   open: true,
+        //   title: '',
+        //   severity: 'error',
+        //   message: 'Jadwal selanjutnya tidak tersedia',
+        // }))
+        setNotificationModal((prev) => ({
           ...prev,
           open: true,
-          title: '',
-          severity: 'error',
-          message: 'Jadwal selanjutnya tidak tersedia',
+          message: 'Maaf. Input anda tidak dapat diproses karena jadwal tidak tersedia',
         }))
       }
     },
@@ -254,6 +272,7 @@ const useCustom = () => {
       handleChangePayment,
       handleChangeStartTime,
       handleCloseConfirmModal,
+      handleCloseNotificationModal,
       handleCloseSnackbar,
       handleOpenConfirmModal,
       setAlert,
@@ -265,6 +284,7 @@ const useCustom = () => {
     },
     state: {
       alert,
+      notificationModal,
       openConfirmModal,
       selectedDate,
       selectedDuration,

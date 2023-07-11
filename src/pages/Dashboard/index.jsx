@@ -1,16 +1,18 @@
-import { InfoOutlined } from '@mui/icons-material'
+import { Circle, InfoOutlined } from '@mui/icons-material'
 import { Box, Tabs, Tab, Typography } from '@mui/material'
+import moment from 'moment'
 import { Helmet } from 'react-helmet-async'
 
 import BarChart from '~/components/Charts/BarChart'
-import HorizontalBarChart from '~/components/Charts/HorizontalBarChart'
+import DatePicker from '~/components/DatePicker'
 import LiveClock from '~/components/LiveClock'
+import date from '~/config/date'
 import {
   DASHBOARD_MENU_TAB_KEY,
   DASHBOARD_MENU_TAB_VALUE,
   DASHBOARD_TAB_MAPPING,
 } from '~/constants/general'
-import { thousandSeparator } from '~/utils/number'
+import { colors } from '~/styles/colors'
 
 import useCustom from './hooks'
 import useStyles from './style'
@@ -57,14 +59,13 @@ function DashboardPage() {
                     }
                   >
                     <Typography className={classes.tabLabel}>
-                      {`${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.PENDAPATAN].name}${
-                        state?.currentDate?.date
-                      }`}
+                      {`${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.PENDAPATAN].name}`}
                     </Typography>
                     <Typography className={classes.tabLabelDesc}>
-                      {`${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.PENDAPATAN].prefix}
+                      {`${data?.summary?.pendapatan?.lastMonth} - ${data?.summary?.pendapatan?.currentMonth}`}
+                      {/* {`${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.PENDAPATAN].prefix}
                       ${thousandSeparator(data?.summary?.pendapatan, 0, false)}
-                      ${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.PENDAPATAN].suffix}`}
+                      ${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.PENDAPATAN].suffix}`} */}
                     </Typography>
                   </div>
                 }
@@ -82,14 +83,13 @@ function DashboardPage() {
                     `}
                   >
                     <Typography className={classes.tabLabel}>
-                      {`${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.JAM_PENYEWAAN].name}${
-                        state?.currentDate?.date
-                      }`}
+                      {`${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.JAM_PENYEWAAN].name}`}
                     </Typography>
                     <Typography className={classes.tabLabelDesc}>
-                      {`${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.JAM_PENYEWAAN].prefix}
+                      {`${data?.summary?.jam?.lastMonth} - ${data?.summary?.jam?.currentMonth}`}
+                      {/* {`${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.JAM_PENYEWAAN].prefix}
                       ${thousandSeparator(data?.summary?.jam, 0, false)}
-                      ${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.JAM_PENYEWAAN].suffix}`}
+                      ${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.JAM_PENYEWAAN].suffix}`} */}
                     </Typography>
                   </div>
                 }
@@ -98,14 +98,28 @@ function DashboardPage() {
             </Tabs>
           </Box>
           <Box className={classes.content}>
-            <Box className={classes.verticalChartWrapper}>
-              <BarChart
-                chartData={data?.verticalChartData?.data}
-                decimalPlaces={data?.verticalChartData?.decimalPlaces}
-                metric={data?.verticalChartData?.metric}
-              />
+            <Box className={classes.verticalChartSection}>
+              <Box className={classes.verticalChartWrapper}>
+                <BarChart
+                  chartData={data?.verticalChartData?.data}
+                  decimalPlaces={data?.verticalChartData?.decimalPlaces}
+                  metric={data?.verticalChartData?.metric}
+                />
+              </Box>
+              <Box className={classes.verticallLegendWrapper}>
+                <Box className={classes.legendWrapper} key='legend-bulan-sekarang'>
+                  <Box className={classes.legendBox} sx={{ backgroundColor: colors.Aqua }} />
+                  <Typography className={classes.legendLabel}>
+                    {`Bulan sekarang ${state?.currentDate.date}`}
+                  </Typography>
+                </Box>
+                <Box className={classes.legendWrapper} key='legend-bulan-lainnya'>
+                  <Box className={classes.legendBox} sx={{ backgroundColor: colors.Turbo }} />
+                  <Typography className={classes.legendLabel}>Bulan lainnya</Typography>
+                </Box>
+              </Box>
             </Box>
-            <Box className={classes.horizontalChartSection}>
+            {/* <Box className={classes.horizontalChartSection}>
               <Box className={classes.horizontalChartWrapper}>
                 <HorizontalBarChart
                   chartData={data?.horizontalChartData?.data}
@@ -126,7 +140,164 @@ function DashboardPage() {
                     </Box>
                   ))}
               </Box>
+            </Box> */}
+          </Box>
+          <Box className={classes.dateWrapper}>
+            <Typography className={classes.dateLabel}>Bulan - Tahun</Typography>
+            <DatePicker
+              minDate={moment('2022-01-01').format(date.daily.format)}
+              maxDate={moment().add(1, 'year').format(date.daily.format)}
+              handleDateChange={(value) => {
+                handler?.setSelectedDate(value.format('YYYY-MM-DD'))
+                const newLocale = new Date(value.format('YYYY-MM-DD'))
+                  .toLocaleDateString('id', {
+                    month: 'short',
+                    year: 'numeric',
+                  })
+                  .replace('Agu', 'Agt')
+                handler?.setSelectedLocaleDate(newLocale)
+              }}
+              selectedDate={state.selectedDate}
+              mode='monthly'
+              width='252px'
+            />
+          </Box>
+          <Box className={classes.menuTabs}>
+            <Tabs
+              classes={{
+                indicator: classes.tabsIndicator,
+                root: classes.tabsContainer,
+              }}
+              value={state.belowCurrentTab}
+              onChange={handler.handleChangeBelowTab}
+              variant='fullWidth'
+            >
+              <Tab
+                label={
+                  <div
+                    className={
+                      state?.belowCurrentTab ===
+                      DASHBOARD_MENU_TAB_VALUE[DASHBOARD_MENU_TAB_KEY.PENDAPATAN]
+                        ? classes.activeTab
+                        : classes.tab
+                    }
+                  >
+                    <Typography className={classes.tabLabel}>
+                      Jumlah Pendapatan pada bulan
+                    </Typography>
+                    <Typography className={classes.tabLabelDesc}>
+                      {new Date(state?.selectedDate)
+                        .toLocaleDateString('id', {
+                          month: 'short',
+                          year: 'numeric',
+                        })
+                        .replace('Agu', 'Agt')}
+                      {/* {`${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.PENDAPATAN].prefix}
+                      ${thousandSeparator(data?.summary?.pendapatan, 0, false)}
+                      ${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.PENDAPATAN].suffix}`} */}
+                    </Typography>
+                  </div>
+                }
+                value={DASHBOARD_MENU_TAB_VALUE[DASHBOARD_MENU_TAB_KEY.PENDAPATAN]}
+              />
+              <Tab
+                label={
+                  <div
+                    className={`${
+                      state?.belowCurrentTab ===
+                      DASHBOARD_MENU_TAB_VALUE[DASHBOARD_MENU_TAB_KEY.JAM_PENYEWAAN]
+                        ? classes.activeTab
+                        : classes.tab
+                    } ${classes.tabSecond}
+                    `}
+                  >
+                    <Typography className={classes.tabLabel}>
+                      Jumlah Jam Penyewaan pada bulan
+                    </Typography>
+                    <Typography className={classes.tabLabelDesc}>
+                      {new Date(state?.selectedDate)
+                        .toLocaleDateString('id', {
+                          month: 'short',
+                          year: 'numeric',
+                        })
+                        .replace('Agu', 'Agt')}
+                      {/* {`${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.JAM_PENYEWAAN].prefix}
+                      ${thousandSeparator(data?.summary?.jam, 0, false)}
+                      ${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.JAM_PENYEWAAN].suffix}`} */}
+                    </Typography>
+                  </div>
+                }
+                value={DASHBOARD_MENU_TAB_VALUE[DASHBOARD_MENU_TAB_KEY.JAM_PENYEWAAN]}
+              />
+            </Tabs>
+          </Box>
+          <Box className={classes.content}>
+            <Box className={classes.verticalChartSection} sx={{ border: 'none !important' }}>
+              <Box className={classes.summaryTotal}>
+                <Typography className={classes.summaryTotalLabel}>
+                  {data?.belowChartData?.data?.total}
+                </Typography>
+                <Typography className={classes.summaryTotalDesc}>
+                  {`telah dikumpulkan dari total penyewaan yang disewakan untuk bulan `}
+                  <span className={classes.boldLabel}>
+                    {new Date(state?.selectedDate)
+                      .toLocaleDateString('id', {
+                        month: 'long',
+                        year: 'numeric',
+                      })
+                      .replace('Agu', 'Agt')}
+                  </span>
+                </Typography>
+              </Box>
+              <Box className={classes.summaryDetail}>
+                <Typography className={classes.summaryDetailabel}>
+                  {`Dari 100% jumlah pendapatan yang didapat pada bulan `}
+                  <span className={classes.boldLabel}>{`${new Date(state?.selectedDate)
+                    .toLocaleDateString('id', {
+                      month: 'long',
+                      year: 'numeric',
+                    })
+                    .replace('Agu', 'Agt')}`}</span>
+                  {` ditemukan rincian sebagai berikut antara lain sebagai berikut:`}
+                </Typography>
+                <Box className={classes.summaryDetailBreakdown}>
+                  {data?.belowChartData?.data?.datasets &&
+                    data?.belowChartData?.data?.datasets.length > 0 &&
+                    data?.belowChartData?.data?.datasets.map((belowData) => (
+                      <Box className={classes.breakdownWrapper}>
+                        <Circle sx={{ color: colors.White, height: '10px', width: '10px' }} />
+                        <Typography className={classes.summaryDetailabel} key=''>
+                          <span className={classes.boldLabel}>{`${belowData?.label}`}</span>
+                          {` dengan total sebesar `}
+                          <span className={classes.boldLabel}>{`${belowData?.value}`}</span>
+                        </Typography>
+                      </Box>
+                    ))}
+                </Box>
+              </Box>
             </Box>
+            {/* <Box className={classes.horizontalChartSection}>
+              <Box className={classes.horizontalChartWrapper}>
+                <HorizontalBarChart
+                  chartData={data?.horizontalChartData?.data}
+                  decimalPlaces={data?.horizontalChartData?.decimalPlaces}
+                  metric={data?.horizontalChartData?.metric}
+                />
+              </Box>
+              <Box className={classes.horizontalLegendWrapper}>
+                {data?.horizontalChartData?.data?.datasets &&
+                  data?.horizontalChartData?.data?.datasets.length > 0 &&
+                  data?.horizontalChartData?.data?.datasets.map((legendData) => (
+                    <Box className={classes.legendWrapper}>
+                      <Box
+                        className={classes.legendBox}
+                        sx={{ backgroundColor: legendData?.backgroundColor }}
+                      />
+                      <Typography className={classes.legendLabel}>{legendData?.label}</Typography>
+                    </Box>
+                  ))}
+              </Box>
+            </Box> */}
           </Box>
         </Box>
       </Box>

@@ -6,6 +6,7 @@ const useStyle = makeStyles((theme) => ({
   paper: {
     backgroundColor: colors.MineShaft,
     maxWidth: ({ width }) => width || '100%',
+    borderRadius: ({ modalBorderRadius }) => modalBorderRadius || '4px',
   },
   modal: {
     borderRadius: ({ modalBorderRadius }) => modalBorderRadius || '4px',

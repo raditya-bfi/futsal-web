@@ -7,6 +7,7 @@ import Button from '~/components/Button'
 import CustomCheckBox from '~/components/CustomCheckbox'
 import CustomField from '~/components/CustomField'
 import CustomSelect from '~/components/CustomSelect'
+import NotificationModal from '~/components/NotificationModal'
 import Snackbar from '~/components/Snackbar'
 import { DAYS_ACTIVE_OPTIONS } from '~/constants/general'
 
@@ -45,7 +46,7 @@ function TambahLapanganPage() {
           validationSchema={state?.isFlagActive ? AddFieldSchemaOption : AddFieldSchema}
           onSubmit={(values, { setSubmitting, resetForm }) => {
             setSubmitting(true)
-            handler.handleEdit(values)
+            handler.handleAdd(values)
             setTimeout(() => {
               resetForm()
               setSubmitting(false)
@@ -284,7 +285,7 @@ function TambahLapanganPage() {
                             <AddLapanganFoto
                               key='field-photo-preview-0'
                               setFiles={handler?.setFirstPhotos}
-                              setAlert={handler?.setAlert}
+                              setAlert={handler?.setNotificationModal}
                             />
                           )}
                           {state?.secondPhotos[0] &&
@@ -309,7 +310,7 @@ function TambahLapanganPage() {
                             <AddLapanganFoto
                               key='field-photo-preview-1'
                               setFiles={handler?.setSecondPhotos}
-                              setAlert={handler?.setAlert}
+                              setAlert={handler?.setNotificationModal}
                             />
                           )}
                         </Box>
@@ -338,6 +339,11 @@ function TambahLapanganPage() {
           )}
         </Formik>
       </Box>
+      <NotificationModal
+        open={state?.notificationModal?.open}
+        onClose={handler?.handleCloseNotificationModal}
+        notificationMessage={state?.notificationModal?.message}
+      />
     </>
   )
 }

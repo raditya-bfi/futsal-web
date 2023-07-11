@@ -124,12 +124,28 @@ const style = makeStyles((theme) => ({
       marginBottom: theme.spacing(9),
     },
   },
-  verticalChartWrapper: {
-    maxHeight: '500px',
+  verticalChartSection: {
+    display: 'flex',
+    flexDirection: 'column',
     width: '100%',
+    height: 'max-content',
     border: `1px solid ${colors.White}`,
     borderRadius: '10px',
     padding: '58px 66px',
+  },
+  verticalChartWrapper: {
+    maxHeight: '500px',
+    width: '100%',
+    marginBottom: '15px',
+  },
+  verticallLegendWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+    '& > div:not(:last-child)': {
+      marginBottom: '11px',
+    },
+    padding: `0px 25px`,
   },
   horizontalChartSection: {
     display: 'flex',
@@ -166,6 +182,65 @@ const style = makeStyles((theme) => ({
   legendLabel: {
     fontSize: fontSize[24],
     fontWeight: 500,
+    color: colors.White,
+  },
+  dateWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    marginTop: '85px',
+    marginBottom: '38px',
+  },
+  dateLabel: {
+    fontSize: fontSize[20],
+    fontWeight: 500,
+    color: colors.White,
+    marginBottom: '8px',
+  },
+  summaryTotal: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  summaryTotalLabel: {
+    fontSize: fontSize[64],
+    fontWeight: 700,
+    color: colors.White,
+    textAlign: 'justify',
+  },
+  summaryTotalDesc: {
+    fontSize: fontSize[24],
+    fontWeight: 500,
+    color: colors.White,
+    textAlign: 'justify',
+  },
+  summaryDetail: {
+    marginTop: '45px',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  summaryDetailabel: {
+    fontSize: fontSize[24],
+    fontWeight: 500,
+    color: colors.White,
+    textAlign: 'justify',
+  },
+  summaryDetailBreakdown: {
+    marginTop: '31px',
+    display: 'flex',
+    flexDirection: 'column',
+    '& > div:not(:last-child)': {
+      marginBottom: '31px',
+    },
+  },
+  breakdownWrapper: {
+    display: 'flex',
+    alignItems: 'center',
+    '& > *:first-child': {
+      marginRight: '12px',
+    },
+  },
+  boldLabel: {
+    fontSize: fontSize[24],
+    fontWeight: 700,
     color: colors.White,
   },
 }))

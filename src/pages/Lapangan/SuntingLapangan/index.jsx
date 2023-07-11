@@ -8,6 +8,7 @@ import CustomCheckBox from '~/components/CustomCheckbox'
 import CustomField from '~/components/CustomField'
 import CustomSelect from '~/components/CustomSelect'
 import LapanganFieldPhoto from '~/components/LapanganFieldPhoto'
+import NotificationModal from '~/components/NotificationModal'
 import Snackbar from '~/components/Snackbar'
 import { DAYS_ACTIVE_OPTIONS } from '~/constants/general'
 
@@ -289,7 +290,7 @@ function SuntingLapanganPage() {
                                   key={`field-photo-preview-${photo?.id}`}
                                   photoId={photo?.id}
                                   handleUpload={handler.handleAddPhoto}
-                                  setAlert={handler.setAlert}
+                                  setAlert={handler.setNotificationModal}
                                 />
                               )
                             })}
@@ -319,6 +320,11 @@ function SuntingLapanganPage() {
           )}
         </Formik>
       </Box>
+      <NotificationModal
+        open={state?.notificationModal?.open}
+        onClose={handler?.handleCloseNotificationModal}
+        notificationMessage={state?.notificationModal?.message}
+      />
     </>
   )
 }

@@ -20,33 +20,56 @@ const useCustom = ({ setAlert, setIsNeedRefetch, open, setOpenModal }) => {
   const [photoFiles, setPhotoFiles] = useState([])
   const [ktpFiles, setKtpFiles] = useState([])
 
+  const [notificationModal, setNotificationModal] = useState({
+    open: false,
+    message: '',
+  })
+
+  const handleCloseNotificationModal = () => {
+    setNotificationModal((prev) => ({
+      ...prev,
+      open: false,
+      message: '',
+    }))
+  }
+
   const handleChangeGender = (value) => {
     setSelectedGender(value)
   }
 
   const validateUpload = useCallback(() => {
     if (photoFiles && photoFiles.length <= 0) {
-      setAlert((prev) => ({
+      setNotificationModal((prev) => ({
         ...prev,
         open: true,
-        title: '',
-        severity: 'error',
-        message: 'Silahkan mengupload foto terlebih dahulu',
+        message: 'Silahkan mengupload foto Operator terlebih dahulu',
       }))
+      // setAlert((prev) => ({
+      //   ...prev,
+      //   open: true,
+      //   title: '',
+      //   severity: 'error',
+      //   message: 'Silahkan mengupload foto terlebih dahulu',
+      // }))
       return false
     }
     if (ktpFiles && ktpFiles.length <= 0) {
-      setAlert((prev) => ({
+      setNotificationModal((prev) => ({
         ...prev,
         open: true,
-        title: '',
-        severity: 'error',
-        message: 'Silahkan mengupload foto ktp terlebih dahulu',
+        message: 'Silahkan mengupload foto KTP terlebih dahulu',
       }))
+      // setAlert((prev) => ({
+      //   ...prev,
+      //   open: true,
+      //   title: '',
+      //   severity: 'error',
+      //   message: 'Silahkan mengupload foto KTP terlebih dahulu',
+      // }))
       return false
     }
     return true
-  }, [setAlert, photoFiles, ktpFiles])
+  }, [setAlert, setNotificationModal, photoFiles, ktpFiles])
 
   const handleAdd = useCallback(
     async (values) => {
@@ -98,8 +121,10 @@ const useCustom = ({ setAlert, setIsNeedRefetch, open, setOpenModal }) => {
     data: {},
     handler: {
       handleChangeGender,
+      handleCloseNotificationModal,
       handleAdd,
       setKtpFiles,
+      setNotificationModal,
       setPhotoFiles,
       validateUpload,
     },
@@ -109,6 +134,7 @@ const useCustom = ({ setAlert, setIsNeedRefetch, open, setOpenModal }) => {
     state: {
       initialValue,
       ktpFiles,
+      notificationModal,
       photoFiles,
       selectedGender,
     },

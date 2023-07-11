@@ -11,17 +11,27 @@ import { thousandSeparator } from '~/utils/number'
 
 export const getSummary = (currentDate, laporanPendapatanData = [], laporanWaktuSewaData = []) => {
   const res = {
-    pendapatan: 0,
-    jam: 0,
+    pendapatan: {
+      currentMonth: '',
+      lastMonth: '',
+      value: 0,
+    },
+    jam: {
+      currentMonth: '',
+      lastMonth: '',
+      value: 0,
+    },
   }
 
   // ? : Pendapatan
   if (laporanPendapatanData && laporanPendapatanData?.length > 0) {
     laporanPendapatanData.forEach((pendapatanData) => {
       Object.keys(pendapatanData).forEach((key) => {
-        if (key === currentDate) {
-          res.pendapatan = pendapatanData[key]?.total_all || 0
+        if (key === currentDate.replace('Agu', 'Agt')) {
+          res.pendapatan.value = pendapatanData[key]?.total_all || 0
+          res.pendapatan.currentMonth = key
         }
+        res.pendapatan.lastMonth = key
       })
     })
   }
@@ -30,10 +40,14 @@ export const getSummary = (currentDate, laporanPendapatanData = [], laporanWaktu
   if (laporanWaktuSewaData && laporanWaktuSewaData?.length > 0) {
     laporanWaktuSewaData.forEach((waktuData) => {
       Object.keys(waktuData).forEach((key) => {
-        if (key === currentDate) {
+        if (key === currentDate.replace('Agu', 'Agt')) {
+          res.jam.currentMonth = key
           waktuData[key].forEach((scheduleData) => {
-            res.jam += scheduleData.total
+            res.jam.value += scheduleData.total
           })
+        }
+        if (key !== 'total_time_rent') {
+          res.jam.lastMonth = key
         }
       })
     })
@@ -73,7 +87,9 @@ export const getVerticalChartData = (
     orderBy(chartData, ['index'], ['desc']).forEach((data) => {
       res.months.push(data?.monthName)
       res.data.push(data?.total)
-      res.colors.push(data?.monthName === currentDate ? colors.Aqua : colors.Turbo)
+      res.colors.push(
+        data?.monthName === currentDate.replace('Agu', 'Agt') ? colors.Aqua : colors.Turbo,
+      )
     })
 
     return {
@@ -130,7 +146,9 @@ export const getVerticalChartData = (
   orderBy(chartData, ['index'], ['desc']).forEach((data) => {
     res.months.push(data?.monthName)
     res.data.push(data?.total)
-    res.colors.push(data?.monthName === currentDate ? colors.Aqua : colors.Turbo)
+    res.colors.push(
+      data?.monthName === currentDate.replace('Agu', 'Agt') ? colors.Aqua : colors.Turbo,
+    )
   })
 
   return {
@@ -176,7 +194,7 @@ export const getHorizontalChartData = (
     if (laporanPendapatanData && laporanPendapatanData?.length > 0) {
       laporanPendapatanData.forEach((pendapatanData) => {
         Object.keys(pendapatanData).forEach((key) => {
-          if (key === currentDate) {
+          if (key === currentDate.replace('Agu', 'Agt')) {
             totalPendapatan.total_admin += pendapatanData[key]?.total_admin || 0
             totalPendapatan.total_all += pendapatanData[key]?.total_all || 0
             totalPendapatan.total_day += pendapatanData[key]?.total_day || 0
@@ -202,7 +220,7 @@ export const getHorizontalChartData = (
     }
     return {
       data: {
-        labels: [currentDate],
+        labels: [currentDate.replace('Agu', 'Agt')],
         plugins: [ChartDataLabels],
         datasets: [
           {
@@ -258,7 +276,7 @@ export const getHorizontalChartData = (
   if (laporanWaktuSewaData && laporanWaktuSewaData?.length > 0) {
     laporanWaktuSewaData.forEach((waktuData) => {
       Object.keys(waktuData).forEach((key) => {
-        if (key === currentDate) {
+        if (key === currentDate.replace('Agu', 'Agt')) {
           waktuData[key].forEach((scheduleData) => {
             set(
               totalJam.monthly,
@@ -297,7 +315,7 @@ export const getHorizontalChartData = (
 
   return {
     data: {
-      labels: [currentDate],
+      labels: [currentDate.replace('Agu', 'Agt')],
       plugins: [ChartDataLabels],
       datasets: [
         {
@@ -371,6 +389,161 @@ export const getHorizontalChartData = (
           barPercentage: 1.5,
         },
       ],
+    },
+    decimalPlaces: 1,
+  }
+}
+
+export const getBelowChartData = (
+  currentDate,
+  dashboardType = DASHBOARD_MENU_TAB_VALUE[DASHBOARD_MENU_TAB_KEY.PENDAPATAN],
+  laporanPendapatanData = [],
+  laporanWaktuSewaData = [],
+) => {
+  const currentMonth = new Date(currentDate)
+    .toLocaleDateString('id', {
+      month: 'short',
+      year: 'numeric',
+    })
+    .replace('Agu', 'Agt')
+
+  if (dashboardType === DASHBOARD_MENU_TAB_VALUE[DASHBOARD_MENU_TAB_KEY.PENDAPATAN]) {
+    const totalPendapatan = {
+      total_all: 0,
+      total_admin: 0,
+      total_day: 0,
+      total_night: 0,
+    }
+
+    // ? : Pendapatan
+    if (laporanPendapatanData && laporanPendapatanData?.length > 0) {
+      laporanPendapatanData.forEach((pendapatanData) => {
+        Object.keys(pendapatanData).forEach((key) => {
+          if (key === currentMonth) {
+            totalPendapatan.total_admin += pendapatanData[key]?.total_admin || 0
+            totalPendapatan.total_all += pendapatanData[key]?.total_all || 0
+            totalPendapatan.total_day += pendapatanData[key]?.total_day || 0
+            totalPendapatan.total_night += pendapatanData[key]?.total_night || 0
+          }
+        })
+      })
+    }
+
+    const totalPercentage = {
+      admin:
+        totalPendapatan.total_all > 0
+          ? (totalPendapatan.total_admin / totalPendapatan.total_all) * 100
+          : 0,
+      day:
+        totalPendapatan.total_all > 0
+          ? (totalPendapatan.total_day / totalPendapatan.total_all) * 100
+          : 0,
+      night:
+        totalPendapatan.total_all > 0
+          ? (totalPendapatan.total_night / totalPendapatan.total_all) * 100
+          : 0,
+    }
+    return {
+      data: {
+        labels: [currentMonth],
+        plugins: [ChartDataLabels],
+        total: `Rp ${thousandSeparator(totalPendapatan?.total_all, 0, false)}`,
+        datasets: [
+          {
+            label: `Biaya Admin`,
+            data: [totalPercentage?.admin],
+            value: `Rp ${thousandSeparator(
+              totalPendapatan?.total_admin,
+              0,
+              false,
+            )} (${thousandSeparator(totalPercentage?.admin, 1, true)}%)`,
+            backgroundColor: [colors.ForestGreen],
+            barPercentage: 1.5,
+          },
+          {
+            label: `Sewa per jam`,
+            data: [totalPercentage?.day],
+            value: `Rp ${thousandSeparator(
+              totalPendapatan?.total_day,
+              0,
+              false,
+            )} (${thousandSeparator(totalPercentage?.day, 1, true)}%)`,
+            backgroundColor: [colors.Matisse],
+            barPercentage: 1.5,
+          },
+          {
+            label: `Sewa Khusus Malam per jam`,
+            data: [totalPercentage?.night],
+            value: `Rp ${thousandSeparator(
+              totalPendapatan?.total_night,
+              0,
+              false,
+            )} (${thousandSeparator(totalPercentage?.night, 1, true)}%)`,
+            backgroundColor: [colors.KeyLimePie],
+            barPercentage: 1.5,
+          },
+        ],
+      },
+      decimalPlaces: 1,
+    }
+  }
+
+  const totalJam = {
+    total_all: 0,
+    monthly: {},
+  }
+
+  // ? : Jam
+  if (laporanWaktuSewaData && laporanWaktuSewaData?.length > 0) {
+    laporanWaktuSewaData.forEach((waktuData) => {
+      Object.keys(waktuData).forEach((key) => {
+        if (key === currentMonth) {
+          waktuData[key].forEach((scheduleData) => {
+            set(
+              totalJam.monthly,
+              `Pukul ${scheduleData?.time.replace('-', ' hingga ')}`,
+              get(totalJam.monthly, `Pukul ${scheduleData?.time.replace('-', ' hingga ')}`, 0) +
+                get(scheduleData, 'total', 0),
+            )
+            set(
+              totalJam,
+              'total_all',
+              get(totalJam, 'total_all', 0) + get(scheduleData, 'total', 0),
+            )
+          })
+        }
+      })
+    })
+  }
+
+  const totalPercentage = []
+
+  Object.keys(totalJam?.monthly).forEach((key) => {
+    set(
+      totalPercentage,
+      key,
+      totalJam.total_all > 0 ? (totalJam.monthly[key] / totalJam.total_all) * 100 : 0,
+    )
+  })
+
+  let resultDatasets = []
+
+  Object.keys(totalJam?.monthly).forEach((key) => {
+    resultDatasets.push({
+      label: key,
+      data: [totalJam.monthly[key]],
+      total: totalJam.monthly[key],
+      value: `${thousandSeparator([totalJam.monthly[key]], 0, false)} Jam`,
+    })
+  })
+  resultDatasets = orderBy(resultDatasets, ['total', 'label'], ['desc', 'asc'])
+
+  return {
+    data: {
+      labels: [currentDate],
+      plugins: [ChartDataLabels],
+      total: `${thousandSeparator(totalJam?.total_all, 0, false)} Jam`,
+      datasets: resultDatasets,
     },
     decimalPlaces: 1,
   }

@@ -49,6 +49,19 @@ const useCustom = () => {
   const [selectedMultipleDays, setSelectedMultipleDays] = useState([])
   const [selectedAll, setSelectedAll] = useState(false)
 
+  const [notificationModal, setNotificationModal] = useState({
+    open: false,
+    message: '',
+  })
+
+  const handleCloseNotificationModal = () => {
+    setNotificationModal((prev) => ({
+      ...prev,
+      open: false,
+      message: '',
+    }))
+  }
+
   const handleCheckBox = (event) => {
     setIsFlagActive(event.target.checked)
   }
@@ -285,11 +298,13 @@ const useCustom = () => {
       handleAddPhoto,
       handleBackButton,
       handleCheckBox,
+      handleCloseNotificationModal,
       handleCloseSnackbar,
       handleEdit,
       handleMultipleDays,
       handleRemovePhoto,
       setAlert,
+      setNotificationModal,
     },
     refs: {
       formikRef,
@@ -298,6 +313,7 @@ const useCustom = () => {
       alert,
       initialValue,
       isFlagActive,
+      notificationModal,
       selectedAll,
       selectedMultipleDays,
     },

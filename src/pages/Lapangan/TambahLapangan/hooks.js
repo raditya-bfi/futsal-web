@@ -37,6 +37,19 @@ const useCustom = () => {
   const [firstPhotos, setFirstPhotos] = useState([])
   const [secondPhotos, setSecondPhotos] = useState([])
 
+  const [notificationModal, setNotificationModal] = useState({
+    open: false,
+    message: '',
+  })
+
+  const handleCloseNotificationModal = () => {
+    setNotificationModal((prev) => ({
+      ...prev,
+      open: false,
+      message: '',
+    }))
+  }
+
   const handleCheckBox = (event) => {
     setIsFlagActive(event.target.checked)
   }
@@ -77,7 +90,7 @@ const useCustom = () => {
     return e.target.value.filter((val) => val !== 'all')
   }
 
-  const handleEdit = useCallback(
+  const handleAdd = useCallback(
     async (values) => {
       await setIsLoading(true)
       let hariSewa = sortBy(values?.daysActive.filter((day) => day !== 'all'))
@@ -131,13 +144,21 @@ const useCustom = () => {
         )
         await setIsLoading(false)
       } else {
-        setAlert((prev) => ({
-          ...prev,
-          open: true,
-          title: '',
-          severity: 'error',
-          message: response?.data?.message || response?.statusText,
-        }))
+        if (response?.data?.message === 'Wajib memiliki 1 gambar lapangan') {
+          setNotificationModal((prev) => ({
+            ...prev,
+            open: true,
+            message: response?.data?.message || response?.statusText,
+          }))
+        } else {
+          setAlert((prev) => ({
+            ...prev,
+            open: true,
+            title: '',
+            severity: 'error',
+            message: response?.data?.message || response?.statusText,
+          }))
+        }
 
         await setIsLoading(false)
       }
@@ -157,13 +178,15 @@ const useCustom = () => {
 
   return {
     handler: {
+      handleAdd,
       handleBackButton,
       handleCheckBox,
+      handleCloseNotificationModal,
       handleCloseSnackbar,
-      handleEdit,
       handleMultipleDays,
       setAlert,
       setFirstPhotos,
+      setNotificationModal,
       setSecondPhotos,
     },
     refs: {
@@ -174,6 +197,7 @@ const useCustom = () => {
       firstPhotos,
       initialValue,
       isFlagActive,
+      notificationModal,
       secondPhotos,
       selectedAll,
       selectedMultipleDays,
