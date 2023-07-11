@@ -13,6 +13,7 @@ import {
   DASHBOARD_TAB_MAPPING,
 } from '~/constants/general'
 import { colors } from '~/styles/colors'
+import { thousandSeparator } from '~/utils/number'
 
 import useCustom from './hooks'
 import useStyles from './style'
@@ -63,9 +64,11 @@ function DashboardPage() {
                     </Typography>
                     <Typography className={classes.tabLabelDesc}>
                       {`${data?.summary?.pendapatan?.lastMonth} - ${data?.summary?.pendapatan?.currentMonth}`}
-                      {/* {`${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.PENDAPATAN].prefix}
-                      ${thousandSeparator(data?.summary?.pendapatan, 0, false)}
-                      ${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.PENDAPATAN].suffix}`} */}
+                    </Typography>
+                    <Typography className={classes.tabLabelDesc}>
+                      {`${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.PENDAPATAN].prefix}
+                      ${thousandSeparator(data?.summary?.pendapatan?.value, 0, false)}
+                      ${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.PENDAPATAN].suffix}`}
                     </Typography>
                   </div>
                 }
@@ -87,9 +90,11 @@ function DashboardPage() {
                     </Typography>
                     <Typography className={classes.tabLabelDesc}>
                       {`${data?.summary?.jam?.lastMonth} - ${data?.summary?.jam?.currentMonth}`}
-                      {/* {`${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.JAM_PENYEWAAN].prefix}
-                      ${thousandSeparator(data?.summary?.jam, 0, false)}
-                      ${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.JAM_PENYEWAAN].suffix}`} */}
+                    </Typography>
+                    <Typography className={classes.tabLabelDesc}>
+                      {`${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.JAM_PENYEWAAN].prefix}
+                      ${thousandSeparator(data?.summary?.jam?.value, 0, false)}
+                      ${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.JAM_PENYEWAAN].suffix}`}
                     </Typography>
                   </div>
                 }
