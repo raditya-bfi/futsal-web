@@ -81,7 +81,6 @@ export const getSummary = (currentDate, laporanPendapatanData = [], laporanWaktu
     })
   }
 
-  console.log(res)
   return res
 }
 
