@@ -35,11 +35,13 @@ export const getSummary = (currentDate, laporanPendapatanData = [], laporanWaktu
       currentMonth: '',
       lastMonth: '',
       value: 0,
+      totalMonth: 0,
     },
     jam: {
       currentMonth: '',
       lastMonth: '',
       value: 0,
+      totalMonth: 0,
     },
   }
 
@@ -54,6 +56,7 @@ export const getSummary = (currentDate, laporanPendapatanData = [], laporanWaktu
         // }
         res.pendapatan.value += pendapatanData[key].total_all || 0
         res.pendapatan.lastMonth = key
+        res.pendapatan.totalMonth += 1
       })
     })
   }
@@ -69,6 +72,7 @@ export const getSummary = (currentDate, laporanPendapatanData = [], laporanWaktu
         // }
         if (key !== 'total_time_rent') {
           res.jam.lastMonth = key
+          res.jam.totalMonth += 1
           waktuData[key].forEach((scheduleData) => {
             res.jam.value += scheduleData.total
           })
@@ -77,6 +81,7 @@ export const getSummary = (currentDate, laporanPendapatanData = [], laporanWaktu
     })
   }
 
+  console.log(res)
   return res
 }
 

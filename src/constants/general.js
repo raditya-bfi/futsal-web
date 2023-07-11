@@ -57,12 +57,12 @@ export const DASHBOARD_MENU_TAB_KEY = {
 export const DASHBOARD_TAB_MAPPING = {
   [DASHBOARD_MENU_TAB_KEY.PENDAPATAN]: {
     prefix: 'Rp ',
-    name: 'Jumlah Pendapatan pada 6 bulan terakhir',
+    name: 'Jumlah Pendapatan pada ',
     suffix: '',
   },
   [DASHBOARD_MENU_TAB_KEY.JAM_PENYEWAAN]: {
     prefix: '',
-    name: 'Jumlah Jam Penyewaan pada 6 bulan terakhir',
+    name: 'Jumlah Jam Penyewaan pada ',
     suffix: ' Jam',
   },
 }

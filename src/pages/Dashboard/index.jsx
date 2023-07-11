@@ -59,6 +59,7 @@ function DashboardPage() {
                   >
                     <Typography className={classes.tabLabel}>
                       {`${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.PENDAPATAN].name}`}
+                      {`${data?.summary?.pendapatan?.totalMonth} bulan terakhir`}
                     </Typography>
                     <Typography className={classes.tabLabelDesc}>
                       {`${data?.summary?.pendapatan?.lastMonth} - ${data?.summary?.pendapatan?.currentMonth}`}
@@ -85,6 +86,7 @@ function DashboardPage() {
                   >
                     <Typography className={classes.tabLabel}>
                       {`${DASHBOARD_TAB_MAPPING[DASHBOARD_MENU_TAB_KEY.JAM_PENYEWAAN].name}`}
+                      {`${data?.summary?.jam?.totalMonth} bulan terakhir`}
                     </Typography>
                     <Typography className={classes.tabLabelDesc}>
                       {`${data?.summary?.jam?.lastMonth} - ${data?.summary?.jam?.currentMonth}`}
