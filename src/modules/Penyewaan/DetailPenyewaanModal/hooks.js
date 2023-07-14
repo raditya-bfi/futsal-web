@@ -36,7 +36,7 @@ const useCustom = ({ open, bookingId, setIsNeedRefetch }) => {
         open: true,
         title: '',
         severity: 'success',
-        message: 'Berhasil membatalkan Transaksi sebagai Admin',
+        message: 'Berhasil membatalkan Transaksi',
         newBookingId: bookingId,
       }
       navigate(

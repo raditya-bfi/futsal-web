@@ -20,7 +20,7 @@ function KonfirmasiBatalkanPenyewaanModal({ handleCancel, onClose, open }) {
       <CustomModal.Header onClose={onClose} closeButton={false}>
         <HelpOutline className={classes.modalHeaderIcon} />
         <CustomModal.HeaderTitle size={36}>
-          Apakah anda yakin untuk membatalkan transaksi ini sebagai Admin?
+          Apakah anda yakin untuk membatalkan transaksi ini?
         </CustomModal.HeaderTitle>
       </CustomModal.Header>
       <CustomModal.Content>
