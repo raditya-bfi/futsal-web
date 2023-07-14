@@ -12,6 +12,7 @@ const useCustom = ({ setAlert, setIsNeedRefetch, open, setOpenModal, userId }) =
     phone: '',
     email: '',
     address: '',
+    gender: '',
   })
 
   // ? : LK : Laki-laki | PR : Perempuan
@@ -150,6 +151,7 @@ const useCustom = ({ setAlert, setIsNeedRefetch, open, setOpenModal, userId }) =
         phone: detailOperatorData?.no_hp,
         email: detailOperatorData?.email,
         address: detailOperatorData?.alamat || '',
+        gender: detailOperatorData?.gender,
       }))
       setSelectedGender(detailOperatorData?.gender)
       if (detailOperatorData?.thumbnail && detailOperatorData?.thumbnail !== '') {

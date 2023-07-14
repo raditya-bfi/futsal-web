@@ -13,6 +13,7 @@ const useCustom = ({ setAlert, setIsNeedRefetch, open, setOpenModal }) => {
     email: '',
     address: '',
     password: '',
+    gender: '',
   })
 
   // ? : LK : Laki-laki | PR : Perempuan
