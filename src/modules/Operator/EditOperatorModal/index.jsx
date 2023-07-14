@@ -86,6 +86,7 @@ function EditOperatorModal({
             }}
             validateOnChange
             validateOnBlur={false}
+            validateOnMount={false}
             enableReinitialize
           >
             {({ errors, handleSubmit, isSubmitting, setFieldValue, touched, values }) => (
