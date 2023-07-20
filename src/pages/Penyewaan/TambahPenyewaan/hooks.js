@@ -142,7 +142,7 @@ const useCustom = () => {
         setNotificationModal((prev) => ({
           ...prev,
           open: true,
-          message: 'Maaf. Tidak bisa melakukan pemesanan pada hari tersebut',
+          message: 'Maaf. Input anda tidak dapat diproses karena jadwal tidak tersedia',
         }))
       }
     }
