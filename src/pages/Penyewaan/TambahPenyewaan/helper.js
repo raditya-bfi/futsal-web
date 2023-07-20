@@ -2,6 +2,7 @@ import { get, set, toNumber } from 'lodash-es'
 import moment from 'moment'
 
 import date from '~/config/date'
+import { DATE_PICKER_ACTIVE_MAPPING } from '~/constants/general'
 
 export const getFieldGalleries = (savedPhotos = []) => {
   const res = [
@@ -245,3 +246,13 @@ export const PAYMENT_OPTIONS = [
     label: 'Uang Tunai / Cash',
   },
 ]
+
+export const getActiveDays = (fieldData = {}) => {
+  const activeDays = []
+  if (fieldData?.days_active && fieldData?.days_active.length > 0) {
+    fieldData?.days_active.forEach((day) => {
+      activeDays.push(DATE_PICKER_ACTIVE_MAPPING[day?.day_name])
+    })
+  }
+  return activeDays
+}

@@ -23,7 +23,6 @@ import NotificationModal from '~/components/NotificationModal'
 import Snackbar from '~/components/Snackbar'
 import VerticalPhotoSlider from '~/components/VerticalPhotoSlider'
 import date from '~/config/date'
-import { DATE_PICKER_ACTIVE_MAPPING } from '~/constants/general'
 import KonfirmasiTambahPenyewaanModal from '~/modules/Penyewaan/KonfirmasiTambahPenyewaanModal'
 import { thousandSeparator } from '~/utils/number'
 import { removeSeconds } from '~/utils/string'
@@ -35,13 +34,6 @@ import useStyles from './style'
 function TambahPenyewaanPage() {
   const { data, handler, state } = useCustom()
   const classes = useStyles()
-
-  const activeDays = []
-  if (data?.fieldData?.days_active && data?.fieldData?.days_active.length > 0) {
-    data?.fieldData?.days_active.forEach((day) => {
-      activeDays.push(DATE_PICKER_ACTIVE_MAPPING[day?.day_name])
-    })
-  }
 
   return (
     <>
@@ -83,7 +75,7 @@ function TambahPenyewaanPage() {
                             handler?.setSelectedStartTime(null)
                           }}
                           selectedDate={state.selectedDate}
-                          activeDays={activeDays}
+                          activeDays={data?.fieldActiveDays}
                           width='100%'
                         />
                       </Box>
@@ -432,8 +424,12 @@ function TambahPenyewaanPage() {
               </Typography>
               <Button
                 disabled={state?.selectedStartTime === null}
-                // handleOnClick={() => handler?.handleAddBookingField()}
-                handleOnClick={() => handler?.handleOpenConfirmModal()}
+                handleOnClick={() => {
+                  const isNotValid = handler?.checkValidityDateByFieldData()
+                  if (!isNotValid) {
+                    handler?.handleOpenConfirmModal()
+                  }
+                }}
                 label='Tambah Penyewaan'
                 type='button'
                 variant='secondary'

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
-import { first } from 'lodash-es'
+import { findIndex, first, toNumber } from 'lodash-es'
 import moment from 'moment'
 
 import date from '~/config/date'
@@ -16,6 +16,7 @@ import { useNavigateParams } from '~/utils/routing'
 
 import {
   DURATION_OPTIONS,
+  getActiveDays,
   getFieldGalleries,
   getInvoiceData,
   getListOfFieldOptions,
@@ -116,6 +117,7 @@ const useCustom = () => {
 
   const fieldOptions = useMemo(() => getListOfFieldOptions(fieldList), [fieldList])
   const fieldPhotos = useMemo(() => getFieldGalleries(fieldData?.galleries), [fieldData])
+  const fieldActiveDays = useMemo(() => getActiveDays(fieldData), [fieldData])
   const startTimeOptions = useMemo(
     () => getStartTimeOptions(fieldSchedule, selectedDate),
     [fieldSchedule, selectedDate],
@@ -128,6 +130,24 @@ const useCustom = () => {
     () => getInvoiceData(selectedDuration, fieldScheduleTable, fieldData),
     [selectedDuration, fieldScheduleTable, fieldData],
   )
+
+  const checkValidityDateByFieldData = useCallback(() => {
+    let validate = false
+    const activeDays = fieldActiveDays
+    if (activeDays && activeDays.length > 0) {
+      const dayNumber = toNumber(moment(selectedDate).format('d'))
+      const isExist = findIndex(activeDays, (activeDay) => activeDay === dayNumber)
+      if (isExist < 0) {
+        validate = true
+        setNotificationModal((prev) => ({
+          ...prev,
+          open: true,
+          message: 'Maaf. Tidak bisa melakukan pemesanan pada hari tersebut',
+        }))
+      }
+    }
+    return validate
+  }, [fieldActiveDays, selectedDate])
 
   const handleOpenConfirmModal = useCallback(() => {
     setOpenConfirmModal(true)
@@ -257,6 +277,7 @@ const useCustom = () => {
 
   return {
     data: {
+      fieldActiveDays,
       fieldData,
       fieldOptions,
       fieldPhotos,
@@ -265,6 +286,7 @@ const useCustom = () => {
       startTimeOptions,
     },
     handler: {
+      checkValidityDateByFieldData,
       handleAddBookingField,
       handleBackButton,
       handleChangeDuration,
