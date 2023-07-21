@@ -4,7 +4,6 @@ import { Field, Formik, Form } from 'formik'
 import { Helmet } from 'react-helmet-async'
 
 import Button from '~/components/Button'
-import CustomCheckBox from '~/components/CustomCheckbox'
 import CustomField from '~/components/CustomField'
 import CustomSelect from '~/components/CustomSelect'
 import LapanganFieldPhoto from '~/components/LapanganFieldPhoto'
@@ -234,7 +233,7 @@ function SuntingLapanganPage() {
                                 </Box>
                               </Box>
                             </Box>
-                            <Box sx={{ marginTop: '27px' }}>
+                            {/* <Box sx={{ marginTop: '27px' }}>
                               <CustomCheckBox
                                 name='flag'
                                 type='checkbox'
@@ -242,7 +241,7 @@ function SuntingLapanganPage() {
                                 onChange={handler?.handleCheckBox}
                                 label='Tidak menentukan Harga Sewa Malam Lapangan'
                               />
-                            </Box>
+                            </Box> */}
                             <Box sx={{ marginTop: '27px' }}>
                               <Typography className={classes.infoLabel}>
                                 <InfoOutlined />
